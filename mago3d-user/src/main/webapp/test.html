@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="./externlib/jquery/jquery.js"></script>
+<style type="text/css">
+	.default-layout {
+		width: 100%; min-width: 1420px; max-width: 1920px; margin: 0;
+	}
+	
+	.left-navigation-layout {
+		float:left; min-width:70px; min-height:500px;
+		border: 1px solid black;
+	}
+	.left-navigation-icons {
+		float:left; width: 70px;
+		border: 1px solid black;
+	}
+	.menu-header {
+		height: 70px;
+		border: 1px solid black;
+	}
+	.left-navigation-detail {
+		margin-left: 70px; width: 220px;
+		border: 1px solid black;
+	}
+	.submenu-header {
+		height: 70px;
+		border: 1px solid black;
+	}
+	
+	.content-layout {
+		margin-left: 220px; min-height:500px; overflow: hidden; background-color: #edf1f5;
+	}
+	.content-header {
+		height: 70px;
+		background-color: #4f5466;
+	}
+	.content-gnb {
+		height: 70px;
+		background-color: #ffffff;
+	}
+	.content-detail {
+		margin: 10px;
+		min-height: 450px;
+		background-color: #ffffff;
+	}
+	.site-footer {
+		height: 40px;
+		vertical-align: center;
+		padding: 15px 0px 0px 20px;
+		background-color: #ffffff;
+	}
+</style>
+</head>
+<body>
+
+<div class="default-layout">
+	<div class="left-navigation-layout">
+		<div class="left-navigation-icons">
+			<div class="menu-header">
+			</div>
+			<div>대메뉴</div>
+		</div>
+		<div class="left-navigation-detail">
+			<div class="submenu-header">
+				
+			</div>
+			<div>하위 메뉴</div>
+		</div>
+	</div>
+	<div class="content-layout">
+		<div class="content-header">
+			<a href="#" onclick="toggleMenu();">접기</a>
+			<a href="#" onclick="toggleMenuShow();">펴기</a>
+		</div>
+		<div>
+			<div class="content-gnb"></div>
+			<div class="content-detail"></div>
+			<div class="site-footer">Mago3D ⓒ Gaia3d Corp. All Rights Reserved</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function toggleMenu() {
+		$(".left-navigation-detail").css("display", "none");  
+		$(".content-layout").css({"margin-left" : "70px"});
+	}
+	function toggleMenuShow() {
+		$(".left-navigation-detail").css("display", "");  
+		//$("#contentArea").css({"margin-left" : "70px"});
+	}
+</script>
+</body>
+</html>
