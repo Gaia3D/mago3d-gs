@@ -124,16 +124,9 @@ public class DataController {
 			txtDownloadFlag = true;
 		}
 		
-		@SuppressWarnings("unchecked")
-		List<CommonCode> dataRegisterTypeList = (List<CommonCode>)CacheManager.getCommonCode(CommonCode.DATA_REGISTER_TYPE);
-		
-		// TODO 다국어 처리를 여기서 해야 할거 같은데....
-//		Map<String, String> statusMap = new HashMap<>();
-//		String welcome = messageSource.getMessage("xxx.xxxx", new Object[]{}, locale);
 		log.info("@@ locale = {}", locale.toString());
 		
 		model.addAttribute(pagination);
-		model.addAttribute("dataRegisterTypeList", dataRegisterTypeList);
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("txtDownloadFlag", Boolean.valueOf(txtDownloadFlag));
 		model.addAttribute("dataList", dataList);
@@ -381,10 +374,6 @@ public class DataController {
 		log.info("@@@@@@@@ dataInfo = {}", dataInfo);
 		Policy policy = CacheManager.getPolicy();
 		
-		@SuppressWarnings("unchecked")
-		List<CommonCode> dataRegisterTypeList = (List<CommonCode>)CacheManager.getCommonCode(CommonCode.DATA_REGISTER_TYPE);
-		
-		model.addAttribute("dataRegisterTypeList", dataRegisterTypeList);
 		model.addAttribute("listParameters", listParameters);
 		model.addAttribute("policy", policy);
 		model.addAttribute("projectList", projectList);

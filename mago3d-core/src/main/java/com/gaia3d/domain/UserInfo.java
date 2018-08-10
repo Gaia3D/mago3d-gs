@@ -291,17 +291,6 @@ public class UserInfo {
 		return value;
 	}
 	
-	public String getViewUserInsertType() {
-		// TODO 이건 뭔가 아닌거 같은데... 어떻게 처리 하지?
-		if(this.user_insert_type == null || "".equals(this.user_insert_type)) {
-			return "";
-		}
-		
-		Map<String, Object> commonCodeMap = CacheManager.getCommonCodeMap();
-		CommonCode commonCode = (CommonCode)commonCodeMap.get(this.user_insert_type);
-		if(commonCode == null) return "";
-		else return commonCode.getCode_name();
-	}
 	
 	public String getValueUserIdStartDate() {
 		if(this.user_id_start_date == null || "".equals( user_id_start_date)) {

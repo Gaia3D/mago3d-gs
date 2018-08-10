@@ -40,27 +40,17 @@
 								<li><a href="#user_tab"><spring:message code='user.group.user'/></a></li>
 								<li><a href="#password_tab"><spring:message code='password'/></a></li>
 								<li><a href="#geo_tab"><spring:message code='spatial.information'/></a></li>
-								<li><a href="#geoserver_tab">GeoServer</a></li>
 								<li><a href="#geocallback_tab">CallBack</a></li>
-								<li><a href="#security_tab"><spring:message code='security'/></a></li>
 								<li><a href="#content_tab"><spring:message code='content'/></a></li>
 								<li><a href="#userupload_tab">사용자 업로딩 파일</a></li>
-								<li><a href="#backoffice_tab"><spring:message code='back.office.information'/></a></li>
-								<li><a href="#site_tab"><spring:message code='site.information'/></a></li>
-								<li><a href="#solution_tab"><spring:message code='product.information'/></a></li>
 							</ul>
 							
 							<%@ include file="/WEB-INF/views/config/modify-policy-user.jsp" %>
 							<%@ include file="/WEB-INF/views/config/modify-policy-password.jsp" %>
 							<%@ include file="/WEB-INF/views/config/modify-policy-geo.jsp" %>
-							<%@ include file="/WEB-INF/views/config/modify-policy-geoserver.jsp" %>
 							<%@ include file="/WEB-INF/views/config/modify-policy-geocallback.jsp" %>
-							<%@ include file="/WEB-INF/views/config/modify-policy-security.jsp" %>
 							<%@ include file="/WEB-INF/views/config/modify-policy-content.jsp" %>
 							<%@ include file="/WEB-INF/views/config/modify-policy-userupload.jsp" %>
-							<%@ include file="/WEB-INF/views/config/modify-policy-backoffice.jsp" %>
-							<%@ include file="/WEB-INF/views/config/modify-policy-site.jsp" %>
-							<%@ include file="/WEB-INF/views/config/modify-policy-solution.jsp" %>
 						</div>
 					</div>
 				</div>
@@ -469,37 +459,6 @@
 		dataDialog.dialog( "close" );
 	});
 	
-	// GeoServer
-	var updatePolicyGeoServerFlag = true;
-	function updatePolicyGeoServer() {
-		if(updatePolicyGeoServerFlag) {
-			// validation 나중에
-			updatePolicyGeoServerFlag = false;
-			var info = $("#policyGeoServer").serialize() + "&policy_id=" + $("#policy_id").val();
-			$.ajax({
-				url: "/config/ajax-update-policy-geoserver.do",
-				type: "POST",
-				data: info,
-				cache: false,
-				dataType: "json",
-				success: function(msg){
-					if(msg.result == "success") {
-						alert(JS_MESSAGE["policy.geoserver.update"]);
-					} else {
-						alert(JS_MESSAGE[msg.result]);
-					}
-					updatePolicyGeoServerFlag = true;
-				},
-				error:function(request,status,error){
-			        alert(JS_MESSAGE["ajax.error.message"]);
-			        updatePolicyGeoServerFlag = true;
-				}
-			});
-		} else {
-			alert(JS_MESSAGE["button.dobule.click"]);
-			return;
-		}
-	}
 	
 	// Geo CallBack Function
 	var updatePolicyGeoCallBackFlag = true;
@@ -533,47 +492,6 @@
 		}
 	}
 	
-	// 보안 정책 저장
-	var updateSecurityFlag = true;
-	function updatePolicySecurity() {
-		if(updateSecurityFlag) {
-			if(!isNumber($("#security_session_timeout").val())) {
-				$("#security_session_timeout").focus();
-				return;
-			}
-			var security_sso_token_verify_time = $("#security_sso_token_verify_time").val();
-			if(security_sso_token_verify_time != null && security_sso_token_verify_time != "") {
-				if(!isNumber(security_sso_token_verify_time)) {
-					$("#security_sso_token_verify_time").focus();
-					return;
-				}
-			}
-			updateSecurityFlag = false;
-			var info = $("#policySecurity").serialize() + "&policy_id=" + $("#policy_id").val();
-			$.ajax({
-				url: "/config/ajax-update-policy-security.do",
-				type: "POST",
-				data: info,
-				cache: false,
-				dataType: "json",
-				success: function(msg){
-					if(msg.result == "success") {
-						alert(JS_MESSAGE["policy.security.update"]);
-					} else {
-						alert(JS_MESSAGE[msg.result]);
-					}
-					updateSecurityFlag = true;
-				},
-				error:function(request,status,error){
-			        alert(JS_MESSAGE["ajax.error.message"]);
-			        updateSecurityFlag = true;
-				}
-			});
-		} else {
-			alert(JS_MESSAGE["button.dobule.click"]);
-			return;
-		}
-	}
 	
 	// 컨텐트 정책 저장
 	var updateContentFlag = true;
@@ -698,141 +616,6 @@
 		}
 	}
 	
-	// Back Office 정보 저장
-	var updateBackofficeFlag = true;
-	function updatePolicyBackoffice() {
-		if(updateBackofficeFlag) {
-			updateBackofficeFlag = false;
-			var info = $("#policyBackoffice").serialize() + "&policy_id=" + $("#policy_id").val();
-			$.ajax({
-				url: "/config/ajax-update-policy-backoffice.do",
-				type: "POST",
-				data: info,
-				cache: false,
-				dataType: "json",
-				success: function(msg){
-					if(msg.result == "success") {
-						alert(JS_MESSAGE["update"]);
-					} else {
-						alert(JS_MESSAGE[msg.result]);
-					}
-					updateBackofficeFlag = true;
-				},
-				error:function(request,status,error){
-			        alert(JS_MESSAGE["ajax.error.message"]);
-			        updateBackofficeFlag = true;
-				}
-			});
-		} else {
-			alert(JS_MESSAGE["button.dobule.click"]);
-			return;
-		}
-	}
-	
-	// 사이트 정보 저장
-	var updateSiteFlag = true;
-	function updatePolicySite() {
-		if(updateSiteFlag) {
-			if(!isIP($("#server_ip").val())) {
-				alert(JS_MESSAGE["policy.site.ip"]);
-				$("#server_ip").focus();
-				return false;
-			}
-			
-			if($("#site_name").val() == "") {
-				alert(JS_MESSAGE["policy.site.service.name"]);
-				$("#site_name").focus();
-				return;
-			}
-			if($("#site_admin_mobile_phone").val() == "") {
-				alert(JS_MESSAGE["policy.site.admin.mobile"]);
-				$("#site_admin_mobile_phone").focus();
-				return;
-			}
-			if($("#site_admin_email").val() == "") {
-				alert(JS_MESSAGE["policy.site.admin.email"]);
-				$("#site_admin_email").focus();
-				return;
-			}
-			
-			updateSiteFlag = false;
-			var info = $("#policySite").serialize() + "&policy_id=" + $("#policy_id").val();
-			$.ajax({
-				url: "/config/ajax-update-policy-site.do",
-				type: "POST",
-				data: info,
-				cache: false,
-				dataType: "json",
-				success: function(msg){
-					if(msg.result == "success") {
-						alert(JS_MESSAGE["policy.site.update"]);
-					} else {
-						alert(JS_MESSAGE[msg.result]);
-					}
-					updateSiteFlag = true;
-				},
-				error:function(request,status,error){
-			        alert(JS_MESSAGE["ajax.error.message"]);
-			        updateSiteFlag = true;
-				}
-			});
-		} else {
-			alert(JS_MESSAGE["button.dobule.click"]);
-			return;
-		}
-	}
-	
-	// API KEY 찾기
-	function findApiKey() {
-		
-	}
-	
-	// 제품 정보 저장
-	var updateSolutionFlag = true;
-	function updatePolicySolution() {
-		if(updateSolutionFlag) {
-			if($("#solution_name").val() == "") {
-				alert(JS_MESSAGE["policy.product.name"]);
-				$("#solution_name").focus();
-				return;
-			}
-			if($("#solution_version").val() == "") {
-				alert(JS_MESSAGE["policy.product.version"]);
-				$("#solution_version").focus();
-				return;
-			}
-			if($("#solution_manager").val() == "") {
-				alert(JS_MESSAGE["policy.product.admin"]);
-				$("#solution_manager").focus();
-				return;
-			}
-			
-			updateSolutionFlag = false;
-			var info = $("#policySolution").serialize() + "&policy_id=" + $("#policy_id").val();
-			$.ajax({
-				url: "/config/ajax-update-policy-solution.do",
-				type: "POST",
-				data: info,
-				cache: false,
-				dataType: "json",
-				success: function(msg){
-					if(msg.result == "success") {
-						alert(JS_MESSAGE["policy.solution.update"]);
-					} else {
-						alert(JS_MESSAGE[msg.result]);
-					}
-					updateSolutionFlag = true;
-				},
-				error:function(request,status,error){
-			        alert(JS_MESSAGE["ajax.error.message"]);
-			        updateSolutionFlag = true;
-				}
-			});
-		} else {
-			alert(JS_MESSAGE["button.dobule.click"]);
-			return;
-		}
-	}
 </script>
 </body>
 </html>

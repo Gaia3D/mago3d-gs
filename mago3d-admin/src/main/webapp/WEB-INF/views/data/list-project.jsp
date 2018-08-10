@@ -70,7 +70,6 @@
 											<th scope="col" class="col-toggle"><spring:message code='height'/></th>
 											<th scope="col" class="col-number"><spring:message code='movement.time'/></th>
 											<th scope="col" class="col-functions"><spring:message code='data.management'/></th>
-											<th scope="col" class="col-functions"><spring:message code='user.group.control.roll'/></th>
 											<th scope="col" class="col-date"><spring:message code='search.insert.date'/></th>
 											<th scope="col" class="col-functions"><spring:message code='code.modify.delete'/></th>
 										</tr>
@@ -95,7 +94,6 @@
 											<td class="col-toggle">${project.height}</td>
 											<td class="col-toggle">${project.duration}</td>
 											<td class="col-functions"><a href="#" onclick="viewDataList('${project.project_id}', '${project.project_name}'); return false;"><spring:message code='view'/></a></td>
-											<td class="col-functions"><a href="/data/modify-project.do?project_id=${project.project_id}"><spring:message code='view'/></a></td>
 											<td class="col-date">${project.viewInsertDate }</td>
 											
 											<td class="col-functions">

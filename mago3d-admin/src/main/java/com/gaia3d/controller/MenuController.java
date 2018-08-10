@@ -377,7 +377,7 @@ public class MenuController {
 				if(i == (menuCount-1)) {
 					// 맨 마지막의 경우 괄호를 닫음
 					if(bigParentheses == 0) {
-						builder.append("}");
+//						builder.append("}");
 					} else {
 						for(int k=0; k<bigParentheses; k++) {
 							builder.append("}");

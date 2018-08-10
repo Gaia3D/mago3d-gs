@@ -114,22 +114,6 @@
 									<fmt:formatNumber value="${pagination.pageNo}" type="number"/> / <fmt:formatNumber value="${pagination.lastPage }" type="number"/> <spring:message code='user.group.page'/>
 								</div>
 								
-								<div class="list-functions u-pull-right">
-									<div class="button-group">
-										<a href="#" onclick="passowrdInit(); return false;" class="button"><spring:message code='user.group.password.init'/></a>
-										<a href="#" onclick="updateUserStatus('USER', 'LOCK'); return false;" class="button"><spring:message code='user.group.user.lock'/></a>
-										<a href="#" onclick="updateUserStatus('USER', 'UNLOCK'); return false;" class="button"><spring:message code='user.group.user.lock.init'/></a>
-										<a href="#" onclick="deleteUsers(); return false;" class="button"><spring:message code='user.group.all.delete'/></a>
-										<a href="#" onclick="inputExcelUser(); return false;" class="button"><spring:message code='user.group.all.insert'/></a>
-<c:if test="${txtDownloadFlag ne 'true' }">
-										<a href="/user/download-excel-user.do" class="button"><spring:message code='user.group.download'/></a>
-</c:if>
-<c:if test="${txtDownloadFlag eq 'true' }">
-										<a href="/user/download-txt-user.do" class="button"><spring:message code='user.group.download.txt'/></a>
-</c:if><spring:message code='user.group.insert.example' var='insertExample'/>
-										<a href="/user/download-excel-user-sample.do" class="image-button button-area button-batch-download" title="${insertExample}"><span>${insertExample}</span></a>
-									</div>
-								</div>
 							</div>
 							<table class="list-table scope-col">
 									<col class="col-checkbox" />
@@ -152,9 +136,6 @@
 											<th scope="col" class="col-id"><spring:message code='user.group.id'/></th>
 											<th scope="col" class="col-name"><spring:message code='user.group.user.name'/></th>
 											<th scope="col" class="col-toggle"><spring:message code='user.group.status'/></th>
-											<th scope="col" class="col-toggle"><spring:message code='user.group.insert.type'/></th>
-											<!-- <th scope="col" class="col-tel">전화번호</th> -->
-											<!-- <th scope="col" class="col-email">이메일</th> -->
 											<th scope="col" class="col-date"><spring:message code='user.group.last.login'/></th>
 											<th scope="col" class="col-date"><spring:message code='user.group.insert.date'/></th>
 											<th scope="col" class="col-functions"><spring:message code='user.group.modified.and.insert'/></th>
@@ -208,11 +189,8 @@
 			</c:when>
 		</c:choose>
 											</td>
-											<td class="col-toggle">${userInfo.viewUserInsertType }</td>
-											<%-- <td class="col-tel">${userInfo.viewMaskingMobilePhone }</td> --%>
-											<%-- <td class="col-email">${userInfo.viewMaskingEmail }</td> --%>
-											<td class="col-date">${userInfo.viewLastLoginDate }</td>
-											<td class="col-date">${userInfo.viewInsertDate }</td>
+											<td class="col-date">${userInfo.last_login_date }</td>
+											<td class="col-date">${userInfo.insert_date }</td>
 											<td class="col-functions">
 												<span class="button-group">
 													<a href="/user/modify-user.do?user_id=${userInfo.user_id }&amp;pageNo=${pagination.pageNo }${pagination.searchParameters}" class="image-button button-edit"><spring:message code='modified'/></a>
@@ -226,20 +204,6 @@
 							</table>
 							</form:form>
 							
-							<%-- 엑셀 다운로드 --%>
-							<form:form id="excelUserInfo" modelAttribute="excelUserInfo" method="post" action="/user/download-excel-user.do">
-								<form:hidden path="user_group_id" />
-								<form:hidden path="search_word" />
-								<form:hidden path="search_option" />
-								<form:hidden path="search_value" />
-								<form:hidden path="status" />
-								<form:hidden path="user_insert_type" />
-								<form:hidden path="start_date" />
-								<form:hidden path="end_date" />
-								<form:hidden path="order_word" />
-								<form:hidden path="order_value" />
-							</form:form>
-							<%-- 엑셀 다운로드 --%>
 						</div>
 						<%@ include file="/WEB-INF/views/common/pagination.jsp" %>
 					</div>

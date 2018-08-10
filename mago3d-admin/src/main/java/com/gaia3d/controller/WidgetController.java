@@ -28,14 +28,11 @@ import com.gaia3d.domain.UserInfo;
 import com.gaia3d.domain.UserSession;
 import com.gaia3d.domain.Widget;
 import com.gaia3d.helper.SessionUserHelper;
-import com.gaia3d.service.APIService;
 import com.gaia3d.service.AccessLogService;
 import com.gaia3d.service.DataLogService;
 import com.gaia3d.service.DataService;
-import com.gaia3d.service.IssueService;
 import com.gaia3d.service.MonitoringService;
 import com.gaia3d.service.ProjectService;
-import com.gaia3d.service.ScheduleService;
 import com.gaia3d.service.UserService;
 import com.gaia3d.service.WidgetService;
 import com.gaia3d.util.DateUtil;
@@ -59,7 +56,6 @@ public class WidgetController {
 	
 	@Autowired
 	private PropertiesConfig propertiesConfig;
-	
 	@Autowired
 	private HikariDataSource dataSource;
 	@Autowired
@@ -69,17 +65,11 @@ public class WidgetController {
 	@Autowired
 	private DataLogService dataLogService;
 	@Autowired
-	private APIService aPIService;
-	@Autowired
-	private IssueService issueService;
-	@Autowired
 	private AccessLogService logService;
 	@Autowired
 	private MonitoringService monitoringService;
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private ScheduleService scheduleService;
 	@Autowired
 	private WidgetService widgetService;
 	
@@ -362,9 +352,7 @@ public class WidgetController {
 			scheduleLog.setEnd_date(endDate);
 			scheduleLog.setOffset(0l);
 			scheduleLog.setLimit(WIDGET_LIST_VIEW_COUNT);
-			List<ScheduleLog> scheduleLogList = scheduleService.getListScheduleLog(scheduleLog);
 			
-			map.put("scheduleLogList", scheduleLogList);
 		} catch(Exception e) {
 			e.printStackTrace();
 			result = "db.exception";

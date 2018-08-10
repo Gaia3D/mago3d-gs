@@ -115,18 +115,6 @@ public class DataInfoLog {
 		return null;
 	}
 		
-	public String getViewDataInsertType() {
-		// TODO 이건 뭔가 아닌거 같은데... 어떻게 처리 하지?
-		if(this.data_insert_type == null || "".equals(this.data_insert_type)) {
-			return "";
-		}
-		
-		Map<String, Object> commonCodeMap = CacheManager.getCommonCodeMap();
-		CommonCode commonCode = (CommonCode)commonCodeMap.get(this.data_insert_type);
-		if(commonCode == null) return "";
-		else return commonCode.getCode_name();
-	}
-	
 	public String setViewInsertDate() {
 		if(this.insert_date == null || "".equals( insert_date)) {
 			return "";

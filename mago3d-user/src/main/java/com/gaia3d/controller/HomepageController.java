@@ -1,7 +1,6 @@
 package com.gaia3d.controller;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -23,13 +22,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gaia3d.domain.CacheManager;
 import com.gaia3d.domain.CommonCode;
 import com.gaia3d.domain.Issue;
-import com.gaia3d.domain.Pagination;
 import com.gaia3d.domain.Policy;
 import com.gaia3d.domain.Project;
 import com.gaia3d.domain.SessionKey;
-import com.gaia3d.domain.UserSession;
-import com.gaia3d.service.IssueService;
-import com.gaia3d.util.DateUtil;
 import com.gaia3d.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +36,6 @@ public class HomepageController {
 	
 	@Autowired
 	private LocaleResolver localeResolver;
-	@Autowired
-	private IssueService issueService;
 	
 	/**
 	 * 메인
@@ -125,35 +118,6 @@ public class HomepageController {
 			localeResolver.setLocale(request, response, locale);
 		}
 		
-		Issue issue = new Issue();
-		UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
-		if(userSession == null) {
-			issue.setUser_id("guest");
-			issue.setUser_name("guest");
-		} else {
-			issue.setUser_id(userSession.getUser_id());
-			issue.setUser_name(userSession.getUser_name());
-		}
-		
-		log.info("@@ issue = {}", issue);
-		if(StringUtil.isNotEmpty(issue.getStart_date())) {
-			issue.setStart_date(issue.getStart_date().substring(0, 8) + DateUtil.START_TIME);
-		}
-		if(StringUtil.isNotEmpty(issue.getEnd_date())) {
-			issue.setEnd_date(issue.getEnd_date().substring(0, 8) + DateUtil.END_TIME);
-		}
-		long totalCount = issueService.getIssueTotalCountByUserId(issue);
-		
-		Pagination pagination = new Pagination(request.getRequestURI(), getSearchParameters(issue), totalCount, Long.valueOf(pageNo).longValue(), 10l);
-		log.info("@@ pagination = {}", pagination);
-		
-		issue.setOffset(pagination.getOffset());
-		issue.setLimit(pagination.getPageRows());
-		List<Issue> issueList = new ArrayList<>();
-		if(totalCount > 0l) {
-			issueList = issueService.getListIssueByUserId(issue);
-		}
-		
 		Policy policy = CacheManager.getPolicy();
 		List<Project> projectList = CacheManager.getProjectList();
 		Map<String, String> initProjectJsonMap = new HashMap<>();
@@ -168,11 +132,6 @@ public class HomepageController {
 			initProjectsLength = initProjects.length;
 		}
 				
-		@SuppressWarnings("unchecked")
-		List<CommonCode> issuePriorityList = (List<CommonCode>)CacheManager.getCommonCode(CommonCode.ISSUE_PRIORITY);
-		@SuppressWarnings("unchecked")
-		List<CommonCode> issueTypeList = (List<CommonCode>)CacheManager.getCommonCode(CommonCode.ISSUE_TYPE);
-		
 		boolean isMobile = isMobile(request);
 		policy.setGeo_view_library(viewLibrary);
 		if(!"pc".equals(device) && isMobile) {
@@ -183,19 +142,13 @@ public class HomepageController {
 		
 		model.addAttribute("policy", policy);
 		model.addAttribute("geoViewLibrary", policy.getGeo_view_library());
-		model.addAttribute("issue", issue);
 		model.addAttribute("now_latitude", policy.getGeo_init_latitude());
 		model.addAttribute("now_longitude", policy.getGeo_init_longitude());
-		model.addAttribute(pagination);
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("issueList", issueList);
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("initProjectsLength", initProjectsLength);
 		model.addAttribute("initProjectJsonMap", mapper.writeValueAsString(initProjectJsonMap));
 		model.addAttribute("cache_version", policy.getContent_cache_version());
 		model.addAttribute("policyJson", mapper.writeValueAsString(policy));
-		model.addAttribute("issuePriorityList", issuePriorityList);
-		model.addAttribute("issueTypeList", issueTypeList);
 		
 		log.info("@@@@@@ viewName = {}", viewName);
 		log.info("@@@@@@ policy = {}", policy);
@@ -215,58 +168,6 @@ public class HomepageController {
 		return false;
 	}
 	
-	/**
-	 * 이슈 목록
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "ajax-list-issue.do")
-	@ResponseBody
-	public Map<String, Object> ajaxListIssue(HttpServletRequest request, Issue issue, @RequestParam(defaultValue="1") String pageNo) {
-		
-		Map<String, Object> map = new HashMap<>();
-		String result = "success";
-		try {
-			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
-			if(userSession == null) {
-				issue.setUser_id("guest");
-				issue.setUser_name("guest");
-			} else {
-				issue.setUser_id(userSession.getUser_id());
-				issue.setUser_name(userSession.getUser_name());
-			}
-			
-			log.info("@@ issue = {}", issue);
-			if(StringUtil.isNotEmpty(issue.getStart_date())) {
-				issue.setStart_date(issue.getStart_date().substring(0, 8) + DateUtil.START_TIME);
-			}
-			if(StringUtil.isNotEmpty(issue.getEnd_date())) {
-				issue.setEnd_date(issue.getEnd_date().substring(0, 8) + DateUtil.END_TIME);
-			}
-			
-			long totalCount = issueService.getIssueTotalCountByUserId(issue);
-			
-			long pageRows = 10l;
-			if(issue.getList_counter() != null && issue.getList_counter().longValue() > 0) pageRows = issue.getList_counter().longValue();
-			Pagination pagination = new Pagination(request.getRequestURI(), getSearchParameters(issue), totalCount, Long.valueOf(pageNo).longValue(), pageRows);
-			log.info("@@ pagination = {}", pagination);
-			
-			issue.setOffset(pagination.getOffset());
-			issue.setLimit(pagination.getPageRows());
-			List<Issue> issueList = new ArrayList<>();
-			if(totalCount > 0l) {
-				issueList = issueService.getListIssueByUserId(issue);
-			}
-			map.put("issueList", issueList);
-			map.put("totalCount", totalCount);
-		} catch(Exception e) {
-			e.printStackTrace();
-			result = "db.exception";
-		}
-	
-		map.put("result", result);
-		return map;
-	}
 	
 	/**
 	 * 다운로드

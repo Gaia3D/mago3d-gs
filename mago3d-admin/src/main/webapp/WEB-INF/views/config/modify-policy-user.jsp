@@ -62,18 +62,6 @@
 				<form:radiobutton path="user_duplication_login_yn" value="N" label="${noUse}" />
 			</td>
 		</tr>
-		<tr>
-			<th class="col-label l" scope="row">
-				<form:label path="user_delete_type"><spring:message code='config.information.delete'/></form:label>
-				<span class="icon-glyph glyph-emark-dot color-warning"></span>
-			</th>
-			<td class="col-input">	
-				<select id="user_delete_type" name="user_delete_type" class="select">
-	  				<option value="0"><spring:message code='config.logical'/></option>
-	  				<option value="1"><spring:message code='config.physical'/></option>
-				</select>
-			</td>
-		</tr>
 	</table>
 	<div class="button-group">
 		<div class="center-buttons">

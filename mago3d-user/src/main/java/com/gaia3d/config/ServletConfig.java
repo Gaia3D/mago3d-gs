@@ -51,15 +51,15 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
 	@Override
     public void addInterceptors(InterceptorRegistry registry) {
 		log.info(" @@@ ServletConfig addInterceptors @@@@ ");
-		registry.addInterceptor(new ConfigInterceptor())
-        		.addPathPatterns("/**")
-        		.excludePathPatterns("/css/**", "/externlib/**", "/f4d/**", "/images/**", "/js/**");
-        registry.addInterceptor(new SecurityInterceptor())
-        		.addPathPatterns("/**")
-        		.excludePathPatterns("/login/**", "/css/**", "/externlib/**", "/f4d/**", "/images/**", "/js/**");
-        registry.addInterceptor(new CSRFHandlerInterceptor())
-        		.addPathPatterns("/**")
-        		.excludePathPatterns("/login/**", "/css/**", "/externlib/**", "/f4d/**", "/images/**", "/js/**");
+//		registry.addInterceptor(new ConfigInterceptor())
+//        		.addPathPatterns("/**")
+//        		.excludePathPatterns("/css/**", "/externlib/**", "/f4d/**", "/images/**", "/js/**");
+//        registry.addInterceptor(new SecurityInterceptor())
+//        		.addPathPatterns("/**")
+//        		.excludePathPatterns("/login/**", "/css/**", "/externlib/**", "/f4d/**", "/images/**", "/js/**");
+//        registry.addInterceptor(new CSRFHandlerInterceptor())
+//        		.addPathPatterns("/**")
+//        		.excludePathPatterns("/login/**", "/css/**", "/externlib/**", "/f4d/**", "/images/**", "/js/**");
     }
 	
 	@Bean
