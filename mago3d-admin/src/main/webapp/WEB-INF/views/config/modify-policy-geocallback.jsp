@@ -53,6 +53,24 @@
 		</tr>
 		<tr>
 			<th class="col-label l" scope="row">
+				<form:label path="geo_callback_insertissue"><spring:message code='config.issue.insert.callback'/></form:label>
+			</th>
+			<td class="col-input">
+				<form:input path="geo_callback_insertissue" cssClass="l" />
+				<form:errors path="geo_callback_insertissue" cssClass="error" />
+			</td>
+		</tr>
+		<tr>
+			<th class="col-label l" scope="row">
+				<form:label path="geo_callback_listissue"><spring:message code='config.issue.list.callback'/></form:label>
+			</th>
+			<td class="col-input">
+				<form:input path="geo_callback_listissue" cssClass="l" />
+				<form:errors path="geo_callback_listissue" cssClass="error" />
+			</td>
+		</tr>
+		<tr>
+			<th class="col-label l" scope="row">
 				<form:label path="geo_callback_clickposition"><spring:message code='config.mouse.click.position.callback'/></form:label>
 			</th>
 			<td class="col-input">

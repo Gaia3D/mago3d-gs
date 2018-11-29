@@ -199,6 +199,7 @@
 			<thead>
 				<tr>
 					<th scope="col" class="col-number"><spring:message code='number'/></th>
+					<th scope="col" class="col-number">Depth</th>
 					<th scope="col" class="col-id"><spring:message code='key'/></th>
 					<th scope="col" class="col-name"><spring:message code='name'/></th>
 					<th scope="col" class="col-toggle"><spring:message code='latitude'/></th>
@@ -278,6 +279,7 @@
 							content = content 
 								+ 	"<tr>"
 								+ 	"	<td class=\"col-number\">" + (i + 1) + " </td>"
+								+ 	"	<td class=\"col-id\">" + viewDepth + "</td>"
 								+ 	"	<td class=\"col-id\">" + dataInfo.data_key + "</td>"
 								+ 	"	<td class=\"col-name\">" + dataInfo.data_name + "</td>"
 								+ 	"	<td class=\"col-toggle\">" + dataInfo.latitude + "</td>"

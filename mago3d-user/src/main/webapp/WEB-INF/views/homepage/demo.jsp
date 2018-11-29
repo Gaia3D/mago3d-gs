@@ -610,21 +610,6 @@
 			<button type="button" id="deleteAllObjectMoveButton" class="btn"><spring:message code='all.delete'/></button>
 		</div>
 		<div>
-			<h3><spring:message code='demo.object.occlusion.culling'/></h3>
-			<div style="height: 30px;">
-				<div style="display: inline-block; width: 70px;"><spring:message code='selection'/></div>
-				<input type="radio" id="useOcclusionCulling" name="occlusionCulling" value="true" />
-				<label for="useOcclusionCulling"> <spring:message code='use'/> </label>
-				<input type="radio" id="unusedOcclusionCulling" name="occlusionCulling" value="false" />
-				<label for="unusedOcclusionCulling"> <spring:message code='unused'/> </label>
-			</div>
-			<div style="height: 30px;">
-				<div style="display: inline-block; width: 70px;"><spring:message code='data.key'/></div>
-				<input type="text" id="occlusion_culling_data_key" name="occlusion_culling_data_key" size="22" />
-				<button type="button" id="changeOcclusionCullingButton" class="btn"><spring:message code='change'/></button>
-			</div>
-		</div>
-		<div>
 			<h3><spring:message code='lod'/></h3>
 			<div style="height: 30px;">
 				<div style="display: inline-block; width: 70px;"><spring:message code='lod0'/></div>
@@ -651,43 +636,6 @@
 				<input type="text" id="geo_lod5" name="geo_lod5" value="${policy.geo_lod5 }" size="15" />&nbsp;<spring:message code='meter'/>&nbsp;&nbsp;
 				<button type="button" id="changeLodButton" class="btn"><spring:message code='change'/></button>
 			</div>
-		</div>
-		<div>
-			<h3><spring:message code='lighting'/></h3>
-			<div style="height: 30px;"><spring:message code='demo.ambient.reflection.coef'/></div>
-			<div id="ambient_reflection_coef" style="display: inline-block; width: 65%;">
-				<div id="geo_ambient_reflection_coef_view" class="ui-slider-handle"></div>
-				<input type="hidden" id="geo_ambient_reflection_coef" name="geo_ambient_reflection_coef" value="0.5" />
-			</div>
-			<div style="height: 30px;"><spring:message code='demo.diffuse.reflection.coef'/></div>
-			<div id="diffuse_reflection_coef" style="display: inline-block; width: 65%;">
-				<div id="geo_diffuse_reflection_coef_view" class="ui-slider-handle"></div>
-				<input type="hidden" id="geo_diffuse_reflection_coef" name="geo_diffuse_reflection_coef" value="1" />
-			</div>
-			<div style="height: 30px;"><spring:message code='demo.specular_reflection.coef'/></div>
-			<div>
-				<div id="specular_reflection_coef" style="display: inline-block; width: 65%;">
-					<div id="geo_specular_reflection_coef_view" class="ui-slider-handle"></div>
-					<input type="hidden" id="geo_specular_reflection_coef" name="geo_specular_reflection_coef" value="1" />
-				</div>
-				<div style="float: right;">
-					<button type="button" id="changeLightingButton" class="btn"><spring:message code='change'/></button>
-				</div>
-			</div>
-			<div style="text-align: center">
-			</div>
-		</div>
-		<div>
-			<h3><label for="geo_ssao_radius"><spring:message code='demo.ssao.radius'/></label></h3>
-			<input type="text" id="geo_ssao_radius" name="geo_ssao_radius" />
-			<button type="button" id="changeSsaoRadiusButton" class="btn"><spring:message code='change'/></button>
-		</div>
-		<div>
-			<h3><spring:message code='demo.view.mode'/></h3>
-			<input type="radio" id="mode3PV" name="viewMode" value ="false" onclick="changeViewMode(false);"/>
-			<label for="mode3PV"> <spring:message code='demo.third.person.mode'/> </label>
-			<input type="radio" id="mode1PV" name="viewMode" value ="true" onclick="changeViewMode(true);"/>
-			<label for="mode1PV"> <spring:message code='demo.first.person.mode'/> </label>
 		</div>
 	</div>
 </div>

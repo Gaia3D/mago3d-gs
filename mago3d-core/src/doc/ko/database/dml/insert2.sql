@@ -48,10 +48,8 @@ values(39, '0', '데이터 수정', 'DATA', 3 , 2, 9, '/data/modify-data.do', '/data/
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, css_class, default_yn, use_yn) values(8, '0', '환경설정', 'CONFIGURATION', 0 , 1, 8, '/config/modify-policy.do', 'glyph-settings', 'Y', 'Y');
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, css_class, default_yn, use_yn) values(81, '0', '운영정책', 'CONFIGURATION', 8 , 2, 1, '/config/modify-policy.do', 'glyph-settings', 'Y', 'Y');
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, css_class, default_yn, use_yn) values(82, '0', '메뉴설정', 'CONFIGURATION', 8 , 2, 2, '/config/list-menu.do', 'glyph-settings', 'Y', 'Y');
-insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, css_class, default_yn, use_yn) values(83, '0', '라이선스', 'CONFIGURATION', 8 , 2, 3, '/config/modify-license.do', 'glyph-settings', 'Y', 'Y');
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, css_class, default_yn, use_yn) values(84, '0', '위젯설정', 'CONFIGURATION', 8 , 2, 4, '/config/modify-widget.do', 'glyph-settings', 'N', 'Y');
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, css_class, default_yn, use_yn) values(85, '0', '권한설정', 'CONFIGURATION', 8 , 2, 5, '/role/list-role.do', 'glyph-settings', 'N', 'Y');
-insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, css_class, default_yn, use_yn) values(86, '0', '공통 코드 설정', 'CONFIGURATION', 8 , 2, 6, '/code/list-code.do', 'glyph-settings', 'N', 'Y');
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, url_alias, css_class, default_yn, use_yn, display_yn) 
 values(87, '0', '권한 설정 수정', 'CONFIGURATION', 8 , 2, 7, '/role/modify-role.do', '/role/list-role.do', 'glyph-settings', 'N', 'Y', 'N');
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, url_alias, css_class, default_yn, use_yn, display_yn) 
@@ -81,10 +79,8 @@ insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (8, 1, 8);
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (81, 1, 81);
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (82, 1, 82);
-insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (83, 1, 83);
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (84, 1, 84);
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (85, 1, 85);
-insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (86, 1, 86);
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (87, 1, 87);
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (88, 1, 88);
 
@@ -93,10 +89,10 @@ insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (
 insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'projectWidget', 1, 'admin' );
 insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'dataInfoWidget', 2, 'admin' );
 insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'dataInfoLogListWidget', 3, 'admin' );
-insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'userWidget', 5, 'admin' );
-insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'accessLogWidget', 7, 'admin' );
-insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'dbcpWidget', 8, 'admin' );
-insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'dbSessionWidget', 9, 'admin' );
+insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'userWidget', 4, 'admin' );
+insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'accessLogWidget', 5, 'admin' );
+insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'dbcpWidget', 6, 'admin' );
+insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget_seq'), 'dbSessionWidget', 7, 'admin' );
 
 
 -- 공통 코드
@@ -183,8 +179,6 @@ insert into common_code (
 
 
 
-
-
 -- 운영 정책
 insert into policy(	policy_id, password_exception_char, site_name, site_admin_mobile_phone, site_admin_email) 
 			values( 1, '<>&''"', 'Mago3D', 'u1Cgl3H66Gx6ruL48dZzgw==', '88qb9Zh2qZAaxa0MR2LXJA==');
@@ -219,3 +213,59 @@ geo_callback_insertissue = 'showInsertIssueLayer',
 geo_callback_clickposition = 'showClickPosition';
 
 commit;
+
+
+
+
+insert into project(
+	project_id, project_key, project_name, view_order, use_yn, latitude, longitude, height, duration
+) values(
+	nextval('project_seq'), '3ds', '3DS 통합 가시화', '1', 'Y', '37.58210', '126.60856869381428', '550', 3
+);
+insert into project(
+	project_id, project_key, project_name, view_order, use_yn, latitude, longitude, height, duration
+) values(
+	nextval('project_seq'), 'ifc_cultural_assets', 'IFC(Cultural Assets)', '2', 'Y', '37.57981', '126.97772995695296', '80', 3
+);
+insert into project(
+	project_id, project_key, project_name, view_order, use_yn, latitude, longitude, height, duration
+) values(
+	nextval('project_seq'), 'ifc', 'IFC', '3', 'Y', '-62.2237', '-58.787', '270', 5
+);
+insert into project(
+	project_id, project_key, project_name, view_order, use_yn, latitude, longitude, height, duration
+) values(
+	nextval('project_seq'), 'ifc_mep', 'IFC(MEP)', '4', 'Y', '37.6636', '126.738234', '150', 3
+);
+insert into project(
+	project_id, project_key, project_name, view_order, use_yn, latitude, longitude, height, duration
+) values(
+	nextval('project_seq'), 'sea_port', 'Sea Port', '5', 'Y', '37.440778', '126.598426', '630', 3
+);
+insert into project(
+	project_id, project_key, project_name, view_order, use_yn, latitude, longitude, height, duration
+) values(
+	nextval('project_seq'), 'collada', 'Collada 통합 가시화', '6', 'Y', '37.567450', '126.7987', '320', 3
+);
+insert into project(
+	project_id, project_key, project_name, view_order, use_yn, latitude, longitude, height, duration
+) values(
+	nextval('project_seq'), 'ifc_japan', 'IFC(Japan)', '7', 'Y', '35.6624', '139.6842', '320', 3
+);
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

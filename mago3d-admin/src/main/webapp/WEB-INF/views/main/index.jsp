@@ -25,6 +25,62 @@
 		<div class="container">
 			<div class="widgets">
 				<div class="row">
+					<%-- <div class="widget widget-low widget-otp-usage full column">
+						<div class="widget-header row">
+							<div class="widget-heading u-pull-left">						
+								<h3 class="widget-title"><spring:message code='main.issue.issuestatus'/><span class="widget-desc">${yearMonthDay } (<spring:message code='main.today'/>)</span></h3>
+							</div>
+						</div><!-- .widget-header -->
+						<div class="widget-content row">
+							<div class="one-third column banner-container">
+								<div class="banner info-generates">
+									<div>
+										<div class="info-device">
+											<span class="icon-glyph glyph-plus-circle"></span>
+											<span class="info-numbers"></span>
+										</div>
+									</div>
+									<div>
+										<span class="banner-title"><spring:message code='main.issue.newissue'/></span>
+										<span id="firstCountSpinner" class="banner-number"></span>
+										<span class="banner-unit"> ${issueTotalCount} <spring:message code='main.count'/> </span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="one-third column banner-container">
+								<div class="banner info-success">
+									<div>
+										<div class="info-device">
+											<span class="icon-glyph glyph-check-circle"></span>
+											<span class="info-numbers"></span>
+										</div>
+									</div>
+									<div>
+										<span class="banner-title"><spring:message code='main.issue.ongoingissue'/></span>
+										<span id="secondeCountSpinner" class="banner-number"></span>
+										<span class="banner-unit"> 0 <spring:message code='main.count'/></span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="one-third column banner-container">
+								<div class="banner info-failures">
+									<div>
+										<div class="info-device">
+											<span class="icon-glyph glyph-emark-circle"></span>
+											<span class="info-numbers"></span>
+										</div>
+									</div>
+									<div>
+										<span class="banner-title"><spring:message code='main.issue.completedissue'/></span>
+										<span id="thirdCountSpinner" class="banner-number"></span>
+										<span class="banner-unit"> 0 <spring:message code='main.count'/></span>
+									</div>
+								</div>
+							</div>
+						</div><!-- .widget-content -->
+					</div><!-- .widget --> --%>
 	
 <c:forEach var="dbWidget" items="${widgetList }">
 	<c:choose>

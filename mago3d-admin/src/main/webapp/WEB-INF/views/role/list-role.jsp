@@ -89,7 +89,7 @@
 									<col class="col-key" />
 									<col class="col-type" />
 									<col class="col-toggle" />
-<!-- 									<col class="col-desc" /> -->
+									<col class="col-desc" />
 									<col class="col-date-time" />
 									<col class="col-functions" />
 									<thead>
@@ -99,7 +99,7 @@
 											<th scope="col" class="col-key">Role Key</th>
 											<th scope="col" class="col-type"><spring:message code='role.type'/></th>
 											<th scope="col" class="col-toggle"><spring:message code='role.use.not'/></th>
-<%-- 											<th scope="col" class="col-desc"><spring:message code='description'/></th> --%>
+											<th scope="col" class="col-desc"><spring:message code='description'/></th>
 											<th scope="col" class="col-date-time"><spring:message code='role.insert.date'/></th>
 											<th scope="col" class="col-functions"><spring:message code='role.modify.or.delete'/></th>
 										</tr>
@@ -138,7 +138,7 @@
 		</c:if>
 											</td>
 											
-<%-- 											<td class="col-desc">${role.description }</td> --%>
+											<td class="col-desc">${role.description }</td>
 											<td class="col-date-time">${role.viewInsertDate }</td>
 											<td class="col-functions">
 												<span class="button-group">

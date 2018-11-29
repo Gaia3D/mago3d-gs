@@ -53,6 +53,7 @@
 								<button type="button" class="btn btn-success btn-sm" onclick="addTree(); return false;"><spring:message code='user.group.add'/></button>
 								<button type="button" class="btn btn-warning btn-sm" onclick="addChildTree(); return false;"><spring:message code='user.group.add.submenu'/></button>
 								<button type="button" class="btn btn-danger btn-sm" onclick="delTree(); return false;"><spring:message code='user.group.select.delete'/></button>
+<!-- 								<button type="button" class="btn btn-success btn-sm" onclick="updateTree(); return false;">수정</button> -->
 								<button type="button" class="btn btn-warning btn-sm" onclick="moveUpTree(); return false;"><spring:message code='user.group.up'/></button>
 								<button type="button" class="btn btn-danger btn-sm" onclick="moveDownTree(); return false;"><spring:message code='user.group.down'/></button>
 							</div>
@@ -107,6 +108,7 @@
 													</div>
 													<div class="button-group u-pull-right">
 														<a href="#" class="button" onclick="modifyUserGroupRole();"><spring:message code='user.group.control.roll'/></a>
+														<a href="#" class="button" onclick="modifyUserGroupMenu();"><spring:message code='user.group.control.menu'/></a>
 														<a href="#" class="button" onclick="modifyUserGroupUser();"><spring:message code='user.group.control.user'/></a>
 													</div>
 												</td>
@@ -118,6 +120,7 @@
 									<div class="tabs">
 										<ul>
 											<li><a href="#role_tab"><spring:message code='user.group.role'/></a></li>
+											<li><a href="#menu_tab"><spring:message code='user.group.menu'/></a></li>
 											<li><a href="#user_tab"><spring:message code='user.group.user'/></a></li>
 										</ul>
 										<div id="role_tab">
@@ -144,8 +147,41 @@
 													</tr>
 												</tbody>
 											</table>
+						
 											<div id="role_pagination" class="pagination"></div>
 										</div>
+										
+										<div id="menu_tab">
+											<table class="inner-table scope-col">
+												<col class="col-numer" />
+												<col class="col-name" />
+												<col class="col-toggle" />
+												<col class="col-url" />
+												<col class="col-url" />
+												<col class="col-desc" />
+												<col class="col-desc" />
+												<col class="col-date-time" />
+												<thead>
+													<tr>
+														<th scope="col" class="col-number"><spring:message code='user.group.number'/></th>
+														<th scope="col" class="col-name"><spring:message code='user.group.role.name'/></th>
+														<th scope="col" class="col-toggle"><spring:message code='user.group.use.not'/></th>
+														<th scope="col" class="col-url"><spring:message code='user.group.menu.url'/></th>
+														<th scope="col" class="col-url"><spring:message code='user.group.menu.image'/></th>
+														<th scope="col" class="col-desc"><spring:message code='user.group.menu.image.alt'/></th>
+														<th scope="col" class="col-desc"><spring:message code='user.group.description'/></th>
+														<th scope="col" class="col-date-time"><spring:message code='user.group.insert.date'/></th>
+													</tr>
+												</thead>
+												<tbody id="menu_list">
+													<tr>
+														<td colspan="8" class="col-none"><spring:message code='user.group.menu.insert.not'/></td>
+													</tr>
+												</tbody>
+											</table>
+											<div id="menu_pagination" class="pagination"></div>
+										</div>
+										
 										<div id="user_tab">
 											<table class="inner-table scope-col">
 												<col class="col-numer" />
@@ -231,9 +267,9 @@
 					<input type="search" id="search_role_name" name="search_role_name" class="m" value="" />
 					<input type="button" value="<spring:message code='user.group.lookup'/>" onclick="drawGroupPage('1', 'role_select');" />
 				</div>
-			</div>
-				<div id="role_select_list_count" class="list-desc u-pull-left" style="margin-top: -10px; margin-bottom: 10px;">
+				<div id="role_select_list_count" class="list-desc u-pull-left">
 				</div>
+			</div>
 			
 			<form id="role_right_form">
 			<table class="list-table scope-col">
