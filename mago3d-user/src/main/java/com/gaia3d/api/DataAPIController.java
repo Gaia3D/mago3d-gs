@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gaia3d.domain.CacheManager;
@@ -44,6 +45,7 @@ public class DataAPIController {
 	 * @return
 	 */
 	@RequestMapping(value = "ajax-data-by-data-id.do")
+	@ResponseBody
 	public Map<String, Object> ajaxDataByDataId(HttpServletRequest request, @RequestParam("data_id") Long data_id) {
 		
 		log.info("@@@@@@@@@ data_id = {}", data_id);
@@ -66,6 +68,7 @@ public class DataAPIController {
 	 * @return
 	 */
 	@RequestMapping(value = "ajax-data-attribute-by-data-id.do")
+	@ResponseBody
 	public Map<String, Object> ajaxDataAttributeByDataId(HttpServletRequest request, @RequestParam("data_id") Long data_id) {
 		
 		log.info("@@@@@@@@@ data_id = {}", data_id);
@@ -88,6 +91,7 @@ public class DataAPIController {
 	 * @return
 	 */
 	@RequestMapping(value = "ajax-list-data-object-attribute.do")
+	@ResponseBody
 	public Map<String, Object> ajaxListDataObjectAttribute(HttpServletRequest request, DataInfoObjectAttribute dataInfoObjectAttribute, @RequestParam(defaultValue="1") String pageNo) {
 		log.info("@@ dataInfoObjectAttribute = {}", dataInfoObjectAttribute);
 		
@@ -147,6 +151,7 @@ public class DataAPIController {
 	 * @return
 	 */
 	@RequestMapping(value = "ajax-data-object-attribute.do")
+	@ResponseBody
 	public Map<String, Object> ajaxDataObjectAttribute(HttpServletRequest request, @RequestParam("data_object_attribute_id") Long data_object_attribute_id) {
 		
 		log.info("@@@@@@@@@ data_object_attribute_id = {}", data_object_attribute_id);
@@ -169,6 +174,7 @@ public class DataAPIController {
 	 * @return
 	 */
 	@RequestMapping(value = "ajax-project-data-statistics.do")
+	@ResponseBody
 	public Map<String, Object> ajaxProjectDataStatistics(HttpServletRequest request) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -200,6 +206,7 @@ public class DataAPIController {
 	 * @return
 	 */
 	@RequestMapping(value = "ajax-data-status-statistics.do")
+	@ResponseBody
 	public Map<String, Object> ajaxDataStatusStatistics(HttpServletRequest request) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -226,6 +233,7 @@ public class DataAPIController {
 	 * @return
 	 */
 	@RequestMapping(value = "ajax-update-data-location-and-rotation.do")
+	@ResponseBody
 	public Map<String, Object> ajaxUpdateDataLocationAndRotation(HttpServletRequest request, DataInfoLog dataInfoLog) {
 		
 		log.info("@@@@@@@@@ dataInfoLog = {}", dataInfoLog);

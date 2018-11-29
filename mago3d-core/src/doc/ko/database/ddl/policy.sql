@@ -26,6 +26,7 @@ create table policy(
 	password_create_char					varchar(32)			default '!@#',
 	password_exception_char					varchar(10)			default '<>&',
 	
+	geo_cesium_ion_token					varchar(256)		default '',
 	geo_view_library						varchar(20)			default 'cesium',
 	geo_data_path							varchar(100)		default '/f4d',
 	geo_data_default_projects				varchar(30)[],
@@ -169,6 +170,7 @@ comment on column policy.password_create_type is '초기 패스워드 생성 방법. 0 : �
 comment on column policy.password_create_char is '초기 패스워드 생성 문자열. 엑셀 업로드 등';
 comment on column policy.password_exception_char is '패스워드로 사용할수 없는 특수문자(XSS). <,>,&,작은따음표,큰따움표';
 
+comment on column policy.geo_cesium_ion_token is 'Cesium ion token 발급. 기본 mago3D';
 comment on column policy.geo_view_library is 'view library. 기본 cesium';
 comment on column policy.geo_data_path is 'data 폴더. 기본 /data';
 comment on column policy.geo_data_default_projects is '시작시 로딩 프로젝트. 배열로 저장';

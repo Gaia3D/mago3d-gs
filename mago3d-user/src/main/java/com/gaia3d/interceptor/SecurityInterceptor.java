@@ -42,9 +42,6 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
     		return true;
     	}
     	
-    	int a = 1;
-    	if(a >0) return true;
-    	
     	if(uri.indexOf("/error") >= 0) {
     		log.info("error pass!!!");
     		printHead(request);

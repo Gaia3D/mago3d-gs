@@ -12,7 +12,6 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import com.gaia3d.filter.XSSFilter;
 import com.gaia3d.listener.Gaia3dHttpSessionBindingListener;
@@ -47,14 +46,6 @@ public class Mago3dUserApplication extends SpringBootServletInitializer {
 		registrationBean.addUrlPatterns("*.do");
         return registrationBean;
     }
-    
-    // If you only support GET and POST like web browsers. Setting the servlet container
-//    @Bean
-//    public FilterRegistrationBean hiddenHttpMethodFilter() {
-//    	FilterRegistrationBean registrationBean = new FilterRegistrationBean(new HiddenHttpMethodFilter());
-//    	registrationBean.addUrlPatterns("/*");
-//    	return registrationBean;
-//    }
 	
 	@Bean
 	public HttpSessionBindingListener httpSessionBindingListener() {

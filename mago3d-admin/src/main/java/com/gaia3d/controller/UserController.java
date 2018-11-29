@@ -44,6 +44,7 @@ import com.gaia3d.domain.UserInfo;
 import com.gaia3d.domain.UserSession;
 import com.gaia3d.helper.PasswordHelper;
 import com.gaia3d.security.Crypt;
+import com.gaia3d.service.UserDeviceService;
 import com.gaia3d.service.UserGroupService;
 import com.gaia3d.service.UserService;
 import com.gaia3d.util.DateUtil;
@@ -73,6 +74,8 @@ public class UserController {
 	private UserGroupService userGroupService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserDeviceService userDeviceService;
 	
 	/**
 	 * 사용자 목록
@@ -119,7 +122,12 @@ public class UserController {
 			txtDownloadFlag = true;
 		}
 		
+		@SuppressWarnings("unchecked")
+		List<CommonCode> userRegisterTypeList = (List<CommonCode>)CacheManager.getCommonCode(CommonCode.USER_REGISTER_TYPE);
+		
 		model.addAttribute(pagination);
+		model.addAttribute("commonCodeMap", CacheManager.getCommonCodeMap());
+		model.addAttribute("userRegisterTypeList", userRegisterTypeList);
 		model.addAttribute("userGroupList", userGroupList);
 		model.addAttribute("txtDownloadFlag", Boolean.valueOf(txtDownloadFlag));
 		model.addAttribute("userList", userList);
@@ -251,7 +259,11 @@ public class UserController {
 			}
 		}
 		
+		@SuppressWarnings("unchecked")
+		List<CommonCode> emailCommonCodeList = (List<CommonCode>)CacheManager.getCommonCode(CommonCode.USER_EMAIL);
+		
 		model.addAttribute("passwordExceptionChar", passwordExceptionChar);
+		model.addAttribute("emailCommonCodeList", emailCommonCodeList);
 		model.addAttribute(userInfo);
 		model.addAttribute("policy", policy);
 		model.addAttribute("userGroupList", userGroupList);
@@ -459,12 +471,14 @@ public class UserController {
 		String listParameters = getListParameters(request);
 			
 		UserInfo userInfo =  userService.getUser(user_id);
+		UserDevice userDevice = userDeviceService.getUserDeviceByUserId(userInfo.getUser_id());
 		
 		Policy policy = CacheManager.getPolicy();
 		
 		model.addAttribute("policy", policy);
 		model.addAttribute("listParameters", listParameters);
 		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("userDevice", userDevice);
 		
 		return "/user/detail-user";
 	}
@@ -488,6 +502,9 @@ public class UserController {
 		userInfo.setMobile_phone(userInfo.getViewMobilePhone());
 		userInfo.setEmail(userInfo.getViewEmail());
 		userInfo.setAddress_etc(userInfo.getViewAddressEtc());
+		
+		// TODO 고민을 해 보자. user_info랑 조인을 해서 가져올지, 그냥 가져 올지
+		UserDevice userDevice = userDeviceService.getUserDeviceByUserId(userInfo.getUser_id());
 		
 		log.info("@@@@@@@@ userInfo = {}", userInfo);
 		if(userInfo.getTelephone() != null && !"".equals(userInfo.getTelephone())) {
@@ -523,11 +540,16 @@ public class UserController {
 			}
 		}
 		
+		@SuppressWarnings("unchecked")
+		List<CommonCode> emailCommonCodeList = (List<CommonCode>)CacheManager.getCommonCode(CommonCode.USER_EMAIL);
+		
 		model.addAttribute("passwordExceptionChar", passwordExceptionChar);
+		model.addAttribute("emailCommonCodeList", emailCommonCodeList);
 		model.addAttribute("listParameters", listParameters);
 		model.addAttribute("policy", policy);
 		model.addAttribute("userGroupList", userGroupList);
 		model.addAttribute(userInfo);
+		model.addAttribute("userDevice", userDevice);
 		
 		return "/user/modify-user";
 	}

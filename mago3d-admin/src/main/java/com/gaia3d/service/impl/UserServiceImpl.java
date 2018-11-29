@@ -12,6 +12,8 @@ import com.gaia3d.domain.CacheManager;
 import com.gaia3d.domain.Policy;
 import com.gaia3d.domain.UserInfo;
 import com.gaia3d.persistence.UserMapper;
+import com.gaia3d.service.SSOService;
+import com.gaia3d.service.UserDeviceService;
 import com.gaia3d.service.UserService;
 import com.gaia3d.util.StringUtil;
 
@@ -25,6 +27,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private UserDeviceService userDeviceService;
+	@Autowired
+	private SSOService sSOService;
 	
 	/**
 	 * 사용자 수
@@ -276,6 +282,8 @@ public class UserServiceImpl implements UserService {
 			return userMapper.updateUser(userInfo);
 		} else if((Policy.PHYSICAL_DELETE_USER).equals(userDeleteType)) {
 			// 물리적 정보 삭제
+			//sSOService.deleteSSOLog(user_id);
+			userDeviceService.deleteUserDeviceByUserId(user_id);
 			return userMapper.deleteUser(user_id);
 		} else {
 			return 0;

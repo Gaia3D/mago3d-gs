@@ -40,11 +40,15 @@
 	<li id="homeMenu" class="home">
 		<img src="/images/ko/homepage/home-icon.png" style="width: 35px; height: 35px; padding-right: 2px;"/>
 	</li>
+	<%-- <li id="myIssueMenu" class="issue" data-tooltip-text="<spring:message code='demo.myissue.menu.description'/>"><spring:message code='issue'/>
+		<br /><span id="issueListCount">${totalCount }</span></li> --%>
 	<li id="searchMenu" class="search" data-tooltip-text="<spring:message code='demo.search.menu.description'/>"><spring:message code='search'/></li>
 	<li id="apiMenu" class="api" data-tooltip-text="<spring:message code='demo.api.menu.description'/>"><spring:message code='api'/></li>	
+	<%-- <li id="insertIssueMenu" class="regist" data-tooltip-text="<spring:message code='demo.insert-issue.menu.description'/>"><spring:message code='registeration'/></li> --%>
 	<li id="treeMenu" class="tree" data-tooltip-text="<spring:message code='demo.tree.menu.description'/>"><spring:message code='tree'/></li>
 	<li id="chartMenu" class="chart" data-tooltip-text="<spring:message code='demo.chart.menu.description'/>"><spring:message code='chart'/></li>
 	<li id="logMenu" class="log" data-tooltip-text="<spring:message code='demo.log.menu.description'/>"><spring:message code='log'/></li>
+	<%-- <li id="attributeMenu" class="attribute" data-tooltip-text="<spring:message code='demo.attribute.menu.description'/>"><spring:message code='attribute'/></li> --%>
 	<li id="configMenu" class="config" data-tooltip-text="<spring:message code='demo.config.menu.description'/>"><spring:message code='config'/></li>	
 </ul>
 
@@ -81,6 +85,36 @@
 		<li><a href="/homepage/faq.do">FAQ</a></li>
 	</ul>
 	
+	<ul id="myIssueMenuContent" class="issueList">
+		<li style="margin-bottom: 8px; font-size: 1em; font-weight: normal; color: #2955a6;">
+			<spring:message code='issue.recent.list.10'/>
+		</li>
+<c:if test="${empty issueList }">
+		<li style="text-align: center; padding-top:20px; height: 50px;">
+			<spring:message code='issue.not.exist'/>
+		</li>
+</c:if>
+<c:if test="${!empty issueList }">
+	<c:forEach var="issue" items="${issueList}" varStatus="status">
+		<li>
+			<button type="button" title="<spring:message code='shortcut'/>" 
+				onclick="gotoIssue('${issue.project_id}', '${issue.issue_id}', '${issue.issue_type}', '${issue.longitude}', '${issue.latitude}', '${issue.height}', '2')">
+				<spring:message code='shortcut'/></button>
+			<div class="info">
+				<p class="title">
+					<span>${issue.project_name }</span>
+					${issue.title }
+				</p>
+				<ul class="tag">
+					<li><span class="${issue.issue_type_css_class }"></span>${issue.issue_type_name }</li>
+					<li><span class="${issue.priority_css_class }"></span>${issue.priority_name }</li>
+					<li class="date">${issue.viewInsertDate }</li>
+				</ul>
+			</div>
+		</li>
+	</c:forEach>
+</c:if>
+	</ul>
 	
 	<form:form id="searchForm" modelAttribute="issue" method="post" onsubmit="return false;">
 	<div id="searchMenuContent" class="searchWrap">
@@ -146,7 +180,25 @@
 	</form:form>
 	
 	<div id="apiMenuContent" class="apiWrap">
-		<%-- <div>
+		<div>
+			<h3><spring:message code='demo.local.search'/></h3>
+			<ul class="apiLocal">
+				<li>
+					<label for="localSearchProjectId"><spring:message code='project'/></label>
+					<select id="localSearchProjectId" name="localSearchProjectId" class="select">
+<c:forEach var="project" items="${projectList}">
+						<option value="${project.project_id}">${project.project_name}</option>
+</c:forEach>
+					</select>
+				</li>
+				<li>
+					<label for="localSearchDataKey"><spring:message code='data.key'/></label>
+					<input type="text" id="localSearchDataKey" name="localSearchDataKey" size="20" />
+					<button type="button" id="localSearch" class="btn"><spring:message code='search'/></button> 
+				</li>
+			</ul>
+		</div>
+		<div>
 			<h3><spring:message code='demo.property.rendering'/></h3>
 			<ul class="apiLocal">
 				<li>
@@ -169,7 +221,7 @@
 					<button type="button" id="changePropertyRendering" class="btn"><spring:message code='change'/></button> 
 				</li>
 			</ul>
-		</div> --%>
+		</div>
 		<div>
 			<h3><spring:message code='demo.color.change'/></h3>
 			<ul class="apiLocal">
@@ -252,6 +304,13 @@
 			</ul>
 		</div>
 		<div>
+			<h3><spring:message code='demo.now.location.issue.list'/></h3>
+			<input type="radio" id="showNearGeoIssueList" name="nearGeoIssueList" value="true" onclick="changeNearGeoIssueList(true);" />
+			<label for="showNearGeoIssueList"> <spring:message code='show'/> </label>
+			<input type="radio" id="hideNearGeoIssueList" name="nearGeoIssueList" value="false" onclick="changeNearGeoIssueList(false);"/>
+			<label for="hideNearGeoIssueList"> <spring:message code='hide'/> </label>
+		</div>
+		<div>
 			<h3><spring:message code='demo.click.point.location'/></h3>
 			<ul class="apiLocal">
 				<li>
@@ -270,6 +329,145 @@
 		</div>
 	</div>
 	
+	<form:form id="issue" modelAttribute="issue" method="post" onsubmit="return false;">
+	<div id="insertIssueMenuContent" class="insertIssueWrap">
+		<table>
+			<tr style="height: 35px;">
+				<td style="width: 100px;" nowrap="nowrap">
+					<form:label path="issueProjectId"><spring:message code='project'/></form:label>
+					<span class="icon-glyph glyph-emark-dot color-warning"></span>
+				</td>
+				<td>
+					<form:select path="issueProjectId" cssClass="select">
+<c:forEach var="project" items="${projectList}">
+						<option value="${project.project_id}">${project.project_name}</option>
+</c:forEach>
+					</form:select>
+				</td>
+			</tr>
+			<tr style="height: 35px;">
+				<td>
+					<form:label path="issue_type"><spring:message code='issue.type'/></form:label>
+					<span class="icon-glyph glyph-emark-dot color-warning"></span>
+				</td>
+				<td>
+					<form:select path="issue_type" cssClass="select">
+<c:forEach var="commonCode" items="${issueTypeList}">
+						<option value="${commonCode.code_key}">${commonCode.code_name}</option>
+</c:forEach>
+					</form:select>
+				</td>
+			</tr>
+			<tr style="height: 35px;">
+				<td>
+					<spring:message code='issue.location'/>
+				</td>
+				<td>
+					<button type="button" id="insertIssueEnableButton" class="btn" style="font-size: 11px;"><spring:message code='issue.insert.control.button'/></button> 
+				</td>
+			</tr>
+			<tr style="height: 35px;">
+				<td>
+					<form:label path="data_key"><spring:message code='data.name'/></form:label>
+					<span class="icon-glyph glyph-emark-dot color-warning"></span>
+				</td>
+				<td>
+					<form:input path="data_key" readonly="true" size="25" cssStyle="background-color: #CBCBCB;" />
+					<form:errors path="data_key" cssClass="error" />
+					<form:hidden path="object_key"/>
+					<form:hidden path="height"/>
+				</td>
+			</tr>
+			<tr style="height: 35px;">
+				<td>
+					<form:label path="latitude"><spring:message code='latitude'/></form:label>
+					<span class="icon-glyph glyph-emark-dot color-warning"></span>
+				</td>
+				<td>
+					<form:input path="latitude" readonly="true" size="25" cssStyle="background-color: #CBCBCB;" />
+					<form:errors path="latitude" cssClass="error" />
+				</td>
+			</tr>
+			<tr style="height: 35px;">
+				<td>
+					<form:label path="longitude"><spring:message code='longitude'/></form:label>
+					<span class="icon-glyph glyph-emark-dot color-warning"></span>
+				</td>
+				<td>
+					<form:input path="longitude" readonly="true" size="25" cssStyle="background-color: #CBCBCB;" />
+					<form:errors path="longitude" cssClass="error" />
+				</td>
+			</tr>
+			<tr style="height: 60px;">
+				<td><form:label path="title"><spring:message code='issue.title'/></form:label>
+					<span class="icon-glyph glyph-emark-dot color-warning"></span>
+				</td>
+				<td>
+					<form:textarea path="title" rows="2" cols="32" />
+					<form:errors path="title" cssClass="error" />
+				</td>
+			</tr>
+			
+			<tr style="height: 35px;">
+				<td><form:label path="priority"><spring:message code='issue.priority'/></form:label>
+					<span class="icon-glyph glyph-emark-dot color-warning"></span>
+				</td>
+				<td>
+					<form:select path="priority" cssClass="select">
+<c:forEach var="commonCode" items="${issuePriorityList}">
+						<option value="${commonCode.code_key}">${commonCode.code_name}</option>
+</c:forEach>
+					</form:select>
+				</td>
+			</tr>
+			
+			<tr style="height: 35px;">
+				<td><form:label path="due_day"><spring:message code='issue.duedate'/></form:label></td>
+				<td><form:hidden path="due_date" />
+					<input type="text" id="due_day" name="due_day" class="date" maxlength="10" style="width: 33%"/>
+					<spring:message code='day'/>&nbsp;&nbsp;
+					<input type="text" id="due_hour" name="due_hour" placeholder=" 00" maxlength="2" style="width: 12%;"/> :
+					<input type="text" id="due_minute" name="due_minute" placeholder=" 00" maxlength="2" style="width: 12%;"/>
+					<spring:message code='minute'/>
+				</td>
+			</tr>
+			
+			<tr style="height: 35px;">
+				<td><form:label path="assignee"><spring:message code='issue.assignee'/></form:label></td>
+				<td>
+					<spring:message code='notice.preparing' var='noticePreparing' />
+					<spring:message code='issue.assignee.description' var="assigneeDescription"/>
+					<form:input path="assignee" cssClass="m" placeholder="${assigneeDescription}" size="22" />
+					<button type="button" class="btn" onclick="alert('${noticePreparing}');"><spring:message code='selection'/></button> 
+					<form:errors path="assignee" cssClass="error" />
+				</td>
+			</tr>
+			
+			<tr style="height: 35px;">
+				<td><form:label path="reporter"><spring:message code='issue.reporter'/></form:label></td>
+				<td>
+					<spring:message code='issue.reporter.description' var="reporterDescription" />
+					<form:input path="reporter" cssClass="m" placeholder="${reporterDescription}" size="22" />
+					<button type="button" class="btn" onclick="alert('${noticePreparing}');"><spring:message code='selection'/></button> 
+					<form:errors path="reporter" cssClass="error" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td><form:label path="contents"><spring:message code='issue.contents'/></form:label>
+					<span class="icon-glyph glyph-emark-dot color-warning"></span>
+				</td>
+				<td><form:textarea path="contents" rows="5" cols="32" />
+					<form:errors path="contents" cssClass="error" />
+				</td>
+			</tr>
+		</table>
+		
+		<div class="btns">
+			<button type="button" id="issueSaveButton" class="full"><spring:message code='save'/></button>
+		</div>
+	</div>
+	</form:form>
 	
 	<div id="treeMenuContent" class="treeWrap">
 		<div>
@@ -325,6 +523,50 @@
 		</table>
 	</div>
 
+	<form id="attributeForm" action="#" method="post" onsubmit="return false;">
+	<div id="attributeMenuContent" class="attributeWrap">
+		<div>
+			<h3>Object Attribute Search</h3>
+		</div>
+		<table style="margin-top: 30px;">
+			<tr style="height: 35px;">
+				<td style="width: 80px;"><label for="objectAttributeProjectId">Project</label></td>
+				<td><select id="objectAttributeProjectId" name="objectAttributeProjectId" class="select">
+<c:forEach var="project" items="${projectList}">
+						<option value="${project.project_id}">${project.project_name}</option>
+</c:forEach>
+				</select>
+				</td>
+			</tr>
+			<tr style="height: 35px;">
+				<td><label for="objectAttributeDataKey">Data Key</label></td>
+				<td>
+					<input type="text" id="objectAttributeDataKey" name="objectAttributeDataKey" size="22" />
+				</td>
+			</tr>
+			<tr style="height: 35px;">
+				<td><label for="objectAttributeObjectId">Object Id</label></td>
+				<td>
+					<input type="text" id="objectAttributeObjectId" name="objectAttributeObjectId" size="22" />
+				</td>
+			</tr>
+			<tr style="height: 35px;">
+				<td>
+					<label for="objectAttributeSearchValue">SearchWord</label></td>
+				<td><input type="text" id="objectAttributeSearchValue" name="objectAttributeSearchValue" size="31" /></td>
+			</tr>
+		</table>
+		<div class="btns">
+			<button type="button" id="objectAttributeSearch" class="full">Search</button>
+		</div>
+		<table id="objectAttributeSearchList" class="" style="width: 100%;">
+			<col style="width: 30%;" />
+			<col style="width: 40%;" />
+			<col style="width: 30%;" />
+			<tbody></tbody>
+		</table>
+	</div>
+	</form>
 	
 	<div id="configMenuContent" class="configWrap">
 		<div>
@@ -368,6 +610,21 @@
 			<button type="button" id="deleteAllObjectMoveButton" class="btn"><spring:message code='all.delete'/></button>
 		</div>
 		<div>
+			<h3><spring:message code='demo.object.occlusion.culling'/></h3>
+			<div style="height: 30px;">
+				<div style="display: inline-block; width: 70px;"><spring:message code='selection'/></div>
+				<input type="radio" id="useOcclusionCulling" name="occlusionCulling" value="true" />
+				<label for="useOcclusionCulling"> <spring:message code='use'/> </label>
+				<input type="radio" id="unusedOcclusionCulling" name="occlusionCulling" value="false" />
+				<label for="unusedOcclusionCulling"> <spring:message code='unused'/> </label>
+			</div>
+			<div style="height: 30px;">
+				<div style="display: inline-block; width: 70px;"><spring:message code='data.key'/></div>
+				<input type="text" id="occlusion_culling_data_key" name="occlusion_culling_data_key" size="22" />
+				<button type="button" id="changeOcclusionCullingButton" class="btn"><spring:message code='change'/></button>
+			</div>
+		</div>
+		<div>
 			<h3><spring:message code='lod'/></h3>
 			<div style="height: 30px;">
 				<div style="display: inline-block; width: 70px;"><spring:message code='lod0'/></div>
@@ -394,6 +651,43 @@
 				<input type="text" id="geo_lod5" name="geo_lod5" value="${policy.geo_lod5 }" size="15" />&nbsp;<spring:message code='meter'/>&nbsp;&nbsp;
 				<button type="button" id="changeLodButton" class="btn"><spring:message code='change'/></button>
 			</div>
+		</div>
+		<div>
+			<h3><spring:message code='lighting'/></h3>
+			<div style="height: 30px;"><spring:message code='demo.ambient.reflection.coef'/></div>
+			<div id="ambient_reflection_coef" style="display: inline-block; width: 65%;">
+				<div id="geo_ambient_reflection_coef_view" class="ui-slider-handle"></div>
+				<input type="hidden" id="geo_ambient_reflection_coef" name="geo_ambient_reflection_coef" value="0.5" />
+			</div>
+			<div style="height: 30px;"><spring:message code='demo.diffuse.reflection.coef'/></div>
+			<div id="diffuse_reflection_coef" style="display: inline-block; width: 65%;">
+				<div id="geo_diffuse_reflection_coef_view" class="ui-slider-handle"></div>
+				<input type="hidden" id="geo_diffuse_reflection_coef" name="geo_diffuse_reflection_coef" value="1" />
+			</div>
+			<div style="height: 30px;"><spring:message code='demo.specular_reflection.coef'/></div>
+			<div>
+				<div id="specular_reflection_coef" style="display: inline-block; width: 65%;">
+					<div id="geo_specular_reflection_coef_view" class="ui-slider-handle"></div>
+					<input type="hidden" id="geo_specular_reflection_coef" name="geo_specular_reflection_coef" value="1" />
+				</div>
+				<div style="float: right;">
+					<button type="button" id="changeLightingButton" class="btn"><spring:message code='change'/></button>
+				</div>
+			</div>
+			<div style="text-align: center">
+			</div>
+		</div>
+		<div>
+			<h3><label for="geo_ssao_radius"><spring:message code='demo.ssao.radius'/></label></h3>
+			<input type="text" id="geo_ssao_radius" name="geo_ssao_radius" />
+			<button type="button" id="changeSsaoRadiusButton" class="btn"><spring:message code='change'/></button>
+		</div>
+		<div>
+			<h3><spring:message code='demo.view.mode'/></h3>
+			<input type="radio" id="mode3PV" name="viewMode" value ="false" onclick="changeViewMode(false);"/>
+			<label for="mode3PV"> <spring:message code='demo.third.person.mode'/> </label>
+			<input type="radio" id="mode1PV" name="viewMode" value ="true" onclick="changeViewMode(true);"/>
+			<label for="mode1PV"> <spring:message code='demo.first.person.mode'/> </label>
 		</div>
 	</div>
 </div>
@@ -535,6 +829,117 @@
 		saveCurrentLocation(latitude, longitude);
 	}
 	
+	// 이슈 위치로 이동
+	function gotoIssue(projectId, issueId, issueType, longitude, latitude, height, duration) {
+		var projectData = getDataAPI(CODE.PROJECT_ID_PREFIX + projectId);
+		if (projectData === null || projectData === undefined) {
+			$.ajax({
+				url: dataInformationUrl,
+				type: "POST",
+				data: "project_id=" + projectId,
+				dataType: "json",
+				headers: { "X-mago3D-Header" : "mago3D"},
+				success : function(msg) {
+					if(msg.result === "success") {
+						var projectDataJson = JSON.parse(msg.projectDataJson);
+						if(projectDataJson === null || projectDataJson === undefined) {
+							alert(JS_MESSAGE["project.data.no.found"]);
+							return;
+						}
+						gotoIssueAPI(managerFactory, projectId, projectDataJson, projectDataJson.data_key, issueId, issueType, longitude, latitude, height, duration);
+					} else {
+						alert(JS_MESSAGE[msg.result]);
+					}
+				},
+				error : function(request, status, error) {
+					alert(JS_MESSAGE["ajax.error.message"]);
+					console.log("code : " + request.status + "\n message : " + request.responseText + "\n error : " + error);
+				}
+			});
+		} else {
+			gotoIssueAPI(managerFactory, projectId, projectData, projectData.data_key, issueId, issueType, longitude, latitude, height, duration);	
+		}
+		
+		// 현재 좌표를 저장
+		saveCurrentLocation(latitude, longitude);
+	}
+	
+	// issue 위치 버튼을 클릭 했을 경우
+	$("#insertIssueEnableButton").click(function() {
+		if(insertIssueEnable) {
+			$("#insertIssueEnableButton").removeClass("on");
+			$("#insertIssueEnableButton").text(JS_MESSAGE["demo.select.object.message"]);
+			insertIssueEnable = false;
+		} else {
+			$("#insertIssueEnableButton").addClass("on");
+			$("#insertIssueEnableButton").text(JS_MESSAGE["demo.issue.enable.status"]);
+			insertIssueEnable = true;
+		}
+		changeInsertIssueModeAPI(managerFactory, insertIssueEnable);
+	});
+	
+	// issue input layer call back function
+	function showInsertIssueLayer(projectId, dataKey, objectKey, latitude, longitude, height) {
+		if(insertIssueEnable) {
+			$("#issueProjectId").val(projectId);
+			$("#data_key").val(dataKey);
+			$("#object_key").val(objectKey);
+			$("#latitude").val(latitude);
+			$("#longitude").val(longitude);
+			$("#height").val(height);
+			
+			// 현재 좌표를 저장
+			saveCurrentLocation(latitude, longitude);
+		}
+	}
+	
+	// 이슈 등록
+	var isInsertIssue = true;
+	$("#issueSaveButton").click(function() {
+		if (check() == false) {
+			return false;
+		}
+		if(isInsertIssue) {
+			isInsertIssue = false;
+			var url = "/issue/ajax-insert-issue.do";
+			var info = $("#issue").serialize() + "&project_id=" + $("#issueProjectId").val();
+			$.ajax({
+				url: url,
+				type: "POST",
+				data: info,
+				dataType: "json",
+				headers: { "X-mago3D-Header" : "mago3D"},
+				success : function(msg) {
+					if(msg.result === "success") {
+						alert(JS_MESSAGE["insert"]);
+						// pin image를 그림
+						drawInsertIssueImageAPI(managerFactory, 1, msg.issue.issue_id, msg.issue.issue_type, 
+								$("#data_key").val(), $("#latitude").val(), $("#longitude").val(), $("#height").val());
+					} else {
+						alert(JS_MESSAGE[msg.result]);
+					}
+					
+					isInsertIssue = true;
+					ajaxIssueList();
+				},
+				error : function(request, status, error) {
+					alert(JS_MESSAGE["ajax.error.message"]);
+					console.log("code : " + request.status + "\n message : " + request.responseText + "\n error : " + error);
+					isInsertIssue
+				}
+			});
+			
+			// issue 등록 버튼, css, 상태를 변경
+			$("#insertIssueEnableButton").removeClass("on");
+			$("#insertIssueEnableButton").text(JS_MESSAGE["demo.select.object.message"]);
+			insertIssueEnable = false;
+			
+			changeInsertIssueStateAPI(managerFactory, 0);
+		} else {
+			alert(JS_MESSAGE["button.dobule.click"]);
+			return;
+		}
+	});
 	
 	function check() {
 		if ($("#data_key").val() === "") {
@@ -554,16 +959,86 @@
 		}
 	}
 	
+	// TODO issue url 밑에 있어야 할지도 모르겠다.
+	function ajaxIssueList() {
+		var info = "";
+		var url = "/homepage/ajax-list-issue.do";
+		$.ajax({
+			url: url,
+			type: "POST",
+			data: info,
+			dataType: "json",
+			headers: { "X-mago3D-Header" : "mago3D"},
+			success : function(msg) {
+				if(msg.result === "success") {
+					var issueRecentList10Message = "<spring:message code='issue.recent.list.10'/>";
+					var issueDoesNotExistMessage = "<spring:message code='issue.not.exist'/>";
+					var commonShortcutMessage = "<spring:message code='shortcut'/>";
+					
+					var issueList = msg.issueList;
+					var content = "";
+					var issueListCount = 0;
+					content = content 
+						+	"<li style=\"margin-bottom: 8px; font-size: 1em; font-weight: normal; color: #2955a6;\">"
+						+ 		issueRecentList10Message
+						+	"</li>";
+					if(issueList === null || issueList.length === 0) {
+						content += 	"<li style=\"text-align: center; padding-top:20px; height: 50px;\">"
+								+	issueDoesNotExistMessage
+								+	"</li>";
+					} else {
+						issueListCount = issueList.length;
+						for(i=0; i<issueListCount; i++ ) {
+							var issue = issueList[i];
+							content = content 
+								+ 	"<li>"
+								+ 	"	<button type=\"button\" title=\"" + commonShortcutMessage + "\""
+								+			"onclick=\"gotoIssue('" + issue.project_id + "', '" + issue.issue_id + "', '" + issue.issue_type + "', '" 
+								+ 				issue.longitude + "', '" + issue.latitude + "', '" + issue.height + "', '2')\">" + commonShortcutMessage + "</button>"
+								+ 	"	<div class=\"info\">"
+								+ 	"		<p class=\"title\">"
+								+ 	"			<span>" + issue.project_name + "</span>"
+								+ 				issue.title
+								+ 	"		</p>"
+								+ 	"		<ul class=\"tag\">"
+								+ 	"			<li><span class=\"" + issue.issue_type_css_class + "\"></span>" + issue.issue_type_name + "</li>"
+								+ 	"			<li><span class=\"" + issue.priority_css_class + "\"></span>" + issue.priority_name + "</li>"
+								+ 	"			<li class=\"date\">" + issue.insert_date.substring(0,19) + "</li>"
+								+ 	"		</ul>"
+								+ 	"	</div>"
+								+ 	"</li>";
+						}
+					}
+					$("#issueListCount").empty();
+					$("#issueListCount").html(msg.totalCount);
+					$("#myIssueMenuContent").empty();
+					$("#myIssueMenuContent").html(content);
+				} else {
+					alert(JS_MESSAGE[msg.result]);
+				}
+			},
+			error : function(request, status, error) {
+				alert(JS_MESSAGE["ajax.error.message"]);
+				console.log("code : " + request.status + "\n message : " + request.responseText + "\n error : " + error);
+			}
+		});
+	}
 	
 	// 왼쪽 메뉴 클릭시 ui 처리
 	$("#homeMenu").click(function() {
 		menuSlideControl("homeMenu");
+	});
+	$("#myIssueMenu").click(function() {
+		menuSlideControl("myIssueMenu");
 	});
 	$("#searchMenu").click(function() {
 		menuSlideControl("searchMenu");
 	});
 	$("#apiMenu").click(function() {
 		menuSlideControl("apiMenu");
+	});
+	$("#insertIssueMenu").click(function() {
+		menuSlideControl("insertIssueMenu");
 	});
 	$("#treeMenu").click(function() {
         menuSlideControl("treeMenu");
@@ -576,6 +1051,9 @@
     $("#logMenu").click(function() {
         menuSlideControl("logMenu");
         dataInfoChangeRequestLogList();
+    });
+    $("#attributeMenu").click(function() {
+        menuSlideControl("attributeMenu");
     });
 	$("#configMenu").click(function() {
 		menuSlideControl("configMenu");
@@ -615,6 +1093,8 @@
 				menuObject[key] = !value;
 			}
 		}
+		// 이슈 등록 비활성화 상태
+		changeInsertIssueStateAPI(managerFactory, 0);
 	});
 	
 	// Data 검색
@@ -633,7 +1113,7 @@
 			if($("#search_word").val() === "data_name") {
 				url = "/data/ajax-search-data.do";
 			} else {
-				alert("이슈는 검색할 수 없습니다.");
+				url = "/homepage/ajax-list-issue.do";
 			}
 			
 			$.ajax({
@@ -644,6 +1124,7 @@
 				headers: { "X-mago3D-Header" : "mago3D"},
 				success : function(msg) {
 					if(msg.result === "success") {
+						var issueDoesNotExistMessage = "<spring:message code='issue.not.exist'/>";
 						var dataDoesNotExistMessage = "<spring:message code='data.not.exist'/>";
 						var commonShortcutMessage = "<spring:message code='shortcut'/>";
 						
@@ -683,7 +1164,35 @@
 								}
 							}
 						} else {
-							alert("이슈는 검색할 수 없습니다.");
+							var issueList = msg.issueList;
+							if(issueList === null || issueList.length === 0) {
+								content = content	
+									+ 	"<li style=\"text-align: center; padding-top:20px; height: 50px;\">"
+									+	issueDoesNotExistMessage
+									+	"</li>";
+							} else {
+								issueListCount = issueList.length;
+								for(i=0; i<issueListCount; i++ ) {
+									var issue = issueList[i];
+									content = content 
+										+ 	"<li>"
+										+ 	"	<button type=\"button\" title=\"" + commonShortcutMessage + "\""
+										+			" onclick=\"gotoIssue('" + issue.project_id + "', '" + issue.issue_id + "', '" + issue.issue_type + "', '" 
+										+ 				issue.longitude + "', '" + issue.latitude + "', '" + issue.height + "', '2');\">" + commonShortcutMessage + "</button>"
+										+ 	"	<div class=\"info\">"
+										+ 	"		<p class=\"title\">"
+										+ 	"			<span>" + issue.project_name + "</span>"
+										+ 				issue.title
+										+ 	"		</p>"
+										+ 	"		<ul class=\"tag\">"
+										+ 	"			<li><span class=\"" + issue.issue_type_css_class + "\"></span>" + issue.issue_type_name + "</li>"
+										+ 	"			<li><span class=\"" + issue.priority_css_class + "\"></span>" + issue.priority_name + "</li>"
+										+ 	"			<li class=\"date\">" + issue.insert_date.substring(0,19) + "</li>"
+										+ 	"		</ul>"
+										+ 	"	</div>"
+										+ 	"</li>";
+								}
+							}
 						}
 						
 						$("#searchList").empty();
@@ -881,6 +1390,42 @@
 		}
 	});
 	
+	// 인접 지역 이슈 표시
+	function changeNearGeoIssueList(isShow) {
+		$("input:radio[name='nearGeoIssueList']:radio[value='" + isShow + "']").prop("checked", true);
+		if(isShow) {
+			// 현재 위치의 latitude, logitude를 가지고 가장 가까이에 있는 데이터 그룹에 속하는 이슈 목록을 최대 100건 받아서 표시
+			var now_latitude = $("#now_latitude").val();
+			var now_longitude = $("#now_longitude").val();
+			var info = "latitude=" + now_latitude + "&longitude=" + now_longitude;
+			var url = "/issue/ajax-list-issue-by-geo.do";
+			$.ajax({
+				url: url,
+				type: "POST",
+				data: info,
+				dataType: "json",
+				headers: { "X-mago3D-Header" : "mago3D"},
+				success : function(msg) {
+					if(msg.result === "success") {
+						var issueList = msg.issueList;
+						if(issueList != null && issueList.length > 0) {
+							for(i=0; i<issueList.length; i++ ) {
+								var issue = issueList[i];
+								drawInsertIssueImageAPI(managerFactory, 0, issue.issue_id, issue.issue_type, issue.data_key, issue.latitude, issue.longitude, issue.height);
+							}
+						}
+					} else {
+						alert(JS_MESSAGE[msg.result]);
+					}
+				},
+				error : function(request, status, error) {
+					alert(JS_MESSAGE["ajax.error.message"]);
+			    	console.log("code : " + request.status + "\n message : " + request.responseText + "\n error : " + error);
+				}
+			});
+		}
+		changeNearGeoIssueListViewModeAPI(managerFactory, isShow);
+	}
 	
 	function initDataTree() {
         var projectId = $("#treeProjectId").val();
@@ -1309,6 +1854,88 @@
 		});
 	}
 	
+	// Data Object Attribute 검색
+	var objectAttributeSearchFlag = true;
+    $("#objectAttributeSearch").click(function() {
+        if ($.trim($("#objectAttributeDataKey").val()) === "") {
+            alert(JS_MESSAGE["data.key.empty"]);
+            $("#objectAttributeDataKey").focus();
+            return false;
+        }
+        if ($.trim($("#objectAttributeObjectId").val()) === "") {
+        	alert(JS_MESSAGE["object.id.empty"]);
+            $("#objectAttributeObjectId").focus();
+            return false;
+        }
+
+        if(objectAttributeSearchFlag) {
+            objectAttributeSearchFlag = false;
+            var doesNotExistMessage = "<spring:message code='data.object.does.not.exist'/>";
+            
+			var url = "/data/ajax-list-data-object-attribute.do";
+			var info = 	"project_id=" + $("#objectAttributeProjectId").val()
+						+ "&data_key=" + $("#objectAttributeDataKey").val()
+						+ "&object_id=" + $("#objectAttributeObjectId").val()
+						+ "&search_value=" + $("#objectAttributeSearchValue").val();
+			$.ajax({
+				url: url,
+				type: "GET",
+				data: info,
+				dataType: "json",
+				headers: { "X-mago3D-Header" : "mago3D"},
+				success : function(msg) {
+					if(msg.result === "success") {
+						var dataInfoObjectAttributeList = msg.dataInfoObjectAttributeList;
+						var totalCount = msg.totalCount;
+						var content = "";
+						var dataInfoObjectAttributeListCount = 0;
+						if(dataInfoObjectAttributeList === null || dataInfoObjectAttributeList.length === 0) {
+							content += 	"<tr style=\"text-align: center; vertical-align: middle; padding-top:20px; height: 50px;\">"
+									+	"	<td colspan=\"3\">" +	doesNotExistMessage + "</td>"
+									+	"</tr>";
+						} else {
+							dataInfoObjectAttributeListCount = dataInfoObjectAttributeList.length;
+							for(i=0; i<dataInfoObjectAttributeListCount; i++ ) {
+								var dataInfoObjectAttribute = dataInfoObjectAttributeList[i];
+								
+								content = content
+								+ 	"<tr style=\"height: 30px; background-color: #eee\">"
+								+ 		"<td style=\"padding-left: 2px\" nowrap=\"nowrap\">" + dataInfoObjectAttribute.data_id + "</td>"
+								+		"<td>" + dataInfoObjectAttribute.object_id + "</td>"
+								+		"<td style=\"padding-left: 5px; padding-right: 5px;\">"
+								+		"	<a href=\"#\" onclick=\"viewDataObjectAttribute('" 
+								+ 				dataInfoObjectAttribute.data_object_attribute_id + "'); return false; \">Details</a></td>"
+								+	"</tr>";	
+							}
+						}
+						
+						$("#objectAttributeSearchList > tbody:last").html("");
+			            $("#objectAttributeSearchList > tbody:last").append(content);
+					} else {
+						alert(JS_MESSAGE[msg.result]);
+					}
+					objectAttributeSearchFlag = true;
+				},
+				error : function(request, status, error) {
+					alert(JS_MESSAGE["ajax.error.message"]);
+			    	console.log("code : " + request.status + "\n message : " + request.responseText + "\n error : " + error);
+			    	objectAttributeSearchFlag = true;
+				}
+			});
+        } else {
+            alert("In progress.");
+            return;
+        }
+    });
+
+    var dataObjectAttributeDialog = $( ".dataObjectAttributeDialog" ).dialog({
+        autoOpen: false,
+        width: 600,
+        height: 550,
+        modal: true,
+        resizable: false
+    });
+
     // data key 를 이용하여 dataInfo 정보를 취득
 	function viewDataObjectAttribute(dataObjectAttributeId) {
         dataObjectAttributeDialog.dialog( "open" );
@@ -1392,6 +2019,93 @@
 		if(confirm("삭제 하시겠습니까?")) {
 			deleteAllObjectMoveAPI(managerFactory, objectMoveMode);
 		}
+	});
+	// Object Occlusion culling
+	$("#changeOcclusionCullingButton").click(function() {
+		var isUse = $(':radio[name="occlusionCulling"]:checked').val();
+		if(isUse === undefined){
+			alert(JS_MESSAGE["demo.occlusion.culling.selection"]);
+			return;
+		}
+		if($.trim($("#occlusion_culling_data_key").val()) === ""){
+			alert(JS_MESSAGE["data.key.empty"]);
+			$("#occlusion_culling_data_key").focus();
+			return;
+		}
+		changeOcclusionCullingAPI(managerFactory, ($(':radio[name="occlusionCulling"]:checked').val() === "true"), $("#occlusion_culling_data_key").val());
+	});
+	
+	// 카메라 모드 전환
+	function changeViewMode(isFPVMode) {
+		$("input:radio[name='viewMode']:radio[value='" + isFPVMode + "']").prop("checked", true);
+		changeFPVModeAPI(managerFactory, isFPVMode);
+	}
+	
+	// rendering 설정
+	function initRendering() {
+		var ambient = $( "#geo_ambient_reflection_coef_view" );
+		$( "#ambient_reflection_coef" ).slider({
+			range: "max",
+			min: 0, // min value
+			max: 1, // max value
+			step: 0.01,
+			value: '0.5', // default value of slider
+			create: function() {
+				ambient.text( $( this ).slider( "value" ) );
+			},
+			slide: function( event, ui ) {
+				ambient.text( ui.value);
+				$("#geo_ambient_reflection_coef" ).val(ui.value);
+			}
+		});
+		var diffuse = $( "#geo_diffuse_reflection_coef_view" );
+		$( "#diffuse_reflection_coef" ).slider({
+			range: "max",
+			min: 0, // min value
+			max: 1, // max value
+			step: 0.01,
+			value: '1.0', // default value of slider
+			create: function() {
+				diffuse.text( $( this ).slider( "value" ) );
+			},
+			slide: function( event, ui ) {
+				diffuse.text( ui.value);
+				$("#geo_diffuse_reflection_coef" ).val(ui.value);
+			}
+		});
+		var specular = $( "#geo_specular_reflection_coef_view" );
+		$( "#specular_reflection_coef" ).slider({
+			range: "max",
+			min: 0, // min value
+			max: 1, // max value
+			step: 0.01,
+			value: '1.0', // default value of slider
+			create: function() {
+				specular.text( $( this ).slider( "value" ) );
+			},
+			slide: function( event, ui ) {
+				specular.text( ui.value);
+				$("#geo_specular_reflection_coef" ).val(ui.value);
+			}
+		});
+	}
+	
+	// LOD 설정
+	$("#changeLodButton").click(function() {
+		changeLodAPI(managerFactory, $("#geo_lod0").val(), $("#geo_lod1").val(), $("#geo_lod2").val(), $("#geo_lod3").val(), $("#geo_lod4").val(), $("#geo_lod5").val());
+	});
+	// Lighting 설정
+	$("#changeLightingButton").click(function() {
+		changeLightingAPI(managerFactory, $("#geo_ambient_reflection_coef").val(), $("#geo_diffuse_reflection_coef").val(), $("#geo_specular_reflection_coef").val(), null, null);
+	});
+	// Ssadradius 설정
+	$("#changeSsaoRadiusButton").click(function() {
+		if($.trim($("#geo_ssao_radius").val())==="") {
+			alert(JS_MESSAGE["demo.ssao.empty"]);
+			$("#geo_ssao_radius").focus();
+			return;
+		}
+		changeSsaoRadiusAPI(managerFactory, $("#geo_ssao_radius").val());
 	});
 
 	// click poisition call back function

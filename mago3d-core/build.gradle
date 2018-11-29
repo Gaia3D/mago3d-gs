@@ -1,7 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.15.RELEASE'
-		lombokVersion = '1.18.2'
+		springBootVersion = '1.5.12.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -44,13 +43,7 @@ dependencies {
 	compile 'javax.servlet:javax.servlet-api:3.1.0'
 	
 	runtime('org.postgresql:postgresql')
-	
-	annotationProcessor("org.projectlombok:lombok:$lombokVersion")
-	compileOnly("org.projectlombok:lombok:$lombokVersion")
-	testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
-	testCompileOnly("org.projectlombok:lombok:$lombokVersion")	
-	//compileOnly('org.projectlombok:lombok:1.18.2')
-	
+	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
 }

@@ -1,5 +1,6 @@
 package com.gaia3d.config;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +14,14 @@ import com.gaia3d.domain.CacheManager;
 import com.gaia3d.domain.CacheName;
 import com.gaia3d.domain.CacheParams;
 import com.gaia3d.domain.CacheType;
+import com.gaia3d.domain.CommonCode;
 import com.gaia3d.domain.DataInfo;
 import com.gaia3d.domain.Menu;
 import com.gaia3d.domain.Policy;
 import com.gaia3d.domain.Project;
 import com.gaia3d.domain.UserGroup;
 import com.gaia3d.domain.UserGroupMenu;
+import com.gaia3d.service.CommonCodeService;
 import com.gaia3d.service.DataService;
 import com.gaia3d.service.MenuService;
 import com.gaia3d.service.PolicyService;
@@ -35,12 +38,20 @@ public class CacheConfig {
 	private DataService dataService;
 	@Autowired
 	private ProjectService projectService;
+//	@Autowired
+//	private LicenseService licenseService;
 	@Autowired
 	private MenuService menuService;
 	@Autowired
 	private UserGroupService userGroupService;
 	@Autowired
 	private PolicyService policyService;
+//	@Autowired
+//	private APIService aPIService;
+	@Autowired
+	private CommonCodeService commonCodeService;
+//	@Autowired
+//	private ServerService serverService;
 	
 	public static final String LOCALHOST = "localhost";
 
@@ -70,6 +81,8 @@ public class CacheConfig {
 		// 데이터를 프로젝트별로 로딩
 		data(cacheParams);
 		
+		commonCode(cacheParams);
+
 		log.info("*************************************************");
 		log.info("************* User Cache Init End ***************");
 		log.info("*************************************************");
@@ -82,6 +95,7 @@ public class CacheConfig {
 		if(cacheName == CacheName.LICENSE) license(cacheParams);
 		else if(cacheName == CacheName.POLICY) policy(cacheParams);
 		else if(cacheName == CacheName.MENU) menu(cacheParams);
+		else if(cacheName == CacheName.COMMON_CODE) commonCode(cacheParams);
 		else if(cacheName == CacheName.PROJECT) project(cacheParams);
 		else if(cacheName == CacheName.DATA_INFO) data(cacheParams);
 	}
@@ -178,6 +192,51 @@ public class CacheConfig {
 		CacheManager.setProjectDataJsonMap(projectDataJsonMap);
 	}
 
+	private void commonCode(CacheParams cacheParams) {
+		List<CommonCode> commonCodeList = commonCodeService.getListCommonCode();
+		log.info(" commonCodeList size = {}", commonCodeList.size());
+		Map<String, Object> commonCodeMap = new HashMap<>();
+		
+		List<CommonCode> emailList = new ArrayList<>();
+		List<CommonCode> issuePriorityList = new ArrayList<>();
+		List<CommonCode> issueTypeList = new ArrayList<>();
+		List<CommonCode> issueStatusList = new ArrayList<>();
+		List<CommonCode> userRegisterTypeList = new ArrayList<>();
+		List<CommonCode> dataRegisterTypeList = new ArrayList<>();
+		
+		for(CommonCode commonCode : commonCodeList) {
+			if(CommonCode.USER_EMAIL.equals(commonCode.getCode_type())) {
+				// 이메일
+				emailList.add(commonCode);
+			} else if(CommonCode.USER_REGISTER_TYPE.equals(commonCode.getCode_type())) {
+				// 사용자 등록 타입
+				userRegisterTypeList.add(commonCode);
+			} else if(CommonCode.ISSUE_PRIORITY.equals(commonCode.getCode_type())) {
+				// 이슈 우선순위
+				issuePriorityList.add(commonCode);
+			} else if(CommonCode.ISSUE_TYPE.equals(commonCode.getCode_type())) {
+				// 이슈 유형
+				issueTypeList.add(commonCode);
+			} else if(CommonCode.ISSUE_STATUS.equals(commonCode.getCode_type())) {
+				// 이슈 상태
+				issueStatusList.add(commonCode);
+			} else if(CommonCode.DATA_REGISTER_TYPE.equals(commonCode.getCode_type())) {
+				// data 등록 타입
+				dataRegisterTypeList.add(commonCode);
+			}
+			commonCodeMap.put(commonCode.getCode_key(), commonCode);
+		}
+		
+		// TODO 여기 다시 설계 해야 할거 같다. 
+		commonCodeMap.put(CommonCode.USER_EMAIL, emailList);
+		commonCodeMap.put(CommonCode.USER_REGISTER_TYPE, userRegisterTypeList);
+		commonCodeMap.put(CommonCode.ISSUE_PRIORITY, issuePriorityList);
+		commonCodeMap.put(CommonCode.ISSUE_TYPE, issueTypeList);
+		commonCodeMap.put(CommonCode.ISSUE_STATUS, issueStatusList);
+		commonCodeMap.put(CommonCode.DATA_REGISTER_TYPE, dataRegisterTypeList);
+		CacheManager.setCommonCodeMap(commonCodeMap);
+	}
+	
 	private String getProjectDataJson(Project project, List<DataInfo> dataInfoList) {
 		
 		if(dataInfoList == null || dataInfoList.isEmpty()) return null;

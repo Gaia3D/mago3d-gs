@@ -20,17 +20,21 @@ import com.gaia3d.domain.AccessLog;
 import com.gaia3d.domain.CacheManager;
 import com.gaia3d.domain.DataInfo;
 import com.gaia3d.domain.DataInfoLog;
+import com.gaia3d.domain.Issue;
 import com.gaia3d.domain.PGStatActivity;
 import com.gaia3d.domain.Policy;
 import com.gaia3d.domain.Project;
+import com.gaia3d.domain.ScheduleLog;
 import com.gaia3d.domain.UserInfo;
 import com.gaia3d.domain.Widget;
 import com.gaia3d.helper.SessionUserHelper;
 import com.gaia3d.service.AccessLogService;
 import com.gaia3d.service.DataLogService;
 import com.gaia3d.service.DataService;
+import com.gaia3d.service.IssueService;
 import com.gaia3d.service.MonitoringService;
 import com.gaia3d.service.ProjectService;
+import com.gaia3d.service.ScheduleService;
 import com.gaia3d.service.UserService;
 import com.gaia3d.service.WidgetService;
 import com.gaia3d.util.DateUtil;
@@ -62,11 +66,15 @@ public class MainController {
 	@Autowired
 	private DataLogService dataLogService;
 	@Autowired
+	private IssueService issueService;
+	@Autowired
 	private AccessLogService logService;
 	@Autowired
 	private MonitoringService monitoringService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ScheduleService scheduleService;
 	@Autowired
 	private WidgetService widgetService;
 	
@@ -77,9 +85,26 @@ public class MainController {
 	 */
 	@GetMapping(value = "index.do")
 	public String index(HttpServletRequest request, Model model) {
+//		if(!ConfigCache.isCompanyConfigValidation()) {
+//			log.error("@@@@@@@@@@@@@@@@@ 설정 파일을 잘못 로딩 하였습니다. Properties, Quartz 파일등을 확인해 주십시오.");
+//			return "/error/config-error";
+//		}
 		
 		Policy policy = CacheManager.getPolicy();
 		boolean isActive = true;
+//		if("UNIX".equals(OS_TYPE)) {
+//			SystemConfig systemConfig = loadBalancingService.getSystemConfig();
+//			String hostname = ConfigCache.getHostname();
+//			if(hostname == null || "".equals(hostname)) {
+//				hostname = WebUtil.getHostName();
+//			}
+//			if(systemConfig == null 
+//					|| !SystemConfig.ACTIVE.equals(systemConfig.getLoad_balancing_status()) 
+//					|| !hostname.equals(systemConfig.getHostname())) {
+//				log.error("@@@@@@@@@ hostname = {}, load_balancing_status = {}", hostname, systemConfig);
+//				isActive = false;
+//			}
+//		}
 		
 		Widget widget = new Widget();
 		widget.setLimit(policy.getContent_main_widget_count());
@@ -109,6 +134,9 @@ public class MainController {
 			} else if("dataInfoLogListWidget".equals(dbWidget.getName())) {
 				isDataInfoLogListDraw = true;
 				dataInfoLogListWidget(startDate, endDate, model);
+			} else if("issueWidget".equals(dbWidget.getName())) {
+				isIssueDraw = true;
+				issueWidget(startDate, endDate, model);
 			} else if("userWidget".equals(dbWidget.getName())) {
 				isUserDraw = true;
 				userWidget(startDate, endDate, model);
@@ -181,6 +209,20 @@ public class MainController {
 		// ajax 에서 처리 하기 위해서 여기는 공백
 	}
 	
+	/**
+	 * CPU 모니터링, 메모리 모니터링, 디스크 사용현황
+	 * @param startDate
+	 * @param endDate
+	 * @param model
+	 */
+	private void issueWidget(String startDate, String endDate, Model model) {
+		Issue issue = new Issue();
+		issue.setStart_date(startDate);
+		issue.setEnd_date(endDate);
+		Long issueTotalCount = issueService.getIssueTotalCount(issue);
+		
+		model.addAttribute("issueTotalCount", issueTotalCount);
+	}
 	
 	/**
 	 * 사용자 현황
@@ -445,6 +487,43 @@ public class MainController {
 		return map;
 	}
 	
+	/**
+	 * 스케줄 실행 이력 갱신
+	 * @param model
+	 * @return
+	 */
+	@GetMapping(value = "ajax-schedule-log-list-widget.do")
+	@ResponseBody
+	public Map<String, Object> ajaxScheduleLogListWidget(HttpServletRequest request) {
+		
+		Map<String, Object> map = new HashMap<>();
+		String result = "success";
+		try {
+			String today = DateUtil.getToday(FormatUtil.YEAR_MONTH_DAY);
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DATE, -7);
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+			String searchDay = simpleDateFormat.format(calendar.getTime());
+			String startDate = searchDay + DateUtil.START_TIME;
+			String endDate = today + DateUtil.END_TIME;
+			
+			ScheduleLog scheduleLog = new ScheduleLog();
+			scheduleLog.setStart_date(startDate);
+			scheduleLog.setEnd_date(endDate);
+			scheduleLog.setOffset(0l);
+			scheduleLog.setLimit(WIDGET_LIST_VIEW_COUNT);
+			List<ScheduleLog> scheduleLogList = scheduleService.getListScheduleLog(scheduleLog);
+			
+//			map.put("scheduleLogList", new JSONArray.fromObject(scheduleLogList));
+		} catch(Exception e) {
+			e.printStackTrace();
+			result = "db.exception";
+		}
+	
+		map.put("result", result);
+		
+		return map;
+	}
 	
 	/**
 	 * DB Connection Pool 현황

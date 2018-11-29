@@ -377,7 +377,7 @@ public class MenuController {
 				if(i == (menuCount-1)) {
 					// 맨 마지막의 경우 괄호를 닫음
 					if(bigParentheses == 0) {
-//						builder.append("}");
+						builder.append("}");
 					} else {
 						for(int k=0; k<bigParentheses; k++) {
 							builder.append("}");
@@ -404,9 +404,9 @@ public class MenuController {
 		menu.setMenu_type(Menu.ADMIN);
 		menuList.add(getRootMenu(menu.getMenu_type()));
 		menuList.addAll(menuService.getListMenu(menu));
-		menu.setMenu_type(Menu.USER);
-		menuList.add(getRootMenu(menu.getMenu_type()));
-		menuList.addAll(menuService.getListMenu(menu));
+//		menu.setMenu_type(Menu.USER);
+//		menuList.add(getRootMenu(menu.getMenu_type()));
+//		menuList.addAll(menuService.getListMenu(menu));
 		return menuList;
 	}
 }

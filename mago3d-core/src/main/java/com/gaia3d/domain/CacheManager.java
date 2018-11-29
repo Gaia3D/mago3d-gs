@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class CacheManager {
 
-	private volatile static CacheManager cacheManager = new CacheManager();
+	private volatile static CacheManager cacheManager = new CacheManager();;
 	
 	private CacheManager() {
 	}
