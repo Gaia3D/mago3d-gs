@@ -42,7 +42,7 @@
 								<li><a href="#geo_tab"><spring:message code='spatial.information'/></a></li>
 								<!-- <li><a href="#geoserver_tab">GeoServer</a></li> -->
 								<li><a href="#geocallback_tab">CallBack</a></li>
-								<li><a href="#security_tab"><spring:message code='security'/></a></li>
+								<%-- <li><a href="#security_tab"><spring:message code='security'/></a></li> --%>
 								<li><a href="#content_tab"><spring:message code='content'/></a></li>
 								<li><a href="#userupload_tab">사용자 업로딩 파일</a></li>
 								<%-- <li><a href="#backoffice_tab"><spring:message code='back.office.information'/></a></li>
@@ -55,7 +55,7 @@
 							<%@ include file="/WEB-INF/views/config/modify-policy-geo.jsp" %>
 							<%-- <%@ include file="/WEB-INF/views/config/modify-policy-geoserver.jsp" %> --%>
 							<%@ include file="/WEB-INF/views/config/modify-policy-geocallback.jsp" %>
-							<%@ include file="/WEB-INF/views/config/modify-policy-security.jsp" %>
+							<%-- <%@ include file="/WEB-INF/views/config/modify-policy-security.jsp" %> --%>
 							<%@ include file="/WEB-INF/views/config/modify-policy-content.jsp" %>
 							<%@ include file="/WEB-INF/views/config/modify-policy-userupload.jsp" %>
 							<%-- <%@ include file="/WEB-INF/views/config/modify-policy-backoffice.jsp" %>
