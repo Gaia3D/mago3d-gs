@@ -22,7 +22,6 @@ comment on table data_info_origin is 'Data 정보';
 comment on column data_info_origin.data_origin_id is '고유번호';
 comment on column data_info_origin.data_id is '고유번호';
 comment on column data_info_origin.data_origin_name is 'data 고유 이름';
-comment on column data_info_origin.location is '위도, 경도 정보';
 comment on column data_info_origin.latitude is '위도';
 comment on column data_info_origin.longitude is '경도';
 comment on column data_info_origin.height is '높이';
