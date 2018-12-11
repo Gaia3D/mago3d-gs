@@ -227,7 +227,7 @@
 		<div id="role_right" class="chosen">
 			<div class="list-header row">
 				<div class="u-pull-left">
-					<h4 class="column-title"><spring:message code='user.group.role.insert.select.group'/></h4>
+					<h4 class="column-title"> <spring:message code='user.group.role.insert.select.group'/>&nbsp;&nbsp;&nbsp; </h4>
 				</div>
 				<div class="u-pull-right">
 					<label for="search_role_name"><spring:message code='user.group.role.name'/></label>
@@ -814,7 +814,7 @@
 			}
 		} else {
 			content += 	"<tr>"
-				+		"<td colspan=\"3\" class=\"col-none\"><spring:message code='user.group.user.not'/></td>"
+				+		"<td colspan=\"3\" class=\"col-none\"><spring:message code='user.group.role.insert.not'/></td>"
 				+	"</tr>";
 		}
 		$("#" + type + "_list").empty();

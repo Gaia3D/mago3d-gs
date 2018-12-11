@@ -1,5 +1,6 @@
 package com.gaia3d.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -308,7 +309,8 @@ public class RoleController {
 		String result = "success";
 		List<UserGroupRole> listExceptUserGroupRoleByGroupId = new ArrayList<>();
 		Pagination pagination = null;
-		try {		
+		try {
+			userGroupRole.setSearch_except_role_name(URLDecoder.decode(userGroupRole.getSearch_except_role_name(), "utf-8"));
 			userGroupRole.setRole_type(UserGroupRole.ROLE_TYPE_USER);
 			long totalCount = roleService.getListExceptUserGroupRoleByGroupIdCount(userGroupRole);
 			
@@ -343,6 +345,7 @@ public class RoleController {
 		List<UserGroupRole> listUserGroupRole = new ArrayList<>();
 		Pagination pagination = null;
 		try {
+			userGroupRole.setSearch_role_name(URLDecoder.decode(userGroupRole.getSearch_role_name(), "utf-8"));
 			userGroupRole.setRole_type(UserGroupRole.ROLE_TYPE_USER);
 			long totalCount = roleService.getListUserGroupRoleCount(userGroupRole);
 			
