@@ -236,6 +236,8 @@
 						alert(JS_MESSAGE["project.update"]);
 						$("#old_project_key").val($("#project_key").val());
 						$("#duplication_value").val("");
+					} else {
+						alert(JS_MESSAGE[msg.result]);
 					}
 					updateProjectFlag = true;
 				},

@@ -236,6 +236,8 @@
 						$('form').each(function(){
 						    this.reset();
 						});
+					} else {
+						alert(JS_MESSAGE[msg.result]);
 					}
 					insertProjectFlag = true;
 				},

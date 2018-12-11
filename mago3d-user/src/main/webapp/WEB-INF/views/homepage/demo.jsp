@@ -37,8 +37,10 @@
 	<input type="hidden" id="now_longitude" name="now_longitude" value="${now_longitude }"  />
 
 <ul class="nav">
-	<li id="homeMenu" class="home">
+	<!-- <li id="homeMenu" class="home">
 		<img src="/images/ko/homepage/home-icon.png" style="width: 35px; height: 35px; padding-right: 2px;"/>
+	</li> -->
+	<li class="home">
 	</li>
 	<%-- <li id="myIssueMenu" class="issue" data-tooltip-text="<spring:message code='demo.myissue.menu.description'/>"><spring:message code='issue'/>
 		<br /><span id="issueListCount">${totalCount }</span></li> --%>
@@ -1255,6 +1257,7 @@
 		changeLocationAndRotationAPI(	managerFactory, $("#moveProjectId").val(),
 										$("#moveDataKey").val(), $("#moveLatitude").val(), $("#moveLongitude").val(), 
 										$("#moveHeight").val(), $("#moveHeading").val(), $("#movePitch").val(), $("#moveRoll").val());
+		alert(JS_MESSAGE["apply"]);
 	});
 	function changeLocationAndRotationCheck() {
 		if ($.trim($("#moveDataKey").val()) === ""){

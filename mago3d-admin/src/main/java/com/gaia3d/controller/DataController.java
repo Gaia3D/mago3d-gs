@@ -44,10 +44,13 @@ import com.gaia3d.domain.FileParseLog;
 import com.gaia3d.domain.Pagination;
 import com.gaia3d.domain.Policy;
 import com.gaia3d.domain.Project;
+import com.gaia3d.domain.UserGroupRole;
 import com.gaia3d.domain.UserSession;
+import com.gaia3d.helper.GroupRoleHelper;
 import com.gaia3d.service.DataService;
 import com.gaia3d.service.FileService;
 import com.gaia3d.service.ProjectService;
+import com.gaia3d.service.RoleService;
 import com.gaia3d.util.DateUtil;
 import com.gaia3d.util.FileUtil;
 import com.gaia3d.util.StringUtil;
@@ -77,6 +80,8 @@ public class DataController {
 	
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private RoleService roleService;
 	@Autowired
 	private DataService dataService;
 	@Autowired
@@ -223,6 +228,17 @@ public class DataController {
 		
 		log.info("@@@@@@@@@@@@@@@@@@ before dataInfo = {}", dataInfo);
 		try {
+			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+			// 사용자 그룹 ROLE 확인
+			UserGroupRole userGroupRole = new UserGroupRole();
+			userGroupRole.setUser_id(userSession.getUser_id());
+			
+			if(!GroupRoleHelper.isUserGroupRoleValid(roleService.getListUserGroupRoleByUserId(userGroupRole), UserGroupRole.DATA_INSERT)) {
+				log.info("@@ 접근 권한이 없어 실행할 수 없습니다. RoleName = {}",  UserGroupRole.DATA_INSERT);
+				map.put("result", "user.group.role.invalid");
+				return map;
+			}
+			
 			dataInfo.setMethod_mode("insert");
 			String errorcode = dataValidate(dataInfo);
 			if(errorcode != null) {
@@ -407,6 +423,18 @@ public class DataController {
 		
 		log.info("@@ dataInfo = {}", dataInfo);
 		try {
+			
+			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+			// 사용자 그룹 ROLE 확인
+			UserGroupRole userGroupRole = new UserGroupRole();
+			userGroupRole.setUser_id(userSession.getUser_id());
+			
+			if(!GroupRoleHelper.isUserGroupRoleValid(roleService.getListUserGroupRoleByUserId(userGroupRole), UserGroupRole.DATA_UPDATE)) {
+				log.info("@@ 접근 권한이 없어 실행할 수 없습니다. RoleName = {}",  UserGroupRole.DATA_UPDATE);
+				map.put("result", "user.group.role.invalid");
+				return map;
+			}
+			
 			dataInfo.setMethod_mode("update");
 			String errorcode = dataValidate(dataInfo);
 			if(errorcode != null) {
@@ -479,6 +507,18 @@ public class DataController {
 		Map<String, Object> map = new HashMap<>();
 		String result = "success";
 		try {
+			
+			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+			// 사용자 그룹 ROLE 확인
+			UserGroupRole userGroupRole = new UserGroupRole();
+			userGroupRole.setUser_id(userSession.getUser_id());
+			
+			if(!GroupRoleHelper.isUserGroupRoleValid(roleService.getListUserGroupRoleByUserId(userGroupRole), UserGroupRole.DATA_DELETE)) {
+				log.info("@@ 접근 권한이 없어 실행할 수 없습니다. RoleName = {}",  UserGroupRole.DATA_DELETE);
+				map.put("result", "user.group.role.invalid");
+				return map;
+			}
+			
 			if(check_ids.length() <= 0) {
 				map.put("result", "check.value.required");
 				return map;
@@ -511,6 +551,18 @@ public class DataController {
 		Map<String, Object> map = new HashMap<>();
 		String result = "success";
 		try {
+			
+			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+			// 사용자 그룹 ROLE 확인
+			UserGroupRole userGroupRole = new UserGroupRole();
+			userGroupRole.setUser_id(userSession.getUser_id());
+			
+			if(!GroupRoleHelper.isUserGroupRoleValid(roleService.getListUserGroupRoleByUserId(userGroupRole), UserGroupRole.DATA_INSERT)) {
+				log.info("@@ 접근 권한이 없어 실행할 수 없습니다. RoleName = {}",  UserGroupRole.DATA_INSERT);
+				map.put("result", "user.group.role.invalid");
+				return map;
+			}
+			
 			Long project_id = Long.valueOf(request.getParameter("project_id"));
 			MultipartFile multipartFile = request.getFile("data_file_name");
 			FileInfo fileInfo = FileUtil.upload(multipartFile, FileUtil.DATA_FILE_UPLOAD, propertiesConfig.getDataUploadDir());
@@ -519,7 +571,6 @@ public class DataController {
 				return map;
 			}
 			
-			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
 			fileInfo.setUser_id(userSession.getUser_id());
 			
 			fileInfo = fileService.insertDataFile(project_id, fileInfo);

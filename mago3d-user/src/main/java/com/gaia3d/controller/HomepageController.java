@@ -126,14 +126,8 @@ public class HomepageController {
 		}
 		
 		Issue issue = new Issue();
-		UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
-		if(userSession == null) {
-			issue.setUser_id("guest");
-			issue.setUser_name("guest");
-		} else {
-			issue.setUser_id(userSession.getUser_id());
-			issue.setUser_name(userSession.getUser_name());
-		}
+		issue.setUser_id("guest");
+		issue.setUser_name("guest");
 		
 		log.info("@@ issue = {}", issue);
 		if(StringUtil.isNotEmpty(issue.getStart_date())) {

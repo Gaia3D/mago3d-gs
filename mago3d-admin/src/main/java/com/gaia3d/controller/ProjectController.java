@@ -183,6 +183,17 @@ public class ProjectController {
 		try {
 			log.info("@@ project = {} ", project);
 			
+			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+			// 사용자 그룹 ROLE 확인
+			UserGroupRole userGroupRole = new UserGroupRole();
+			userGroupRole.setUser_id(userSession.getUser_id());
+			
+			if(!GroupRoleHelper.isUserGroupRoleValid(roleService.getListUserGroupRoleByUserId(userGroupRole), UserGroupRole.PROJECT_INSERT)) {
+				log.info("@@ 접근 권한이 없어 실행할 수 없습니다. RoleName = {}",  UserGroupRole.PROJECT_INSERT);
+				map.put("result", "user.group.role.invalid");
+				return map;
+			}
+			
 			if(project.getProject_key() == null || "".equals(project.getProject_key())
 					|| project.getProject_name() == null || "".equals(project.getProject_name())) {
 				result = "input.invalid";
@@ -233,6 +244,17 @@ public class ProjectController {
 		Map<String, Object> map = new HashMap<>();
 		String result = "success";
 		try {
+			
+			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+			// 사용자 그룹 ROLE 확인
+			UserGroupRole userGroupRole = new UserGroupRole();
+			userGroupRole.setUser_id(userSession.getUser_id());
+			
+			if(!GroupRoleHelper.isUserGroupRoleValid(roleService.getListUserGroupRoleByUserId(userGroupRole), UserGroupRole.PROJECT_UPDATE)) {
+				log.info("@@ 접근 권한이 없어 실행할 수 없습니다. RoleName = {}",  UserGroupRole.PROJECT_UPDATE);
+				map.put("result", "user.group.role.invalid");
+				return map;
+			}
 						
 			log.info("@@ project = {} ", project);
 			if(project.getProject_id() == null || project.getProject_id().longValue() == 0l

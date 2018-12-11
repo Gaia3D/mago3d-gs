@@ -26,11 +26,18 @@ public class UserGroupRole {
 	public static final String USER_CREATE_SSO_TOKEN = "USER_CREATE_SSO_TOKEN";
 	public static final String USER_VERIFY_SSO_TOKEN = "USER_VERIFY_SSO_TOKEN";
 	
+	// 프로젝트 등록 권한
+	public static final String PROJECT_INSERT = "PROJECT_INSERT";
+	// 프로젝트 수정 권한
+	public static final String PROJECT_UPDATE = "PROJECT_UPDATE";
 	// 프로젝트 삭제 권한
 	public static final String PROJECT_DELETE = "PROJECT_DELETE";
+	// 데이터 등록 권한
+	public static final String DATA_INSERT = "DATA_INSERT";
+	// 데이터 수정 권한
+	public static final String DATA_UPDATE = "DATA_UPDATE";
 	// 데이터 삭제 권한
 	public static final String DATA_DELETE = "DATA_DELETE";
-	
 	
 	/****** validator ********/
 	private String method_mode;

@@ -32,4 +32,9 @@ public class CustomErrorController implements ErrorController {
 		log.info("@@@@@@@@@@@@@@@@@@@@@@@ CustomErrorController attrs = {}", attrs.toString());
 		return "/error/error";
 	}
+	
+	@RequestMapping("/authorization")
+	public String authorization(HttpServletRequest servletRequest, Model model) {
+		return "/error/authorization";
+	}
 }
