@@ -68,7 +68,7 @@
 				<span class="icon-glyph glyph-emark-dot color-warning"></span>
 			</th>
 			<td class="col-input">	
-				<select id="user_delete_type" name="user_delete_type" class="select">
+				<select id="user_delete_type" name="user_delete_type" style="width:100px; height: 30px;">
 	  				<option value="0"><spring:message code='config.logical'/></option>
 	  				<option value="1"><spring:message code='config.physical'/></option>
 				</select>

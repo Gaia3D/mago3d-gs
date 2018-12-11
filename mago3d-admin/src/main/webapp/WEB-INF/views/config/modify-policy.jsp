@@ -73,20 +73,20 @@
 		$( ".tabs" ).tabs();
 		initGeo();
 		
-		$("#user_delete_type").val("${policyUser.user_delete_type}");
+		$("#user_delete_type").val("${policy.user_delete_type}");
 		
-		$("#security_session_timeout_yn").val("${policySecurity.security_session_timeout_yn}");
-		$("#security_session_hijacking").val("${policySecurity.security_session_hijacking}");
-		$("#security_sso").val("${policySecurity.security_sso}");
-		$("#security_log_save_type").val("${policySecurity.security_log_save_type}");
-		$("#security_log_save_term").val("${policySecurity.security_log_save_term}");
-		$("#security_dynamic_block_yn").val("${policySecurity.security_dynamic_block_yn}");
+		$("#security_session_timeout_yn").val("${policy.security_session_timeout_yn}");
+		$("#security_session_hijacking").val("${policy.security_session_hijacking}");
+		$("#security_sso").val("${policy.security_sso}");
+		$("#security_log_save_type").val("${policy.security_log_save_type}");
+		$("#security_log_save_term").val("${policy.security_log_save_term}");
+		$("#security_dynamic_block_yn").val("${policy.security_dynamic_block_yn}");
 		
-		$("#content_statistics_interval").val("${policySecurity.content_statistics_interval}");
+		$("#content_statistics_interval").val("${policy.content_statistics_interval}");
 
-		$("[name=security_api_result_secure_yn]").filter("[value='${policySecurity.security_api_result_secure_yn}']").prop("checked",true);
-		$("[name=security_masking_yn]").filter("[value='${policySecurity.security_masking_yn}']").prop("checked",true);
-		$("[name=user_duplication_login_yn]").filter("[value='${policyUser.user_duplication_login_yn}']").prop("checked",true);
+		$("[name=security_api_result_secure_yn]").filter("[value='${policy.security_api_result_secure_yn}']").prop("checked",true);
+		$("[name=security_masking_yn]").filter("[value='${policy.security_masking_yn}']").prop("checked",true);
+		$("[name=user_duplication_login_yn]").filter("[value='${policy.user_duplication_login_yn}']").prop("checked",true);
 		
 		/* $("#backoffice_user_db_driver").val("${policyBackoffice.backoffice_user_db_driver}"); */
 		

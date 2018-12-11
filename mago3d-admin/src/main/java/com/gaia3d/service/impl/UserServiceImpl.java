@@ -305,17 +305,15 @@ public class UserServiceImpl implements UserService {
         String userDeleteType = policy.getUser_delete_type();
 
         UserInfo userInfo = userMapper.getUser(user_id);
-        if((Policy.LOGICAL_DELETE_USER).equals(userDeleteType)) {
-            // 논리적 정보 삭제
-            userInfo.setStatus(UserInfo.STATUS_LOGICAL_DELETE);
-            return userMapper.updateUser(userInfo);
-        } else if((Policy.PHYSICAL_DELETE_USER).equals(userDeleteType)) {
+        if((Policy.PHYSICAL_DELETE_USER).equals(userDeleteType)) {
             // 물리적 정보 삭제
             //sSOService.deleteSSOLog(user_id);
             userDeviceService.deleteUserDeviceByUserId(user_id);
             return userMapper.deleteUser(user_id);
         } else {
-            return 0;
+        	// 논리적 정보 삭제
+        	userInfo.setStatus(UserInfo.STATUS_LOGICAL_DELETE);
+        	return userMapper.updateUser(userInfo);
         }
     }
 
