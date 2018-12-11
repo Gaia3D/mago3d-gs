@@ -53,7 +53,9 @@ insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, u
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, url_alias, css_class, default_yn, use_yn, display_yn) 
 values(87, '0', '권한 설정 수정', 'CONFIGURATION', 8 , 2, 7, '/role/modify-role.do', '/role/list-role.do', 'glyph-settings', 'N', 'Y', 'N');
 insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, url_alias, css_class, default_yn, use_yn, display_yn) 
-values(88, '0', '공통 코드 수정', 'CONFIGURATION', 8 , 2, 8, '/code/modify-code.do', '/code/list-code.do', 'glyph-settings', 'N', 'Y', 'N');
+values(88, '0', '권한 설정 등록', 'CONFIGURATION', 8 , 2, 8, '/role/input-role.do', '/role/list-role.do', 'glyph-settings', 'N', 'Y', 'N');
+insert into menu(menu_id, menu_type, name, name_en, parent, depth, view_order, url, url_alias, css_class, default_yn, use_yn, display_yn) 
+values(89, '0', '공통 코드 수정', 'CONFIGURATION', 8 , 2, 9, '/code/modify-code.do', '/code/list-code.do', 'glyph-settings', 'N', 'Y', 'N');
 
 
 -- 사용자 그룹별 메뉴
@@ -83,6 +85,7 @@ insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (85, 1, 85);
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (87, 1, 87);
 insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (88, 1, 88);
+insert into user_group_menu(user_group_menu_id, user_group_id, menu_id) values (89, 1, 89);
 
 
 -- 메인 화면 위젯

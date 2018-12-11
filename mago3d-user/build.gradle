@@ -22,7 +22,7 @@ apply plugin: 'war'
 
 war {
 	baseName = 'mago3d-user'
-	version = '0.0.1-SNAPSHOT'
+	version = '1.1.1-SNAPSHOT'
 	rootSpec.exclude ('f4d')
 }
 

@@ -100,4 +100,37 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
         }
         return value;
     }
+    
+	public static String htmlFilter(String message) {
+		if (message == null) return null;
+		
+		char content[] = new char[message.length()];
+		message.getChars(0, message.length(), content, 0);
+		StringBuilder result = new StringBuilder(content.length + 50);
+		for (int i = 0; i < content.length; i++) {
+			switch (content[i]) {
+			case '<':
+				result.append("&lt;");
+				break;
+			case '>':
+				result.append("&gt;");
+				break;
+			case '&':
+				result.append("&amp;");
+				break;
+			case '"':
+				result.append("&quot;");
+				break;
+			case '/':
+				result.append("&#x27f;");
+				break;
+			case '\\':
+				result.append("&#x5c;");
+				break;
+			default:
+				result.append(content[i]);
+			}
+		}
+		return result.toString();
+	}
 }
