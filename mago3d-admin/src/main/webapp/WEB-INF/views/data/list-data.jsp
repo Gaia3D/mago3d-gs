@@ -127,8 +127,6 @@
 									<col class="col-toggle" />
 									<col class="col-toggle" />
 									<col class="col-functions" />
-									<col class="col-functions" />
-									<col class="col-functions" />
 									<col class="col-date" />
 									<col class="col-functions" />
 									<thead>
@@ -143,8 +141,6 @@
 											<th scope="col" class="col-toggle"><spring:message code='height'/></th>
 											<th scope="col" class="col-toggle"><spring:message code='status'/></th>
 											<th scope="col" class="col-name"><spring:message code='data.control.properties'/></th>
-											<th scope="col" class="col-name"><spring:message code='data.origin.properties'/></th>
-											<th scope="col" class="col-name"><spring:message code='data.object.properties'/></th>
 											<th scope="col" class="col-date"><spring:message code='data.insert.date'/></th>
 											<th scope="col" class="col-functions"><spring:message code='modified.and.insert'/></th>
 										</tr>
@@ -182,21 +178,6 @@
 											</td>
 											<td class="col-name" style="text-align: center;">
 												<a href="#" onclick="detailDataControlAttribute('${dataInfo.data_id }'); return false;"><spring:message code='view'/></a>
-											</td>
-											<td class="col-functions">
-												<span class="button-group">
-													<a href="#" onclick="detailDataAttribute('${dataInfo.data_id }', '${dataInfo.data_name }'); return false;"><spring:message code='view'/></a>
-													<a href="#" class="image-button button-edit" 
-														onclick="uploadDataAttribute('${dataInfo.data_id }', '${dataInfo.data_name }'); return false;">
-														<spring:message code='modified'/></a>
-												</span>
-											</td>
-											<td class="col-functions">
-												<span class="button-group">
-													<a href="#" class="image-button button-edit" 
-														onclick="uploadDataObjectAttribute('${dataInfo.data_id }', '${dataInfo.data_name }'); return false;">
-														<spring:message code='modified'/></a>
-												</span>
 											</td>
 											<td class="col-date">${dataInfo.viewInsertDate }</td>
 											<td class="col-functions">

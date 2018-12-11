@@ -54,8 +54,6 @@
 							<input type="submit" value="Sign In" class="sign-submit" />
 						</form:form>					
 						<div class="sign-links">
-							Don't have an account? &nbsp;<a href="#">Sign up</a>
-							<br />
 							Forgot your password? &nbsp;<a href="/login/find-password.do">Click</a>
 						</div>
 					</div>

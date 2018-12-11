@@ -108,7 +108,6 @@
 													</div>
 													<div class="button-group u-pull-right">
 														<a href="#" class="button" onclick="modifyUserGroupRole();"><spring:message code='user.group.control.roll'/></a>
-														<a href="#" class="button" onclick="modifyUserGroupMenu();"><spring:message code='user.group.control.menu'/></a>
 														<a href="#" class="button" onclick="modifyUserGroupUser();"><spring:message code='user.group.control.user'/></a>
 													</div>
 												</td>
@@ -120,7 +119,6 @@
 									<div class="tabs">
 										<ul>
 											<li><a href="#role_tab"><spring:message code='user.group.role'/></a></li>
-											<li><a href="#menu_tab"><spring:message code='user.group.menu'/></a></li>
 											<li><a href="#user_tab"><spring:message code='user.group.user'/></a></li>
 										</ul>
 										<div id="role_tab">
@@ -149,37 +147,6 @@
 											</table>
 						
 											<div id="role_pagination" class="pagination"></div>
-										</div>
-										
-										<div id="menu_tab">
-											<table class="inner-table scope-col">
-												<col class="col-numer" />
-												<col class="col-name" />
-												<col class="col-toggle" />
-												<col class="col-url" />
-												<col class="col-url" />
-												<col class="col-desc" />
-												<col class="col-desc" />
-												<col class="col-date-time" />
-												<thead>
-													<tr>
-														<th scope="col" class="col-number"><spring:message code='user.group.number'/></th>
-														<th scope="col" class="col-name"><spring:message code='user.group.role.name'/></th>
-														<th scope="col" class="col-toggle"><spring:message code='user.group.use.not'/></th>
-														<th scope="col" class="col-url"><spring:message code='user.group.menu.url'/></th>
-														<th scope="col" class="col-url"><spring:message code='user.group.menu.image'/></th>
-														<th scope="col" class="col-desc"><spring:message code='user.group.menu.image.alt'/></th>
-														<th scope="col" class="col-desc"><spring:message code='user.group.description'/></th>
-														<th scope="col" class="col-date-time"><spring:message code='user.group.insert.date'/></th>
-													</tr>
-												</thead>
-												<tbody id="menu_list">
-													<tr>
-														<td colspan="8" class="col-none"><spring:message code='user.group.menu.insert.not'/></td>
-													</tr>
-												</tbody>
-											</table>
-											<div id="menu_pagination" class="pagination"></div>
 										</div>
 										
 										<div id="user_tab">
