@@ -11,6 +11,7 @@ JS_MESSAGE["move.confirm"] = "Are you sure you want to move?";
 JS_MESSAGE["delete.confirm"] = "Are you sure you want to delete?";
 JS_MESSAGE["check.value.required"] = "No items selected.";
 JS_MESSAGE["preparing"] = "Coming soon.";
+JS_MESSAGE["invalid.range"] = "invalid range value.";
 
 JS_MESSAGE["search.word.empty"] = "Please enter a search term.";
 

@@ -41,6 +41,18 @@ function isNumber(control) {
     return true;
 }
 
+function isFloatNumber(control) {
+    var val = control;
+    var Num = "1234567890.";
+    for (var i=0; i<val.length; i++) {
+        if(Num.indexOf(val.substring(i,i+1))<0) {
+            alert("숫자만 입력 가능 합니다.");
+            return false;
+        }
+    }
+    return true;
+}
+
 // IP 체크
 var ipRegularExpression = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 function isIP(ipAddress) {

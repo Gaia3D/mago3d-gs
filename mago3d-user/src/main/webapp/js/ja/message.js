@@ -11,6 +11,7 @@ JS_MESSAGE["move.confirm"] = "移動しますか？";
 JS_MESSAGE["delete.confirm"] = "削除しますか？";
 JS_MESSAGE["check.value.required"] = "選択された項目がありません。";
 JS_MESSAGE["preparing"] = "準備中です。";
+JS_MESSAGE["invalid.range"] = "正しくない値です。";
 
 JS_MESSAGE["search.word.empty"] = "検索語を入力してください。";
 

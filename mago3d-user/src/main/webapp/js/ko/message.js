@@ -11,6 +11,7 @@ JS_MESSAGE["move.confirm"] = "이동 하시겠습니까?";
 JS_MESSAGE["delete.confirm"] = "삭제 하시겠습니까?";
 JS_MESSAGE["check.value.required"] = "선택된 항목이 없습니다.";
 JS_MESSAGE["preparing"] = "준비중 입니다.";
+JS_MESSAGE["invalid.range"] = "유효하지 않는 범위 값 입니다.";
 
 JS_MESSAGE["search.word.empty"] = "검색어를 입력해 주세요.";
 

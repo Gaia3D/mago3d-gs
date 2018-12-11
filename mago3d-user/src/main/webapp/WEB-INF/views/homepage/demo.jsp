@@ -136,7 +136,7 @@
 				<td>
 					<select id="search_word" name="search_word" class="select">
 						<option value="data_name"><spring:message code='data.name'/></option>
-						<option value="title"><spring:message code='issue.name'/></option>
+						<%-- <option value="title"><spring:message code='issue.name'/></option> --%>
 					</select>
 					<select id="search_option" name="search_option" class="select">
 						<option value="1"><spring:message code='included'/></option>
@@ -1107,7 +1107,7 @@
 										+ 	"		<ul class=\"tag\">"
 										+ 	"			<li><span class=\"t3\"></span>" + dataInfo.latitude + "</li>"
 										+ 	"			<li><span class=\"t3\"></span>" + dataInfo.longitude + "</li>"
-										+ 	"			<li class=\"date\">" + dataInfo.insert_date.substring(0,19) + "</li>"
+										+ 	"			<li class=\"date\">" + dataInfo.insert_date.substring(0,10) + "</li>"
 										+ 	"		</ul>"
 										+ 	"	</div>"
 										+ 	"</li>";
@@ -1270,8 +1270,26 @@
 			$("#moveLatitude").focus();
 			return false;
 		}
+		if(!isFloatNumber($("#moveLatitude").val())) {
+			$("#moveLatitude").focus();
+			return false;
+		}
+		if(parseFloat($("#moveLatitude").val()) > 180 || parseFloat($("#moveLatitude").val()) < -180 ) {
+			alert(JS_MESSAGE["invalid.range"]);
+			$("#moveLatitude").focus();
+			return false;
+		}
 		if ($.trim($("#moveLongitude").val()) === ""){
 			alert(JS_MESSAGE["data.longitude.empty"]);
+			$("#moveLongitude").focus();
+			return false;
+		}
+		if(!isFloatNumber($("#moveLongitude").val())) {
+			$("#moveLongitude").focus();
+			return false;
+		}
+		if(parseFloat($("#moveLongitude").val()) > 360 || parseFloat($("#moveLongitude").val()) < -360 ) {
+			alert(JS_MESSAGE["invalid.range"]);
 			$("#moveLongitude").focus();
 			return false;
 		}
@@ -1280,8 +1298,26 @@
 			$("#moveHeight").focus();
 			return false;
 		}
+		if(!isFloatNumber($("#moveHeight").val())) {
+			$("#moveHeight").focus();
+			return false;
+		}
+		if(parseFloat($("#moveHeight").val()) > 1000 || parseFloat($("#moveHeight").val()) < 0 ) {
+			alert(JS_MESSAGE["invalid.range"]);
+			$("#moveHeight").focus();
+			return false;
+		}
 		if ($.trim($("#moveHeading").val()) === ""){
 			alert(JS_MESSAGE["data.heading.empty"]);
+			$("#moveHeading").focus();
+			return false;
+		}
+		if(!isFloatNumber($("#moveHeading").val())) {
+			$("#moveHeading").focus();
+			return false;
+		}
+		if(parseFloat($("#moveHeading").val()) > 360 || parseFloat($("#moveHeading").val()) < -360 ) {
+			alert(JS_MESSAGE["invalid.range"]);
 			$("#moveHeading").focus();
 			return false;
 		}
@@ -1290,8 +1326,26 @@
 			$("#movePitch").focus();
 			return false;
 		}
+		if(!isFloatNumber($("#movePitch").val())) {
+			$("#movePitch").focus();
+			return false;
+		}
+		if(parseFloat($("#movePitch").val()) > 360 || parseFloat($("#movePitch").val()) < -360 ) {
+			alert(JS_MESSAGE["invalid.range"]);
+			$("#movePitch").focus();
+			return false;
+		}
 		if ($.trim($("#moveRoll").val()) === ""){
 			alert(JS_MESSAGE["data.roll.empty"]);
+			$("#moveRoll").focus();
+			return false;
+		}
+		if(!isFloatNumber($("#moveRoll").val())) {
+			$("#moveRoll").focus();
+			return false;
+		}
+		if(parseFloat($("#moveRoll").val()) > 360 || parseFloat($("#moveRoll").val()) < -360 ) {
+			alert(JS_MESSAGE["invalid.range"]);
 			$("#moveRoll").focus();
 			return false;
 		}
