@@ -1,9 +1,24 @@
 package com.gaia3d.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gaia3d.domain.CacheManager;
 import com.gaia3d.domain.Policy;
 import com.gaia3d.domain.UserInfo;
+import com.gaia3d.helper.PasswordHelper;
 import com.gaia3d.persistence.UserMapper;
+import com.gaia3d.security.Crypt;
 import com.gaia3d.service.SSOService;
 import com.gaia3d.service.UserDeviceService;
 import com.gaia3d.service.UserService;
@@ -31,6 +48,8 @@ public class UserServiceImpl implements UserService {
     private UserDeviceService userDeviceService;
     @Autowired
     private SSOService sSOService;
+//    @Autowired
+//    private JavaMailSender  mailSender;
 
     /**
     * 사용자 수
@@ -313,5 +332,27 @@ public class UserServiceImpl implements UserService {
         }
 
         return check_ids.length();
+    }
+
+    public String sendTempPassword(UserInfo userInfo) {
+        Policy policy = CacheManager.getPolicy();
+        String tempPassword = PasswordHelper.randomPassword(8) + StringUtil.getDefaultValue(policy.getPassword_create_char());
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost(policy.getBackoffice_email_host());
+        MimeMessage message = mailSender.createMimeMessage();
+        userInfo.setSubject("임시 비밀번호 발송 메일");
+        userInfo.setTemp_password(tempPassword);
+        try {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
+            messageHelper.setTo(userInfo.getViewEmail());
+            messageHelper.setFrom(new InternetAddress(Crypt.decrypt(policy.getSite_admin_email())));
+            messageHelper.setSubject(userInfo.getSubject());
+            messageHelper.setSentDate(new Date());
+            messageHelper.setText(tempPassword, true);
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return tempPassword;
     }
 }

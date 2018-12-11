@@ -35,8 +35,8 @@
                     <div class="sign-inputs">
                         <div class="sign-desc"><spring:message code='user.find.id' /></div>
                         <form:form id="idCheckForm" modelAttribute="idCheckForm" method="post" action="/login/find-password.do">
-                            <label for="find_id"><span class="icon-glyph glyph-users"></span></label>
-                            <input type="text" id="find_id" name="user_id" maxlength="32" title="<spring:message code='login.id.title' />"
+                            <label for="find_id" style="font-size:18px;"><spring:message code='id'/>: </label>
+                            <input type="text" id="find_id" name="user_id" maxlength="32" style="width:250px;" title="<spring:message code='login.id.title' />"
                             placeholder="<spring:message code='login.id.placeholder' />" required="required" />
                             <input type="submit" value="Confirm" class="sign-submit" />
                         </form:form>

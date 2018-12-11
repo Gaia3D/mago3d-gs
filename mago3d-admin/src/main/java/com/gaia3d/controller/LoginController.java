@@ -425,6 +425,15 @@ public class LoginController {
         checkForm.setEmail(Crypt.encrypt(checkForm.getEmail()));
         int count = userService.getUserInformationCheck(checkForm);
         if(count > 0) {
+            UserInfo userinfo = userService.getUser(checkForm.getUser_id());
+            String tempPassword = userService.sendTempPassword(checkForm);
+            userinfo.setTemp_password(tempPassword);
+            ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
+            shaPasswordEncoder.setIterations(1000);
+            String encryptPassword = shaPasswordEncoder.encodePassword(tempPassword, userinfo.getSalt());
+            userinfo.setPassword(encryptPassword);
+            userinfo.setStatus(UserInfo.STATUS_TEMP_PASSWORD);
+            userService.updatePassword(userinfo);
             message="login.information.success";
         }
         else {

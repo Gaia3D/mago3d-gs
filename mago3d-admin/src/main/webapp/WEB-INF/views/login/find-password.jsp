@@ -29,22 +29,19 @@
                     <h2 class="sign-title"><span class="text-sub"><spring:message code='user.find.password'/></span></h2>
                     <div class="sign-inputs">
                         <div class="sign-desc"><spring:message code='login.information.input' /></div>
-<%--                         <form:form id="informationCheckForm" modelAttribute="informationCheckForm" method="post" action="/login/send-passwordEmail.do" onsubmit="return testAlert();"> --%>
                             <form:form id="informationCheckForm" modelAttribute="informationCheckForm">
-                            <label for="maske_phone"><span class="icon-glyph glyph-users-circle"></span></label>
-                            <input type="text" id="mask_phone" readonly value="${userinfo.mobile_phone}"/>
-                            <label for="find_phone"><span class="icon-glyph glyph-users"></span></label>
-                            <div>
-                            <input type="text" name="mobile_phone1" style="width:86px;margin-left:-67px;" maxLength="3">
+                            <label for="maske_phone" style="font-size:18px;min-width:100px;"><spring:message code='mobile'/> : </label>
+                            <input type="text" id="mask_phone" readonly style="width:230px;" value="${userinfo.mobile_phone}"/>
+                            <div style="margin-left:122px;">
+                            <input type="text" name="mobile_phone1" style="width:69px;padding-left:20px;" maxLength="3">
                             <span class="delimeter dash">-</span>
-                            <input type="text" name="mobile_phone2" style="width:104px;" maxLength="4">
+                            <input type="text" name="mobile_phone2" style="width:69px;padding-left:20px;" maxLength="4">
                             <span class="delimeter dash">-</span>
-                            <input type="text" name="mobile_phone3" style="width:104px;"maxLength="4">
+                            <input type="text" name="mobile_phone3" style="width:69px;padding-left:20px;"maxLength="4">
                             </div>
-                            <label for="mask_email"><span class="icon-glyph glyph-users-circle"></span></label>
-                            <input type="text" id="mask_email" readonly value="${userinfo.email}"/>
-                            <label for="find_email"><span class="icon-glyph glyph-users"></span></label>
-                            <input type="text" id="find_email" name="email" maxlength="32" title="<spring:message code='email' />"
+                            <label for="mask_email" style="font-size:18px;min-width:100px;"><spring:message code='email'/> : </label>
+                            <input type="text" id="mask_email" readonly style="width:230px;margin-left:5px;"value="${userinfo.email}"/>
+                            <input type="text" style="width:230px;margin-left:122px;" id="find_email" name="email" maxlength="32" title="<spring:message code='email' />"
                             placeholder="<spring:message code='email' />" required="required" />
                             <input type="submit" value="Confirm" class="sign-submit" onclick="check_userInformation();" />
                             <input type="hidden" name="user_id" value="${userinfo.user_id}"/>
@@ -71,7 +68,8 @@ function check_userInformation() {
             alert(JS_MESSAGE[msg.result]);
           },
           error:function(request,status,error){
-            alert(JS_MESSAGE[error]);
+            alert("error");
+//             alert(JS_MESSAGE[error]);
           }
       });
 

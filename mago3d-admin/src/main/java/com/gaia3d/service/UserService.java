@@ -148,4 +148,11 @@ public interface UserService {
     * @return
     */
     int deleteUserList(String userIds);
+
+    /**
+    * 임시비밀번호 발급하여 메일 전송
+    * @param userinfo
+    * @return
+    */
+    String sendTempPassword(UserInfo userinfo);
 }
