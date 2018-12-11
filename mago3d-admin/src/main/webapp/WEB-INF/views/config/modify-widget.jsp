@@ -137,9 +137,9 @@
 									<div class="widget-heading u-pull-left">						
 										<h3 class="widget-title"><spring:message code='config.widget.user.tracking'/><span class="widget-desc">${today } <spring:message code='config.widget.basic'/></span></h3>
 									</div>
-									<div class="widget-functions u-pull-right">
+									<%-- <div class="widget-functions u-pull-right">
 										<a href="/log/list-access-log.do" title="<spring:message code='config.widget.user.tracking.more'/>"><span class="icon-glyph glyph-plus"></span></a>
-									</div>
+									</div> --%>
 								</div>
 								
 								<div id="${dbWidget.name}" class="widget-content row">
@@ -289,9 +289,9 @@
 									<div class="widget-heading u-pull-left">						
 										<h3 class="widget-title"><spring:message code='config.widget.db.session'/>(${dbSessionCount })<span class="widget-desc">${today } <spring:message code='config.widget.basic'/></span></h3>
 									</div>
-									<div class="widget-functions u-pull-right">
+									<%-- <div class="widget-functions u-pull-right">
 										<a href="/monitoring/list-db-session.do" title="<spring:message code='config.widget.db.session.more'/>"><span class="icon-glyph glyph-plus"></span></a>
-									</div>
+									</div> --%>
 								</div>
 								<div id="${dbWidget.name}" class="widget-content row">
 									<table class="widget-table">
@@ -368,8 +368,8 @@
 		dataInfoLogWidget();
 		startSpinner("dataInfoLogListSpinner");
  		userWidget();
-		startSpinner("scheduleLogListSpinner");
-		scheduleLogListWidget();
+		/* startSpinner("scheduleLogListSpinner");
+		scheduleLogListWidget(); */
 		startSpinner("accessLogSpinner");
 		accessLogWidget();
 	});
