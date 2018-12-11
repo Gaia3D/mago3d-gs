@@ -1,11 +1,31 @@
 package com.gaia3d.controller;
 
+import java.io.IOException;
+import java.security.spec.AlgorithmParameterSpec;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+ 
+import org.apache.commons.codec.binary.Hex;
+ 
+import net.iharder.Base64;
+
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,6 +53,7 @@ import com.gaia3d.domain.UserSession;
 import com.gaia3d.helper.GroupRoleHelper;
 import com.gaia3d.helper.SessionUserHelper;
 import com.gaia3d.listener.Gaia3dHttpSessionBindingListener;
+import com.gaia3d.security.AESCipher;
 import com.gaia3d.service.LoginService;
 import com.gaia3d.service.RoleService;
 import com.gaia3d.service.UserService;
@@ -81,6 +102,8 @@ public class LoginController {
 		UserInfo loginForm = new UserInfo();
 		model.addAttribute("loginForm", loginForm);
 		model.addAttribute("policy", policy);
+		model.addAttribute("EncryptionKey", TOKEN_AES_KEY + "u/Gu5posvwDsXUnV5Zaq4g==" + TOKEN_AES_KEY);
+		model.addAttribute("EncryptionIv", TOKEN_AES_KEY + "5D9r9ZVzEYYgha93/aUK2w==" + TOKEN_AES_KEY);
 		model.addAttribute(SessionKey.TOKEN_AES_KEY.name(), TOKEN_AES_KEY);
 		
 		return "/login/login";
@@ -97,16 +120,32 @@ public class LoginController {
 		
 		Policy policy = CacheManager.getPolicy();
 		String SESSION_TOKEN_AES_KEY = (String)request.getSession().getAttribute(SessionKey.SESSION_TOKEN_AES_KEY.name());
-//		try {
-//			AESCipher aESCipher = new AESCipher(SESSION_TOKEN_AES_KEY);
-//			log.info("@@ SESSION_TOKEN_AES_KEY = {}", SESSION_TOKEN_AES_KEY);
-//			log.info("@@ password = {}", loginForm.getPassword());
+		try {
+			
+			SecretKey key = new SecretKeySpec(Base64.decode("u/Gu5posvwDsXUnV5Zaq4g=="), "AES");
+			AlgorithmParameterSpec iv = new IvParameterSpec(Base64.decode("5D9r9ZVzEYYgha93/aUK2w=="));
+			byte[] decodeBase64 = Base64.decode(loginForm.getPassword());
+			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+			cipher.init(Cipher.DECRYPT_MODE, key, iv);
+			
+			String afterDecrypt = new String(cipher.doFinal(decodeBase64), "UTF-8");
+			byte[] bytes = Hex.decodeHex(afterDecrypt.toCharArray());
+			String plainTextPassword = new String(bytes, "UTF-8");
+			log.info("------------------------------------------------------ plainTextPassword = {}", plainTextPassword);
+			
+			
+			
+			//AESCipher aESCipher = new AESCipher(SESSION_TOKEN_AES_KEY);
+			log.info("@@ SESSION_TOKEN_AES_KEY = {}", SESSION_TOKEN_AES_KEY);
+			log.info("@@ password = {}", loginForm.getPassword());
 //			log.info("@@ url decode = {}", URLDecoder.decode(loginForm.getPassword(), "utf-8"));
 //			loginForm.setPassword(aESCipher.decrypt(URLDecoder.decode(loginForm.getPassword(), "utf-8")));
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			bindingResult.rejectValue("password", "login.password.decrypt.exception", e.getMessage());
-//		}
+			loginForm.setPassword(plainTextPassword);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			bindingResult.rejectValue("password", "login.password.decrypt.exception", e.getMessage());
+		}
 			
 		this.loginValidator.validate(loginForm, bindingResult);
 		if(bindingResult.hasErrors()) {
