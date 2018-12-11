@@ -65,7 +65,8 @@ JS_MESSAGE["user.id.enable"] = "This is a valid id.";
 JS_MESSAGE["user.insert"] = "You have registered users";
 JS_MESSAGE["user.info.update"] = "User information has been modified.";
 JS_MESSAGE["user.id.notexist"] = "Username does not exist";
-
+JS_MESSAGE["login.information.success"] = "Your password was reset and emailed.";
+JS_MESSAGE["login.information.fail"] = "No matching user information found.";
 
 //Operational policy
 JS_MESSAGE["policy.server.datetime"] = "Server time has been reset."

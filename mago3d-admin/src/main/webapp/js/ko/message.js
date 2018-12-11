@@ -65,6 +65,8 @@ JS_MESSAGE["user.id.enable"] = "사용 가능한 아이디 입니다.";
 JS_MESSAGE["user.insert"] = "사용자를 등록 하였습니다.";
 JS_MESSAGE["user.info.update"] = "사용자 정보를 수정 하였습니다.";
 JS_MESSAGE["user.id.notexist"] = "아이디가 존재하지 않습니다.";
+JS_MESSAGE["login.information.success"] = "비밀번호를 초기화하여 메일로 전송했습니다.";
+JS_MESSAGE["login.information.fail"] = "일치하는 사용자 정보가 없습니다.";
 
 
 //운영정책
