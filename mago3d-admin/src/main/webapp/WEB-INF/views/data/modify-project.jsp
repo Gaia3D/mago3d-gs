@@ -292,6 +292,11 @@
 			$("#duration").focus();
 			return false;
 		}
+		if ($("#attributes").val() == "") {
+			alert(JS_MESSAGE["project.attributes.empty"]);
+			$("#attributes").focus();
+			return false;
+		}
 	}
 </script>
 </body>

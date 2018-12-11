@@ -157,7 +157,8 @@ JS_MESSAGE["project.name.empty"] = "プロジェクト名を入力してくだ�
 JS_MESSAGE["project.latitude.empty"] = "緯度を入力してください。";
 JS_MESSAGE["project.longitude.empty"] = "硬さを入力してください。";
 JS_MESSAGE["project.height.empty"] = "高さを入力してください。";
-JS_MESSAGE["project.height.empty"] = "移動時間を入力してください。";
+JS_MESSAGE["project.duration.empty"] = "移動時間を入力してください。";
+JS_MESSAGE["project.attributes.empty"] = "属性を入力してください。";
 
 //問題
 JS_MESSAGE["issue.datagroup.empty"] = "データグループを選択してください。";

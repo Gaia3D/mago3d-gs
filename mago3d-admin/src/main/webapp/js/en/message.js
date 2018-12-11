@@ -158,7 +158,8 @@ JS_MESSAGE["project.name.empty"] = "Please enter the project name";
 JS_MESSAGE["project.latitude.empty"] = "Please enter your latitude.";
 JS_MESSAGE["project.longitude.empty"] = "Please enter longitude.";
 JS_MESSAGE["project.height.empty"] = "Please enter a height.";
-JS_MESSAGE["project.height.empty"] = "Please enter the movement time.";
+JS_MESSAGE["project.duration.empty"] = "Please enter the movement time.";
+JS_MESSAGE["project.attributes.empty"] = "Please enter the attributes.";
 
 // issue
 JS_MESSAGE["issue.datagroup.empty"] = "Please select a data group.";

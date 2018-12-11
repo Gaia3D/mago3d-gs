@@ -195,7 +195,10 @@ public class ProjectController {
 			}
 			
 			if(project.getProject_key() == null || "".equals(project.getProject_key())
-					|| project.getProject_name() == null || "".equals(project.getProject_name())) {
+					|| project.getProject_name() == null || "".equals(project.getProject_name())
+					|| project.getLatitude() == null || project.getLongitude() == null
+					|| project.getHeight() == null || project.getDuration() == null
+					|| project.getAttributes() == null || "".equals(project.getAttributes())) {
 				result = "input.invalid";
 				map.put("result", result);
 				return map;
@@ -258,7 +261,10 @@ public class ProjectController {
 						
 			log.info("@@ project = {} ", project);
 			if(project.getProject_id() == null || project.getProject_id().longValue() == 0l
-					|| project.getProject_name() == null || "".equals(project.getProject_name())) {
+					|| project.getProject_name() == null || "".equals(project.getProject_name())
+					|| project.getLatitude() == null || project.getLongitude() == null
+					|| project.getHeight() == null || project.getDuration() == null
+					|| project.getAttributes() == null || "".equals(project.getAttributes())) {
 				
 				result = "input.invalid";
 				map.put("result", result);

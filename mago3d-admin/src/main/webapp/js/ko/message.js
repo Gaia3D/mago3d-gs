@@ -157,7 +157,8 @@ JS_MESSAGE["project.name.empty"] = "프로젝트명을 입력하여 주십시오
 JS_MESSAGE["project.latitude.empty"] = "위도를 입력하여 주십시오.";
 JS_MESSAGE["project.longitude.empty"] = "경도를  입력하여 주십시오.";
 JS_MESSAGE["project.height.empty"] = "높이를  입력하여 주십시오.";
-JS_MESSAGE["project.height.empty"] = "이동시간을  입력하여 주십시오.";
+JS_MESSAGE["project.duration.empty"] = "이동시간을  입력하여 주십시오.";
+JS_MESSAGE["project.attributes.empty"] = "속성을  입력하여 주십시오.";
 
 // 이슈
 JS_MESSAGE["issue.datagroup.empty"] = "데이터 그룹을 선택하여 주십시오.";
