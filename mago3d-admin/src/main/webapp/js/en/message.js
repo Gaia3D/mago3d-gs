@@ -48,6 +48,7 @@ JS_MESSAGE["password.correct.empty"] = "Please enter your password confirmation"
 JS_MESSAGE["user.name.empty"] = "Please enter a name.";
 JS_MESSAGE["user.input.invalid"] = "The required input value is invalid.";
 JS_MESSAGE["user.id.duplication"] = "This is the ID you are using. Please choose a different one.";
+JS_MESSAGE["user.password.length"] = "The password length is ";
 JS_MESSAGE["user.password.invalid"] = "The password you entered is invalid for the configured password policy";
 JS_MESSAGE["user.password.digit.invalid"] = "The password you entered is incorrect in the password policy set (number of digits).";
 JS_MESSAGE["user.password.upper.invalid"] = "The password you entered is incorrect in the password policy (in uppercase letters).";
@@ -88,6 +89,7 @@ JS_MESSAGE["policy.user.login.fail"] = "Please enter the number of login failure
 JS_MESSAGE["policy.user.lockout.period"] = "Please enter the lockout period from the last login.";
 
 JS_MESSAGE["policy.password.period"] = "Please enter a change interval.";
+JS_MESSAGE["policy.password.min.length.invalid"] = "Password Min Length is 8";
 JS_MESSAGE["policy.password.min.length"] = "Please enter the minimum length.";
 JS_MESSAGE["policy.password.max.length"] = "Please enter the maximum length.";
 JS_MESSAGE["policy.password.uppercase"] = "Please enter the number of uppercase letters in English.";

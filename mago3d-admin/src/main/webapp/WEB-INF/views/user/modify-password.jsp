@@ -142,6 +142,12 @@
 			$("#new_password").focus();
 			return false;
 		}
+		if($("#new_password").val().length < parseInt("${policy.password_min_length}")
+				|| $("#new_password").val().length > parseInt("${policy.password_max_length}")) {
+			alert(JS_MESSAGE["user.password.length"] + " ${policy.password_min_length} ~ ${policy.password_max_length}");
+			$("#new_password").focus();
+			return false;
+		}
 		if ($("#new_password").val() != $("#new_password_confirm").val()) {
 			alert("새로운 비밀번호와 일치하지 않습니다.");
 			$("#new_password_confirm").focus();

@@ -1,28 +1,13 @@
 package com.gaia3d.controller;
 
-import java.io.IOException;
 import java.security.spec.AlgorithmParameterSpec;
-import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
- 
-import org.apache.commons.codec.binary.Hex;
- 
-import net.iharder.Base64;
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -30,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -53,7 +39,6 @@ import com.gaia3d.domain.UserSession;
 import com.gaia3d.helper.GroupRoleHelper;
 import com.gaia3d.helper.SessionUserHelper;
 import com.gaia3d.listener.Gaia3dHttpSessionBindingListener;
-import com.gaia3d.security.AESCipher;
 import com.gaia3d.service.LoginService;
 import com.gaia3d.service.RoleService;
 import com.gaia3d.service.UserService;
@@ -61,6 +46,7 @@ import com.gaia3d.util.WebUtil;
 import com.gaia3d.validator.LoginValidator;
 
 import lombok.extern.slf4j.Slf4j;
+import net.iharder.Base64;
 
 /**
  * 로그인 처리
@@ -131,9 +117,6 @@ public class LoginController {
 			String afterDecrypt = new String(cipher.doFinal(decodeBase64), "UTF-8");
 			byte[] bytes = Hex.decodeHex(afterDecrypt.toCharArray());
 			String plainTextPassword = new String(bytes, "UTF-8");
-			log.info("------------------------------------------------------ plainTextPassword = {}", plainTextPassword);
-			
-			
 			
 			//AESCipher aESCipher = new AESCipher(SESSION_TOKEN_AES_KEY);
 			log.info("@@ SESSION_TOKEN_AES_KEY = {}", SESSION_TOKEN_AES_KEY);
@@ -311,10 +294,11 @@ public class LoginController {
 		// TODO 사용기간이 종료 되었는지 확인할것
 		
 		// 중복 로그인 허용 하지 않을 경우, 동일 아이디로 생성된 세션이 존재할 경우 파기
-		log.info("##################################### user_duplication_login_yn() = {}", policy.getUser_duplication_login_yn());
+		log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ user_duplication_login_yn() = {}", policy.getUser_duplication_login_yn());
 		if("N".equals(policy.getUser_duplication_login_yn())) {
+			log.info("----------------- concurrent map = {}", SessionUserHelper.loginUsersMap);
 			if(SessionUserHelper.isExistSession(userSession.getUser_id())) {
-				log.info("######################### 중복 로그인 user_id = {}", userSession.getUser_id());
+				log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 중복 로그인 user_id = {}", userSession.getUser_id());
 				SessionUserHelper.invalidateSession(userSession.getUser_id());
 			}
 		}

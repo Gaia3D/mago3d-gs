@@ -158,7 +158,7 @@ public class PolicyController {
 			log.info("@@ policy = {} ", policy);
 			if(policy.getPolicy_id() == null || policy.getPolicy_id().intValue() <= 0
 					|| policy.getPassword_change_term() == null || "".equals(policy.getPassword_change_term())
-					|| policy.getPassword_min_length() == null || policy.getPassword_min_length() <=0
+					|| policy.getPassword_min_length() == null || policy.getPassword_min_length() <=0 || policy.getPassword_min_length() < 8
 					|| policy.getPassword_eng_upper_count() == null || policy.getPassword_eng_upper_count().intValue() < 0
 					|| policy.getPassword_eng_lower_count() == null || policy.getPassword_eng_lower_count().intValue() < 0
 					|| policy.getPassword_number_count() == null || policy.getPassword_number_count().intValue() < 0

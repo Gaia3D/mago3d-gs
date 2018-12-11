@@ -174,10 +174,10 @@
 							<div class="widget-heading u-pull-left">						
 								<h3 class="widget-title"><spring:message code='main.status.user.tracking'/><span class="widget-desc">${today } <spring:message code='main.standard'/></span></h3>
 							</div>
-							<div class="widget-functions u-pull-right">
+							<%-- <div class="widget-functions u-pull-right">
 								<spring:message code='main.status.user.moretracking' var='moreTracking'/>
 								<a href="/log/list-access-log.do" title="${moreTracking}"><span class="icon-glyph glyph-plus"></span></a>
-							</div>
+							</div> --%>
 						</div>
 						
 						<div id="${dbWidget.name}" class="widget-content row">

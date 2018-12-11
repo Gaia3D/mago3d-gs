@@ -49,6 +49,7 @@ JS_MESSAGE["user.name.empty"] = "이름을 입력하여 주십시오.";
 JS_MESSAGE["user.input.invalid"] = "필수 입력값이 유효하지 않습니다.";
 JS_MESSAGE["user.id.duplication"] = "사용중인 아이디 입니다. 다른 아이디를 선택해 주십시오.";
 JS_MESSAGE["user.password.invalid"] = "입력한 패스워드가 설정된 패스워드 정책에 부적합 합니다.";
+JS_MESSAGE["user.password.length"] = "패스워드 길이는";
 JS_MESSAGE["user.password.digit.invalid"] = "입력한 패스워드가 설정된 패스워드 정책에(숫자 개수) 부적합 합니다.";
 JS_MESSAGE["user.password.upper.invalid"] = "입력한 패스워드가 설정된 패스워드 정책에(영문 대문자 개수) 부적합 합니다.";
 JS_MESSAGE["user.password.lower.invalid"] = "입력한 패스워드가 설정된 패스워드 정책에(영문 소문자 개수) 부적합 합니다.";
@@ -88,6 +89,7 @@ JS_MESSAGE["policy.user.login.fail"] = "로그인 실패 횟수를 입력하여 
 JS_MESSAGE["policy.user.lockout.period"] = "마지막 로그인으로 부터 잠금 기간을 입력하여 주십시오.";
 
 JS_MESSAGE["policy.password.period"] = "변경 주기를 입력하여 주십시오.";
+JS_MESSAGE["policy.password.min.length.invalid"] = "최소 길이는 8 입니다.";
 JS_MESSAGE["policy.password.min.length"] = "최소 길이를 입력하여 주십시오.";
 JS_MESSAGE["policy.password.max.length"] = "최대 길이를 입력하여 주십시오.";
 JS_MESSAGE["policy.password.uppercase"] = "영문 대문자 개수를 입력하여 주십시오.";

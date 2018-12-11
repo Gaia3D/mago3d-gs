@@ -189,6 +189,12 @@
 				$("#password_min_length").focus();
 				return;
 			}
+			
+			if(parseInt($("#password_min_length").val()) < 8) {
+				alert(JS_MESSAGE["policy.password.min.length.invalid"]);
+				$("#password_min_length").focus();
+				return;			
+			}
 			if($("#password_max_length").val() == "") {
 				alert(JS_MESSAGE["policy.password.max.length"]);
 				$("#password_max_length").focus();

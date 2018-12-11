@@ -673,6 +673,12 @@
 		var password = $("#password").val();
 		var password_confirm = $("#password_confirm").val();
 		if(password != "" && password_confirm != "") {
+			if($("#password").val().length < parseInt("${policy.password_min_length}")
+					|| $("#password").val().length > parseInt("${policy.password_max_length}")) {
+				alert(JS_MESSAGE["user.password.length"] + " ${policy.password_min_length} ~ ${policy.password_max_length}");
+				$("#password").focus();
+				return false;
+			}
 			if(password != password_confirm) {
 				alert(JS_MESSAGE["user.group.password.not.same"]);
 				$("#password").focus();

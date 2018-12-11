@@ -49,6 +49,7 @@ JS_MESSAGE["user.name.empty"] = "名前を入力してください。";
 JS_MESSAGE["user.input.invalid"] = "必須入力値が有効ではありません。";
 JS_MESSAGE["user.id.duplication"] = "使用中のIDです。他のIDを選択してください。";
 JS_MESSAGE["user.password.invalid"] = "入力したパスワードが設定されたパスワードポリシーに不適合です。";
+JS_MESSAGE["user.password.length"] = "パスワード の長さは";
 JS_MESSAGE["user.password.digit.invalid"] = "入力したパスワードが設定されたパスワードポリシーに（数字の数）不適合です。";
 JS_MESSAGE["user.password.upper.invalid"] = "入力したパスワードが設定されたパスワードポリシーに（英語の大文字数）不適合です。";
 JS_MESSAGE["user.password.lower.invalid"] = "入力したパスワードが設定されたパスワードポリシーに（英語の小文字数）不適合です。";
@@ -88,6 +89,7 @@ JS_MESSAGE["policy.user.login.fail"] = "ログインの失敗を入力してく�
 JS_MESSAGE["policy.user.lockout.period"] = "最後にログインします。";
 
 JS_MESSAGE["policy.password.period"] = "変更周期を入力してください。";
+JS_MESSAGE["policy.password.min.length.invalid"] = "最小の長さは 8です.";
 JS_MESSAGE["policy.password.min.length"] = "最小の長さを入力してください。";
 JS_MESSAGE["policy.password.max.length"] = "最大の長さを入力してください。";
 JS_MESSAGE["policy.password.uppercase"] = "英語の大文字の数を入力してください。";
