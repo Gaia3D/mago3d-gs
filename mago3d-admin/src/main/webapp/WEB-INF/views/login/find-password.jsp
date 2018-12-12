@@ -63,13 +63,13 @@ function check_userInformation() {
           type: "POST",
           data: info,
           cache: false,
+          async: false,
           dataType: "json",
           success: function(msg){
             alert(JS_MESSAGE[msg.result]);
           },
           error:function(request,status,error){
-            alert("error");
-//             alert(JS_MESSAGE[error]);
+            alert(JS_MESSAGE["ajax.error.message"]);
           }
       });
 

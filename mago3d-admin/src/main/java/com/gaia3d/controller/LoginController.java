@@ -417,30 +417,34 @@ public class LoginController {
        */
        @PostMapping(value = "send-passwordEmail.do")
        @ResponseBody
-       public Map<String, Object> sendPasswordEmail(HttpServletRequest request, @ModelAttribute("informationCheckForm") UserInfo checkForm, Model model) {
-        Map<String, Object> map = new HashMap<>();
-        String message ="";
-        checkForm.setMobile_phone(checkForm.getMobile_phone1()+"-"+checkForm.getMobile_phone2()+"-"+checkForm.getMobile_phone3());
-        checkForm.setMobile_phone(Crypt.encrypt(checkForm.getMobile_phone()));
-        checkForm.setEmail(Crypt.encrypt(checkForm.getEmail()));
-        int count = userService.getUserInformationCheck(checkForm);
-        if(count > 0) {
-            UserInfo userinfo = userService.getUser(checkForm.getUser_id());
-            String tempPassword = userService.sendTempPassword(checkForm);
-            userinfo.setTemp_password(tempPassword);
-            ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
-            shaPasswordEncoder.setIterations(1000);
-            String encryptPassword = shaPasswordEncoder.encodePassword(tempPassword, userinfo.getSalt());
-            userinfo.setPassword(encryptPassword);
-            userinfo.setStatus(UserInfo.STATUS_TEMP_PASSWORD);
-            userService.updatePassword(userinfo);
-            message="login.information.success";
-        }
-        else {
-            message="login.information.fail";
-        }
-        map.put("result", message);
-        return map;
+       public Map<String, Object> sendPasswordEmail(HttpServletRequest request, @ModelAttribute("informationCheckForm") UserInfo checkForm) {
+
+           Map<String, Object> map = new HashMap<>();
+           String message ="";
+           //사용자 정보 일치하는지 체크
+           checkForm.setMobile_phone(checkForm.getMobile_phone1()+"-"+checkForm.getMobile_phone2()+"-"+checkForm.getMobile_phone3());
+           checkForm.setMobile_phone(Crypt.encrypt(checkForm.getMobile_phone()));
+           checkForm.setEmail(Crypt.encrypt(checkForm.getEmail()));
+           int count = userService.getUserInformationCheck(checkForm);
+           if(count > 0) {
+               UserInfo userinfo = userService.getUser(checkForm.getUser_id());
+               //임시 비밀번호 생성 후 메일 전송
+               String tempPassword = userService.sendTempPassword(checkForm);
+               //임시 비밀번호로 업데이트
+               userinfo.setTemp_password(tempPassword);
+               ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
+               shaPasswordEncoder.setIterations(1000);
+               String encryptPassword = shaPasswordEncoder.encodePassword(tempPassword, userinfo.getSalt());
+               userinfo.setPassword(encryptPassword);
+               userinfo.setStatus(UserInfo.STATUS_TEMP_PASSWORD);
+               userService.updatePassword(userinfo);
+               message="login.information.success";
+           }
+           else {
+               message="login.information.fail";
+           }
+           map.put("result", message);
+           return map;
        }
 
 }
