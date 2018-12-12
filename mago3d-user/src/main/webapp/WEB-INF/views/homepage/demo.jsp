@@ -183,48 +183,6 @@
 	
 	<div id="apiMenuContent" class="apiWrap">
 		<div>
-			<h3><spring:message code='demo.local.search'/></h3>
-			<ul class="apiLocal">
-				<li>
-					<label for="localSearchProjectId"><spring:message code='project'/></label>
-					<select id="localSearchProjectId" name="localSearchProjectId" class="select">
-<c:forEach var="project" items="${projectList}">
-						<option value="${project.project_id}">${project.project_name}</option>
-</c:forEach>
-					</select>
-				</li>
-				<li>
-					<label for="localSearchDataKey"><spring:message code='data.key'/></label>
-					<input type="text" id="localSearchDataKey" name="localSearchDataKey" size="20" />
-					<button type="button" id="localSearch" class="btn"><spring:message code='search'/></button> 
-				</li>
-			</ul>
-		</div>
-		<div>
-			<h3><spring:message code='demo.property.rendering'/></h3>
-			<ul class="apiLocal">
-				<li>
-					<input type="radio" id="showPropertyRendering" name="propertyRendering" value="true" />
-					<label for="showLabel"> <spring:message code='show'/> </label>
-					<input type="radio" id="hidePropertyRendering" name="propertyRendering" value="false" />
-					<label for="hideLabel"> <spring:message code='hide'/> </label>
-				</li>
-				<li>
-					<label for="propertyRenderingProjectId"> <spring:message code='project'/> </label>
-					<select id="propertyRenderingProjectId" name="propertyRenderingProjectId" class="select">
-<c:forEach var="project" items="${projectList}">
-						<option value="${project.project_id}">${project.project_name}</option>
-</c:forEach>
-					</select>
-				</li>
-				<li>
-					<label for="propertyRenderingWord"><spring:message code='property'/></label>
-					<input type="text" id="propertyRenderingWord" name="propertyRenderingWord" size="21" placeholder="isMain=true" />
-					<button type="button" id="changePropertyRendering" class="btn"><spring:message code='change'/></button> 
-				</li>
-			</ul>
-		</div>
-		<div>
 			<h3><spring:message code='demo.color.change'/></h3>
 			<ul class="apiLocal">
 				<li>
@@ -304,13 +262,6 @@
 					<button type="button" id="updateLocationAndRotation" class="btn"><spring:message code='save'/></button>
 				</li>
 			</ul>
-		</div>
-		<div>
-			<h3><spring:message code='demo.now.location.issue.list'/></h3>
-			<input type="radio" id="showNearGeoIssueList" name="nearGeoIssueList" value="true" onclick="changeNearGeoIssueList(true);" />
-			<label for="showNearGeoIssueList"> <spring:message code='show'/> </label>
-			<input type="radio" id="hideNearGeoIssueList" name="nearGeoIssueList" value="false" onclick="changeNearGeoIssueList(false);"/>
-			<label for="hideNearGeoIssueList"> <spring:message code='hide'/> </label>
 		</div>
 		<div>
 			<h3><spring:message code='demo.click.point.location'/></h3>
