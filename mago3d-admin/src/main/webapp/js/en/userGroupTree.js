@@ -142,7 +142,7 @@ var fnObj = {
 				alert("그룹을 선택해 주세요");
 				return;
 			}
-			if(obj.item.user_group_id == "0") {
+			if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP") {
 				alert("수정할 수 없는 그룹 입니다.")
 				return;
 			}
@@ -199,7 +199,7 @@ var fnObj = {
 			alert("그룹을 선택해 주세요");
 			return;
 		}
-		if(obj.item.user_group_id == "0" || obj.item.default_yn == "Y") {
+		if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP" || obj.item.default_yn == "Y") {
 			alert("삭제할 수 없는 그룹 입니다.")
 			return;
 		}
@@ -217,7 +217,7 @@ var fnObj = {
 			alert("그룹을 선택해 주세요");
 			return;
 		}
-		if(obj.item.user_group_id == "0") {
+		if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP") {
 			alert("수정할 수 없는 그룹 입니다.")
 			return;
 		}
@@ -239,7 +239,7 @@ var fnObj = {
 			alert("그룹을 선택해 주세요");
 			return;
 		}
-		if(obj.item.user_group_id == "0") {
+		if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP") {
 			alert("이동할 수 없는 그룹입니다.")
 			return;
 		}
@@ -260,7 +260,7 @@ var fnObj = {
 			alert("그룹을 선택해 주세요");
 			return;
 		}
-		if(obj.item.user_group_id == "0") {
+		if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP") {
 			alert("이동할 수 없는 그룹입니다.")
 			return;
 		}
@@ -385,13 +385,10 @@ function getAjaxUserGroupList() {
 				alert(JS_MESSAGE[msg.result]);
 			}
 		},
-//		error: function() {
-//			alert(JS_MESSAGE["ajax.error.message"]);
-//		}
 		error:function(request, status, error) {
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			alert(JS_MESSAGE["ajax.error.message"]);
+			console.log("code : " + request.status + "\n" + " message : " + request.responseText + "\n" + " error : " +error);
 		}
-
 	});
 }
 

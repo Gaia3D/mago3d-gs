@@ -185,6 +185,7 @@ JS_MESSAGE["user.group.top.not.insert"] = "최상위 그룹에는 사용자를 �
 JS_MESSAGE["user.group.role.top.not.insert"] = "최상위 그룹에는 Role을 등록할 수 없습니다.";
 JS_MESSAGE["user.group.not.group.id"] = "그룹 아이디가 없습니다.";
 JS_MESSAGE["user.group.not.select"] = "선택된 항목이 없습니다.";
+JS_MESSAGE["user.group.temp.not.delete"] = "임시 그룹에서는 삭제 할 수 없습니다. 다른 그룹에 등록시 사용자 그룹이 자동 변경 됩니다.";
 
 //input group
 JS_MESSAGE["user.group.id.minlength"] = "사용자 아이디 최소 길이는";

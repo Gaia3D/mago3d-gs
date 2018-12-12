@@ -34,6 +34,12 @@
 		SELECT * FROM user_group WHERE user_group_id = #{user_group_id}
 	</select>
 	
+	<!-- 사용자 그룹 -->
+	<select id="getUserGroupByGroupKey" parameterType="string" resultType="userGroup">
+		/* getUserGroupByGroupKey */
+		SELECT * FROM user_group WHERE group_key = #{group_key}
+	</select>
+	
 	<!-- 사용자 그룹에 속한 자식 그룹 개수 -->
 	<select id="getUserGroupChildCount" parameterType="long" resultType="int">
 		/* getUserGroupChildCount */

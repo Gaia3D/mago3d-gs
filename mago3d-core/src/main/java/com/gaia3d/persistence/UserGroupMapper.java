@@ -44,7 +44,15 @@ public interface UserGroupMapper {
 	 * @return
 	 */
 	UserGroup getUserGroup(Long user_group_id);
-
+	
+	/**
+	 * 사용자 그룹 조회
+	 * 
+	 * @param group_key
+	 * @return
+	 */
+	UserGroup getUserGroupByGroupKey(String group_key);
+	
 	/**
 	 * 사용자 그룹에 속한 자식 그룹 개수
 	 * 

@@ -834,6 +834,14 @@ public class UserController {
 				return map;
 			}
 			
+			// temp 그룹은 삭제 불가
+			UserGroup userGroup = userGroupService.getUserGroup(user_group_id);
+			if(UserGroup.TEMP_GROUP.equals(userGroup.getGroup_key())) {
+				result = "user.group.temp.not.delete";
+				map.put("result", result);
+				return map;
+			}
+			
 			UserInfo userInfo = new UserInfo();
 			userInfo.setUser_group_id(user_group_id);
 			userInfo.setUser_select_id(user_select_id);

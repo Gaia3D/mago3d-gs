@@ -28,6 +28,14 @@ public interface UserGroupService {
 	 * @return
 	 */
 	UserGroup getUserGroup(Long user_group_id);
+	
+	/**
+	 * 사용자 그룹 조회
+	 * 
+	 * @param group_key
+	 * @return
+	 */
+	UserGroup getUserGroupByGroupKey(String group_key);
 
 	/**
 	 * 자식 그룹 중 순서가 최대인 그룹을 검색

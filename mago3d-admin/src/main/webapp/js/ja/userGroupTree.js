@@ -142,7 +142,7 @@ var fnObj = {
 				alert("グループを選択してください");
 				return;
 			}
-			if(obj.item.user_group_id == "0") {
+			if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP") {
 				alert("変更できないグループです。")
 				return;
 			}
@@ -199,7 +199,7 @@ var fnObj = {
 			alert("グループを選択してください");
 			return;
 		}
-		if(obj.item.user_group_id == "0" || obj.item.default_yn == "Y") {
+		if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP" || obj.item.default_yn == "Y") {
 			alert("削除できないグループです。")
 			return;
 		}
@@ -217,7 +217,7 @@ var fnObj = {
 			alert("グループを選択してください");
 			return;
 		}
-		if(obj.item.user_group_id == "0") {
+		if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP") {
 			alert("変更できないグループです。")
 			return;
 		}
@@ -239,7 +239,7 @@ var fnObj = {
 			alert("グループを選択してください");
 			return;
 		}
-		if(obj.item.user_group_id == "0") {
+		if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP") {
 			alert("移動できないグループです。")
 			return;
 		}
@@ -260,7 +260,7 @@ var fnObj = {
 			alert("グループを選択してください");
 			return;
 		}
-		if(obj.item.user_group_id == "0") {
+		if(obj.item.user_group_id == "0" || obj.item.group_key == "TEMP") {
 			alert("移動できないグループです。")
 			return;
 		}

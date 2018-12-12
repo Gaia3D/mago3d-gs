@@ -47,6 +47,17 @@ public class UserGroupServiceImpl implements UserGroupService {
 	}
 	
 	/**
+	 * 사용자 그룹 조회
+	 * 
+	 * @param group_key
+	 * @return
+	 */
+	@Transactional(readOnly=true)
+	public UserGroup getUserGroupByGroupKey(String group_key) {
+		return userGroupMapper.getUserGroupByGroupKey(group_key);
+	}
+	
+	/**
 	 * 사용자 그룹 메뉴 권한 목록
 	 * @param userGroup
 	 * @return

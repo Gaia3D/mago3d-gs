@@ -15,7 +15,7 @@ import lombok.ToString;
 public class UserGroup {
 	
 	// 임시 그룹
-	public static final Long TEMP_GROUP = 2l;
+	public static final String TEMP_GROUP = "TEMP";
 	
 	// 상태 : 사용중
 	public static final String IN_USE = "Y";

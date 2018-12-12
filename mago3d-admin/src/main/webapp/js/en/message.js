@@ -186,6 +186,7 @@ JS_MESSAGE["user.group.top.not.insert"] = "Users can not be registered in the to
 JS_MESSAGE["user.group.role.top.not.insert"] = "Role can not be registered for top level group";
 JS_MESSAGE["user.group.not.group.id"] = "There is no group ID.";
 JS_MESSAGE["user.group.not.select"] = "No item selected";
+JS_MESSAGE["user.group.temp.not.delete"] = "You can not delete it from a temporary group. When registering to another group, the user group is automatically changed.";
 
 //input group
 JS_MESSAGE["user.group.id.minlength"] = "User ID minimum length";

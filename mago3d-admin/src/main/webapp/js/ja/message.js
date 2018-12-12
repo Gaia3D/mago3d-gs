@@ -185,6 +185,7 @@ JS_MESSAGE["user.group.top.not.insert"] = "最上位グループにユーザー�
 JS_MESSAGE["user.group.role.top.not.insert"] = "最上位グループには、ロールを登録することができません。";
 JS_MESSAGE["user.group.not.group.id"] = "グループ名がありません。";
 JS_MESSAGE["user.group.not.select"] = "選択された項目がありません。";
+JS_MESSAGE["user.group.temp.not.delete"] = "臨時グループから削除できません。他のグループを選択するとユーザーグループが変更になります。";
 
 //input group
 JS_MESSAGE["user.group.id.minlength"] = "ユーザー名最小の長さは、";

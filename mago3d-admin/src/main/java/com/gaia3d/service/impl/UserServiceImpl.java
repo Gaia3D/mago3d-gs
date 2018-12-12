@@ -25,12 +25,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gaia3d.domain.CacheManager;
 import com.gaia3d.domain.Policy;
+import com.gaia3d.domain.UserGroup;
 import com.gaia3d.domain.UserInfo;
 import com.gaia3d.helper.PasswordHelper;
 import com.gaia3d.persistence.UserMapper;
 import com.gaia3d.security.Crypt;
 import com.gaia3d.service.SSOService;
 import com.gaia3d.service.UserDeviceService;
+import com.gaia3d.service.UserGroupService;
 import com.gaia3d.service.UserService;
 import com.gaia3d.util.StringUtil;
 
@@ -48,6 +50,8 @@ public class UserServiceImpl implements UserService {
     private UserDeviceService userDeviceService;
     @Autowired
     private SSOService sSOService;
+    @Autowired
+    private UserGroupService userGroupService;
 //    @Autowired
 //    private JavaMailSender  mailSender;
 
@@ -150,14 +154,15 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-//		// 임시 그룹으로 보냄
-//		if(rightUserId != null && rightUserId.length >0) {
-//			for(String user_id : rightUserId) {
-//				userInfo.setUser_group_id(UserGroup.TEMP_GROUP);
-//				userInfo.setUser_id(user_id);
-//				userMapper.updateUserGroupUser(userInfo);
-//			}
-//		}
+		// 임시 그룹으로 보냄
+        UserGroup userGroup = userGroupService.getUserGroupByGroupKey(UserGroup.TEMP_GROUP);
+        if(rightUserId != null && rightUserId.length >0) {
+        	for(String user_id : rightUserId) {
+				userInfo.setUser_group_id(userGroup.getUser_group_id());
+				userInfo.setUser_id(user_id);
+				userMapper.updateUserGroupUser(userInfo);
+			}
+		}
         return 0;
     }
 
