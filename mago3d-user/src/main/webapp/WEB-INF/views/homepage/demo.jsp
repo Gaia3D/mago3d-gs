@@ -1225,7 +1225,7 @@
 			$("#moveLatitude").focus();
 			return false;
 		}
-		if(parseFloat($("#moveLatitude").val()) > 180 || parseFloat($("#moveLatitude").val()) < -180 ) {
+		if(parseFloat($("#moveLatitude").val()) > 2160 || parseFloat($("#moveLatitude").val()) < -2160 ) {
 			alert(JS_MESSAGE["invalid.range"]);
 			$("#moveLatitude").focus();
 			return false;
@@ -1239,7 +1239,7 @@
 			$("#moveLongitude").focus();
 			return false;
 		}
-		if(parseFloat($("#moveLongitude").val()) > 360 || parseFloat($("#moveLongitude").val()) < -360 ) {
+		if(parseFloat($("#moveLongitude").val()) > 2160 || parseFloat($("#moveLongitude").val()) < -2160 ) {
 			alert(JS_MESSAGE["invalid.range"]);
 			$("#moveLongitude").focus();
 			return false;
@@ -1253,7 +1253,7 @@
 			$("#moveHeight").focus();
 			return false;
 		}
-		if(parseFloat($("#moveHeight").val()) > 1000 || parseFloat($("#moveHeight").val()) < 0 ) {
+		if(parseFloat($("#moveHeight").val()) > 50000 || parseFloat($("#moveHeight").val()) < 0 ) {
 			alert(JS_MESSAGE["invalid.range"]);
 			$("#moveHeight").focus();
 			return false;
@@ -1267,7 +1267,7 @@
 			$("#moveHeading").focus();
 			return false;
 		}
-		if(parseFloat($("#moveHeading").val()) > 360 || parseFloat($("#moveHeading").val()) < -360 ) {
+		if(parseFloat($("#moveHeading").val()) > 2160 || parseFloat($("#moveHeading").val()) < -2160 ) {
 			alert(JS_MESSAGE["invalid.range"]);
 			$("#moveHeading").focus();
 			return false;
@@ -1281,7 +1281,7 @@
 			$("#movePitch").focus();
 			return false;
 		}
-		if(parseFloat($("#movePitch").val()) > 360 || parseFloat($("#movePitch").val()) < -360 ) {
+		if(parseFloat($("#movePitch").val()) > 2160 || parseFloat($("#movePitch").val()) < -2160 ) {
 			alert(JS_MESSAGE["invalid.range"]);
 			$("#movePitch").focus();
 			return false;
@@ -1295,7 +1295,7 @@
 			$("#moveRoll").focus();
 			return false;
 		}
-		if(parseFloat($("#moveRoll").val()) > 360 || parseFloat($("#moveRoll").val()) < -360 ) {
+		if(parseFloat($("#moveRoll").val()) > 2160 || parseFloat($("#moveRoll").val()) < -2160 ) {
 			alert(JS_MESSAGE["invalid.range"]);
 			$("#moveRoll").focus();
 			return false;

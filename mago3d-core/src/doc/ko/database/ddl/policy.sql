@@ -26,7 +26,7 @@ create table policy(
 	password_create_char					varchar(32)			default '!@#',
 	password_exception_char					varchar(10)			default '<>&',
 	
-	geo_cesium_ion_token					varchar(256)		default '',
+	geo_cesium_ion_token					varchar(512)		default '',
 	geo_view_library						varchar(20)			default 'cesium',
 	geo_data_path							varchar(100)		default '/f4d',
 	geo_data_default_projects				varchar(30)[],
