@@ -154,15 +154,15 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-		// 임시 그룹으로 보냄
+        // 임시 그룹으로 보냄
         UserGroup userGroup = userGroupService.getUserGroupByGroupKey(UserGroup.TEMP_GROUP);
         if(rightUserId != null && rightUserId.length >0) {
-        	for(String user_id : rightUserId) {
-				userInfo.setUser_group_id(userGroup.getUser_group_id());
-				userInfo.setUser_id(user_id);
-				userMapper.updateUserGroupUser(userInfo);
-			}
-		}
+            for(String user_id : rightUserId) {
+                userInfo.setUser_group_id(userGroup.getUser_group_id());
+                userInfo.setUser_id(user_id);
+                userMapper.updateUserGroupUser(userInfo);
+            }
+        }
         return 0;
     }
 
@@ -316,9 +316,9 @@ public class UserServiceImpl implements UserService {
             userDeviceService.deleteUserDeviceByUserId(user_id);
             return userMapper.deleteUser(user_id);
         } else {
-        	// 논리적 정보 삭제
-        	userInfo.setStatus(UserInfo.STATUS_LOGICAL_DELETE);
-        	return userMapper.updateUser(userInfo);
+            // 논리적 정보 삭제
+            userInfo.setStatus(UserInfo.STATUS_LOGICAL_DELETE);
+            return userMapper.updateUser(userInfo);
         }
     }
 
@@ -348,7 +348,7 @@ public class UserServiceImpl implements UserService {
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
             messageHelper.setTo(userInfo.getViewEmail());
-            messageHelper.setFrom(new InternetAddress(Crypt.decrypt(policy.getSite_admin_email())));
+            messageHelper.setFrom(new InternetAddress("gaia3d@gaia3d.com"));
             messageHelper.setSubject(userInfo.getSubject());
             messageHelper.setSentDate(new Date());
             messageHelper.setText(tempPassword, true);
