@@ -56,7 +56,6 @@
 								<button type="button" class="btn btn-success btn-sm" onclick="addTree(); return false;"><spring:message code='add'/></button>
 								<button type="button" class="btn btn-success btn-sm" onclick="addChildTree(); return false;"><spring:message code='config.menu.down.add'/></button>
 								<button type="button" class="btn btn-success btn-sm" onclick="delTree(); return false;"><spring:message code='config.menu.select.delete'/></button>
-								<button type="button" class="btn btn-success btn-sm" onclick="updateTree(); return false;"><spring:message code='config.menu.modified'/></button>
 								<button type="button" class="btn btn-warning btn-sm" onclick="moveUpTree(); return false;"><spring:message code='config.menu.up'/></button>
 								<button type="button" class="btn btn-danger btn-sm" onclick="moveDownTree(); return false;"><spring:message code='config.menu.down'/></button>
 							</div>
