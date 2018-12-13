@@ -29,7 +29,7 @@
                     <h2 class="sign-title"><span class="text-sub"><spring:message code='user.find.password'/></span></h2>
                     <div class="sign-inputs">
                         <div class="sign-desc"><spring:message code='login.information.input' /></div>
-                            <form:form id="informationCheckForm" modelAttribute="informationCheckForm">
+                            <form:form id="informationCheckForm">
                             <label for="maske_phone" style="font-size:18px;min-width:100px;"><spring:message code='mobile'/> : </label>
                             <input type="text" id="mask_phone" readonly style="width:230px;" value="${userinfo.mobile_phone}"/>
                             <div style="margin-left:122px;">
@@ -43,8 +43,13 @@
                             <input type="text" id="mask_email" readonly style="width:230px;margin-left:5px;"value="${userinfo.email}"/>
                             <input type="text" style="width:230px;margin-left:122px;" id="find_email" name="email" maxlength="32" title="<spring:message code='email' />"
                             placeholder="<spring:message code='email' />" required="required" />
-                            <input type="submit" value="Confirm" class="sign-submit" onclick="check_userInformation();" />
                             <input type="hidden" name="user_id" value="${userinfo.user_id}"/>
+                            <a href="/main/index.do" style="margin-right:30px;">
+                                <spring:message code='login' />
+                            </a>
+                            <a href="#" onclick="check_userInformation(); return false;">
+                                <spring:message code='login.information.confirm' />
+                            </a>
                         </form:form>
                     </div>
                 </div>
@@ -62,8 +67,6 @@ function check_userInformation() {
           url: "/login/send-passwordEmail.do",
           type: "POST",
           data: info,
-          cache: false,
-          async: false,
           dataType: "json",
           success: function(msg){
             alert(JS_MESSAGE[msg.result]);
@@ -72,7 +75,6 @@ function check_userInformation() {
             alert(JS_MESSAGE["ajax.error.message"]);
           }
       });
-
 }
 </script>
 </html>

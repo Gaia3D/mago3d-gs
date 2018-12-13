@@ -366,21 +366,22 @@ public class LoginController {
      * @return
      */
      @GetMapping(value = "userid-check.do")
-     public String findPassword(HttpServletRequest request) {
+     public String useridCheck(HttpServletRequest request) {
          return "/login/userid-check";
      }
 
      /**
-      * 비밀번호 찾기 페이지
-      * @param model
+      * userID 체크
+      * @param UserInfo
       * @return
       */
-      @PostMapping(value = "find-password.do")
-      public String useridCheck(HttpServletRequest request, @ModelAttribute("idCheckForm") UserInfo idCheckForm,  Model model) {
+      @GetMapping(value = "ajax-userid-check.do")
+      public String ajaxUseridCheck(HttpServletRequest request,  UserInfo idCheckForm,  Model model) {
          String userId = idCheckForm.getUser_id();
          int count = userService.getDuplicationIdCount(userId);
          UserInfo userinfo = userService.getUser(userId);
          if(count == 0) {
+            log.debug("User Count 0");
              String errorCode = "login.id.check";
              idCheckForm.setError_code(errorCode);
              idCheckForm.setUser_id(null);
@@ -397,16 +398,30 @@ public class LoginController {
                  model.addAttribute("idCheckForm", idCheckForm);
                      return "/login/userid-check";
              }
-             String []emailSplit = checkEmail.split("@");
-             checkEmail = emailSplit[0].substring(0, emailSplit[0].length()-3);
-             checkEmail += "***" + "@" + emailSplit[1];
-             checkPhone = checkPhone.replaceAll("-", "");
-             checkPhone = checkPhone.substring(0, checkPhone.length()-4);
-             checkPhone += "****";
-             userinfo.setEmail(checkEmail);
-             userinfo.setMobile_phone(checkPhone);
-             model.addAttribute("userinfo", userinfo);
          }
+         model.addAttribute("userId", userId);
+         return "redirect:/login/find-password.do";
+      }
+
+     /**
+      * 비밀번호 찾기 페이지
+      * @param userid
+      * @return
+      */
+      @GetMapping(value = "find-password.do")
+      public String findPassword(HttpServletRequest request, @RequestParam("userId") String userId, Model model) {
+          UserInfo userinfo = userService.getUser(userId);
+          String checkEmail = userinfo.getViewEmail();
+          String checkPhone = userinfo.getViewMobilePhone();
+          String []emailSplit = checkEmail.split("@");
+          checkEmail = emailSplit[0].substring(0, emailSplit[0].length()-3);
+          checkEmail += "***" + "@" + emailSplit[1];
+          checkPhone = checkPhone.replaceAll("-", "");
+          checkPhone = checkPhone.substring(0, checkPhone.length()-4);
+          checkPhone += "****";
+          userinfo.setEmail(checkEmail);
+          userinfo.setMobile_phone(checkPhone);
+          model.addAttribute("userinfo", userinfo);
          return "/login/find-password";
       }
 
@@ -417,31 +432,34 @@ public class LoginController {
        */
        @PostMapping(value = "send-passwordEmail.do")
        @ResponseBody
-       public Map<String, Object> sendPasswordEmail(HttpServletRequest request, @ModelAttribute("informationCheckForm") UserInfo checkForm) {
-
+       public Map<String, Object> sendPasswordEmail(HttpServletRequest request, UserInfo checkForm, Model model) {
            Map<String, Object> map = new HashMap<>();
            String message ="";
            //사용자 정보 일치하는지 체크
-           checkForm.setMobile_phone(checkForm.getMobile_phone1()+"-"+checkForm.getMobile_phone2()+"-"+checkForm.getMobile_phone3());
-           checkForm.setMobile_phone(Crypt.encrypt(checkForm.getMobile_phone()));
-           checkForm.setEmail(Crypt.encrypt(checkForm.getEmail()));
-           int count = userService.getUserInformationCheck(checkForm);
-           if(count > 0) {
-               UserInfo userinfo = userService.getUser(checkForm.getUser_id());
-               //임시 비밀번호 생성 후 메일 전송
-               String tempPassword = userService.sendTempPassword(checkForm);
-               //임시 비밀번호로 업데이트
-               userinfo.setTemp_password(tempPassword);
-               ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
-               shaPasswordEncoder.setIterations(1000);
-               String encryptPassword = shaPasswordEncoder.encodePassword(tempPassword, userinfo.getSalt());
-               userinfo.setPassword(encryptPassword);
-               userinfo.setStatus(UserInfo.STATUS_TEMP_PASSWORD);
-               userService.updatePassword(userinfo);
-               message="login.information.success";
-           }
-           else {
-               message="login.information.fail";
+           try {
+            checkForm.setMobile_phone(checkForm.getMobile_phone1()+"-"+checkForm.getMobile_phone2()+"-"+checkForm.getMobile_phone3());
+            checkForm.setMobile_phone(Crypt.encrypt(checkForm.getMobile_phone()));
+            checkForm.setEmail(Crypt.encrypt(checkForm.getEmail()));
+            int count = userService.getUserInformationCheck(checkForm);
+            if(count > 0) {
+                UserInfo userinfo = userService.getUser(checkForm.getUser_id());
+                //임시 비밀번호 생성 후 메일 전송
+                String tempPassword = userService.sendTempPassword(checkForm);
+                //임시 비밀번호로 업데이트
+                userinfo.setTemp_password(tempPassword);
+                ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
+                shaPasswordEncoder.setIterations(1000);
+                String encryptPassword = shaPasswordEncoder.encodePassword(tempPassword, userinfo.getSalt());
+                userinfo.setPassword(encryptPassword);
+                userinfo.setStatus(UserInfo.STATUS_TEMP_PASSWORD);
+                userService.updatePassword(userinfo);
+                message="login.information.success";
+            }
+            else {
+                message="login.information.fail";
+            }
+           } catch(Exception e) {
+               e.printStackTrace();
            }
            map.put("result", message);
            return map;
