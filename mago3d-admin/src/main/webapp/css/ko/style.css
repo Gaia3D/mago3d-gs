@@ -728,6 +728,12 @@ select + .ui-selectmenu-button + select + .ui-selectmenu-button  {
 select + .ui-selectmenu-button + input {
 	margin-left: 10px; }
 
+.selectBoxClass {
+	height: 30px;
+	border: 1px solid #d5d5d5;
+}
+
+
 /* Selectmenu */
 .ui-selectmenu-button {
 	display: block;

@@ -132,7 +132,7 @@
 											<form:input path="email1" class="s" />
 											<span class="delimeter at">@</span>
 											<form:input path="email2" class="s" />
-											<select id="email3" name="email3" class="select">
+											<select id="email3" name="email3" class="selectBoxClass">
 				               		 			<option value="0"><spring:message code='direct.input'/></option>
 	<c:if test="${!empty emailCommonCodeList }">
 		<c:forEach var="commonCode" items="${emailCommonCodeList}" varStatus="status">
@@ -617,7 +617,7 @@
 		}
 	}
 	
-	$( "#email3" ).selectmenu({
+/* 	$( "#email3" ).selectmenu({
 		change: function( event, ui ) {
 			if($("#email3").val() != 0) {
 				$("#email2").val($("#email3").val());
@@ -625,7 +625,7 @@
 				$("#email2").val("");
 			}
 		}
-	});
+	}); */
 </script>
 </body>
 </html>

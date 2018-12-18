@@ -31,8 +31,6 @@
 						<div class="tabs">
 							<ul>
 								<li><a href="#user_info_tab"><spring:message code='user.input.information'/></a></li>
-								<li><a href="#user_device_tab"><spring:message code='user.input.device'/></a></li>
-
 							</ul>
 							<div id="user_info_tab">
 								<form:form id="userInfo" modelAttribute="userInfo" method="post" onsubmit="return false;">
@@ -140,7 +138,7 @@
 											<form:input path="email1" class="s" />
 											<span class="delimeter at">@</span>
 											<form:input path="email2" class="s" />
-											<select id="email3" name="email3" class="select">
+											<select id="email3" name="email3" class="selectBoxClass">
 				               		 			<option value="0"><spring:message code='direct.input'/></option>
 	<c:if test="${!empty emailCommonCodeList }">
 		<c:forEach var="commonCode" items="${emailCommonCodeList}" varStatus="status">
@@ -167,7 +165,7 @@
 											<form:label path="status"><spring:message code='status'/></form:label>
 										</th>
 										<td class="col-input">
-											<form:select path="status" cssClass="select">
+											<form:select path="status" cssClass="selectBoxClass">
 												<option value="0"><spring:message code='user.group.in.use'/></option>
 												<option value="1"><spring:message code='user.group.stop.use'/></option>
 												<option value="2"><spring:message code='user.group.lock.password'/></option>
@@ -183,23 +181,12 @@
 											<form:label path="user_insert_type"><spring:message code='user.information.register.guide'/></form:label>
 										</th>
 										<td class="col-input">
-											<form:select path="user_insert_type" cssClass="select">
+											<form:select path="user_insert_type" cssClass="selectBoxClass">
 												<option value="SELF"><spring:message code='user.information.register.admin'/></option>
-												<option value="${externalUserRegister.code_value }">${externalUserRegister.code_name }</option>
 											</form:select>
 										</td>
 									</tr>
-									<tr>
-										<th class="col-label" scope="row">Single Sign-On</th>
-										<td class="col-input">
-										<spring:message var="use" code='use'/>
-										<spring:message var="noUse" code='no.use'/>
-											<form:radiobutton path="sso_use_yn" value="Y" label="${use }"/>
-											<form:radiobutton path="sso_use_yn" value="N" label="${noUse }" />
-										</td>
-									</tr>
 								</table>
-								
 								<div class="button-group">
 									<div class="center-buttons">
 										<input type="submit" value="<spring:message code='save'/>" onclick="updateUserInfo();" />
@@ -208,162 +195,6 @@
 								</div>
 								</form:form>
 							</div>
-										
-							
-										
-							<div id="user_device_tab">
-								<form:form id="userDevice" modelAttribute="userDevice" method="post" onsubmit="return false;">
-								<table class="input-table scope-col">
-									<col class="col-number" />
-									<col class="col-name" />
-									<col class="col-type-select" />
-									<col class="col-ip" />
-									<col class="col-toggle-radio" />
-									<col class="col-functions" />
-									<thead>
-										<tr>
-											<th class="col-number" scope="col"><spring:message code='user.device.priority'/></th>
-											<th class="col-name" scope="col">
-												<span><spring:message code='user.device.device.name'/></span>
-												<span class="icon-glyph glyph-emark-dot color-warning"></span>
-											</th>
-											<th class="col-type-select" scope="col">
-												<span><spring:message code='user.device.type'/></span>
-												<span class="icon-glyph glyph-emark-dot color-warning"></span>
-											</th>
-											<th class="col-ip" scope="col"><spring:message code='user.device.ip'/></th>
-											<th class="col-toggle-radio" scope="col">
-												<span><spring:message code='user.device.use.not'/></span>
-												<span class="icon-glyph glyph-emark-dot color-warning"></span>
-											</th>
-											<th class="col-functions" scope="col"><spring:message code='user.device.delete'/></th>
-										</tr>
-									</thead>
-									
-									<tbody>
-										<tr id="user_device1">
-											<td class="col-number">1</td>
-											<td class="col-name"><form:input path="device_name1" cssClass="m" /></td>
-											<td class="col-type-select">
-												<select id="device_type1" name="device_type1" class="select">
-					               		 			<option value="0">PC</option>
-													<option value="1"><spring:message code='mobile'/></option>
-												</select>
-											</td>
-											<td class="col-ip"><form:input path="device_ip1" class="m"/></td>
-											<td class="col-type-select">
-												<select id="use_yn1" name="use_yn1" class="select">
-					               		 			<option value="Y"><spring:message code='use'/></option>
-													<option value="N"><spring:message code='not.use'/></option>
-												</select>
-											</td>
-											<td class="col-functions">
-												<a href="#" onclick="removeUserDevice(1);" class="image-button button-delete">삭제</a>
-											</td>
-										</tr>
-									
-										<tr id="user_device2">
-											<td class="col-number">2</td>
-											<td class="col-name"><form:input path="device_name2" cssClass="m" /></td>
-											<td class="col-type-select">
-												<select id="device_type2" name="device_type2" class="select">
-					               		 			<option value="0">PC</option>
-													<option value="1"><spring:message code='mobile'/></option>
-												</select>
-											</td>
-											<td class="col-ip"><form:input path="device_ip2" class="m"/></td>
-											<td class="col-type-select">
-												<select id="use_yn2" name="use_yn2" class="select">
-					               		 			<option value="Y"><spring:message code='use'/></option>
-													<option value="N"><spring:message code='not.use'/></option>
-												</select>
-											</td>
-											<td class="col-functions">
-												<a href="#" onclick="removeUserDevice(2);" class="image-button button-delete"><spring:message code='user.device.delete'/></a>
-											</td>
-										</tr>
-									
-										<tr id="user_device3">
-											<td class="col-number">3</td>
-											<td class="col-name"><form:input path="device_name3" cssClass="m" /></td>
-											<td class="col-type-select">
-												<select id="device_type3" name="device_type3" class="select">
-					               		 			<option value="0">PC</option>
-													<option value="1"><spring:message code='mobile'/></option>
-												</select>
-											</td>
-											<td class="col-ip"><form:input path="device_ip3" class="m"/></td>
-											<td class="col-type-select">
-												<select id="use_yn3" name="use_yn3" class="select">
-					               		 			<option value="Y"><spring:message code='use'/></option>
-													<option value="N"><spring:message code='not.use'/></option>
-												</select>
-											</td>
-											<td class="col-functions">
-												<a href="#" onclick="removeUserDevice(3);" class="image-button button-delete"><spring:message code='user.device.delete'/></a>
-											</td>
-										</tr>
-										<tr id="user_device4">
-											<td class="col-number">4</td>
-											<td class="col-name"><form:input path="device_name4" cssClass="m" /></td>
-											<td class="col-type-select">
-												<select id="device_type4" name="device_type4" class="select">
-					               		 			<option value="0">PC</option>
-													<option value="1"><spring:message code='mobile'/></option>
-												</select>
-											</td>
-											<td class="col-ip"><form:input path="device_ip4" class="m"/></td>
-											<td class="col-type-select">
-												<select id="use_yn4" name="use_yn4" class="select">
-					               		 			<option value="Y"><spring:message code='use'/></option>
-													<option value="N"><spring:message code='not.use'/></option>
-												</select>
-											</td>
-											<td class="col-functions">
-												<a href="#" onclick="removeUserDevice(4);" class="image-button button-delete"><spring:message code='user.device.delete'/></a>
-											</td>
-										</tr>
-										<tr id="user_device5">
-											<td class="col-number">5</td>
-											<td class="col-name"><form:input path="device_name5" cssClass="m" /></td>
-											<td class="col-type-select">
-												<select id="device_type5" name="device_type5" class="select">
-					               		 			<option value="0">PC</option>
-													<option value="1"><spring:message code='mobile'/></option>
-												</select>
-											</td>
-											<td class="col-ip"><form:input path="device_ip5" class="m"/></td>
-											<td class="col-type-select">
-												<select id="use_yn5" name="use_yn5" class="select">
-					               		 			<option value="Y"><spring:message code='use'/></option>
-													<option value="N"><spring:message code='not.use'/></option>
-												</select>
-											</td>
-											<td class="col-functions">
-												<a href="#" onclick="removeUserDevice(5);" class="image-button button-delete"><spring:message code='user.device.delete'/></a>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="6" class="col-none">
-												<div class="button-group">
-													<div class="center-buttons">
-														<input type="button" value="<spring:message code='add'/>" onclick="addUserDevice();" style="background-color: #573592 ;" />
-													</div>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								
-								<div class="button-group">
-									<div id="updateUserDeviceLink" class="center-buttons">
-										<input type="submit" value="<spring:message code='save'/>" onclick="updateUserDevice();" />
-										<a href="/user/list-user.do?${listParameters}" class="button"><spring:message code='list'/></a>
-									</div>
-								</div>
-								</form:form>
-							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -484,7 +315,7 @@
 		var email2 = "${userInfo.email2}";
 		if(email2 == "") email2 = "0";
 		$("#email3").val(email2);
-		$("#email3").selectmenu("refresh");
+/* 		$("#email3").selectmenu("refresh"); */
 		
 		var userStatus = "${userInfo.status}";
 		if(userStatus != null && userStatus != "") {
@@ -877,7 +708,7 @@
 		}
 	}
 	
-	$( "#email3" ).selectmenu({
+/* 	$( "#email3" ).selectmenu({
 		change: function( event, ui ) {
 			if($("#email3").val() != 0) {
 				$("#email2").val($("#email3").val());
@@ -885,7 +716,7 @@
 				$("#email2").val("");
 			}
 		}
-	});
+	}); */
 </script>
 </body>
 </html>
