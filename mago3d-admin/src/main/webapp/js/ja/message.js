@@ -58,6 +58,7 @@ JS_MESSAGE["user.password.continuous.char.invalid"] = "継続文字制限数が�
 JS_MESSAGE["user.password.exception.char.message1"] = "管理者が設定した特殊文字";
 JS_MESSAGE["user.password.exception.char.message2"] = "は、パスワードとして使用することができません。";
 JS_MESSAGE["user.password.exception"] = "パスワードの登録処理中にエラーが発生しました。";
+JS_MESSAGE["user.password.same"] = "以前のパスワードと同じパスワードです。";
 JS_MESSAGE["user.session.notexist"] = "セッション情報が存在しません。";
 JS_MESSAGE["user.session.closed"] = "セッション終了処理しました。";
 JS_MESSAGE["user.session.close"] = "選択したユーザーのセッションを終了しますか？";
@@ -65,6 +66,7 @@ JS_MESSAGE["user.id.enable"] = "使用可能なIDです。";
 JS_MESSAGE["user.insert"] = "ユーザーを登録しました。";
 JS_MESSAGE["user.info.update"] = "ユーザー情報を修正しました。";
 JS_MESSAGE["user.id.notexist"] = "ユーザ名が存在しません。";
+JS_MESSAGE["user.old.password.exception"] = "以前パスワードが有効ではありません。";
 
 
 //運営ポリシー

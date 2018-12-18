@@ -58,6 +58,7 @@ JS_MESSAGE["user.password.continuous.char.invalid"] = "The number of consecutive
 JS_MESSAGE["user.password.exception.char.message1"] = "Special character set by administrator";
 JS_MESSAGE["user.password.exception.char.message2"] = "can not be used as a password";
 JS_MESSAGE["user.password.exception"] = "An error occurred during password registration.";
+JS_MESSAGE["user.password.same"] = "It is the same password as the previous password.";
 JS_MESSAGE["user.session.notexist"] = "Session information does not exist";
 JS_MESSAGE["user.session.closed"] = "The session has been closed.";
 JS_MESSAGE["user.session.close"] = "Are you sure you want to end the selected user's session?";
@@ -67,6 +68,7 @@ JS_MESSAGE["user.info.update"] = "User information has been modified.";
 JS_MESSAGE["user.id.notexist"] = "Username does not exist";
 JS_MESSAGE["login.information.success"] = "Your password was reset and emailed.";
 JS_MESSAGE["login.information.fail"] = "No matching user information found.";
+JS_MESSAGE["user.old.password.exception"] = "Previous password is invalid.";
 
 //Operational policy
 JS_MESSAGE["policy.server.datetime"] = "Server time has been reset."

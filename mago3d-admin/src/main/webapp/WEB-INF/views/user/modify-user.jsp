@@ -72,8 +72,17 @@
 									</tr>
 									<tr>
 										<th class="col-label" scope="row">
-											<form:label path="password"><spring:message code='password'/></form:label>
+											<form:label path="old_password"><spring:message code='old.password'/></form:label>
 											<span class="icon-glyph glyph-emark-dot color-warning"></span>
+										</th>
+										<td class="col-input">
+											<form:password path="old_password" class="m" />
+											<form:errors path="old_password" cssClass="error" />
+										</td>
+									</tr>
+									<tr>
+										<th class="col-label" scope="row">
+											<form:label path="password"><spring:message code='new.password'/></form:label>
 										</th>
 										<td class="col-input">
 											<form:password path="password" class="m" />
@@ -83,7 +92,7 @@
 									</tr>
 									<tr>
 										<th class="col-label" scope="row">
-											<form:label path="password_confirm"><spring:message code='password.check'/></form:label>
+											<form:label path="password_confirm"><spring:message code='new.password.check'/></form:label>
 										</th>
 										<td class="col-input">
 											<form:password path="password_confirm" class="m" />
@@ -670,8 +679,27 @@
 			return false;
 		}
 		
+		var old_password = $("#old_password").val();
+		if(old_password == "") {
+			alert(JS_MESSAGE["user.old.password.exception"]);
+			$("#old_password").focus();
+			return false;
+		}
+		if(old_password.length < parseInt("${policy.password_min_length}")
+				|| old_password.length > parseInt("${policy.password_max_length}")) {
+			alert(JS_MESSAGE["user.password.length"] + " ${policy.password_min_length} ~ ${policy.password_max_length}");
+			$("#old_password").focus();
+			return false;
+		}
+		
 		var password = $("#password").val();
 		var password_confirm = $("#password_confirm").val();
+		if(old_password == password_confirm) {
+			alert(JS_MESSAGE["user.password.same"]);
+			$("#password").focus();
+			return false;
+		}
+		
 		if(password != "" && password_confirm != "") {
 			if($("#password").val().length < parseInt("${policy.password_min_length}")
 					|| $("#password").val().length > parseInt("${policy.password_max_length}")) {

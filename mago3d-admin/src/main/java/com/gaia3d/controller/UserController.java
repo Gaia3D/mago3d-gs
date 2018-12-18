@@ -579,10 +579,32 @@ public class UserController {
 			String encryptPassword = null;
 			ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
 			shaPasswordEncoder.setIterations(1000);
+			
+			if(userInfo.getOld_password() == null || "".equals(userInfo.getOld_password())) {
+				result = "user.old.password.exception";
+				map.put("result", result);
+				return map;
+			}
+			if(userInfo.getOld_password().equals(userInfo.getPassword())) {
+				log.info("@@ new password is same passwor!");
+				result = "user.password.same";
+				map.put("result", result);
+				return map;
+			}
+			
+			ShaPasswordEncoder oldShaPasswordEncoder = new ShaPasswordEncoder(512);
+			oldShaPasswordEncoder.setIterations(1000);
+			String oldEncryptPassword = oldShaPasswordEncoder.encodePassword(userInfo.getOld_password(), dbUserInfo.getSalt());
+			if(!oldEncryptPassword.equals(dbUserInfo.getPassword())) {
+				log.info("@@ old password is different from db password!");
+				result = "user.old.password.exception";
+				map.put("result", result);
+				return map;
+			}
+			
 			// 비밀번호의 경우 입력값이 있을때만 수정
 			if(userInfo.getPassword() != null && !"".equals(userInfo.getPassword())
 					&& userInfo.getPassword_confirm() != null && !"".equals(userInfo.getPassword_confirm())) {
-				
 				encryptPassword = shaPasswordEncoder.encodePassword(userInfo.getPassword(), dbUserInfo.getSalt()) ;
 				if("".equals(encryptPassword)) {
 					log.info("@@ password error!");

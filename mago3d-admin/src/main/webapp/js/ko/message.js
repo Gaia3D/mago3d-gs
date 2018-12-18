@@ -58,6 +58,7 @@ JS_MESSAGE["user.password.continuous.char.invalid"] = "연속 문자 제한 개�
 JS_MESSAGE["user.password.exception.char.message1"] = "관리자가 설정한 특수문자 ";
 JS_MESSAGE["user.password.exception.char.message2"] = " 는 비밀번호로 사용 하실 수 없습니다.";
 JS_MESSAGE["user.password.exception"] = "패스워드 등록 과정 중 오류가 발생하였습니다.";
+JS_MESSAGE["user.password.same"] = "이전 패스워드와 동일한 패스워드 입니다.";
 JS_MESSAGE["user.session.notexist"] = "세션 정보가 존재하지 않습니다.";
 JS_MESSAGE["user.session.closed"] = "세션 종료 처리 하였습니다.";
 JS_MESSAGE["user.session.close"] = "선택하신 사용자의 세션을 종료 하시겠습니까?";
@@ -67,6 +68,7 @@ JS_MESSAGE["user.info.update"] = "사용자 정보를 수정 하였습니다.";
 JS_MESSAGE["user.id.notexist"] = "아이디가 존재하지 않습니다.";
 JS_MESSAGE["login.information.success"] = "비밀번호를 초기화하여 메일로 전송했습니다.";
 JS_MESSAGE["login.information.fail"] = "일치하는 사용자 정보가 없습니다.";
+JS_MESSAGE["user.old.password.exception"] = "이전 패스워드가 유효하지 않습니다.";
 
 
 //운영정책

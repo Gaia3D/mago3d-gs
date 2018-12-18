@@ -89,6 +89,8 @@ public class UserInfo {
 	// 이름
 	private String user_name;
 	// 비밀번호
+	private String old_password;
+	// 비밀번호
 	private String password;
 	// 비밀번호 확인
 	private String password_confirm;
