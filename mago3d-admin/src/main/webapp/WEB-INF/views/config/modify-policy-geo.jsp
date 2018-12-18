@@ -12,7 +12,7 @@
  			<td>
 	  			<select id="geo_view_library" name="geo_view_library" class="select">
 	  				<option value="cesium" selected>Cesium</option>
-	  				<option value="worldwind">WorldWind</option>
+	  				<!-- <option value="worldwind">WorldWind</option> -->
 	  			</select>
 	  		</td>
   		</tr>
