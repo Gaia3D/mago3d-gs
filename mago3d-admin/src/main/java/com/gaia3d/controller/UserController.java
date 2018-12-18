@@ -298,6 +298,14 @@ public class UserController {
 				return map;
 			}
 			
+			for(int i = 0 ; i< userInfo.getPassword().length() ; i++) {
+				if(userInfo.getPassword().charAt(i) == ' ' || userInfo.getPassword().charAt(i) == ' ') {
+					result = "user.password.invalid";
+					map.put("result", result);
+					return map;
+				}
+		    }
+
 			String salt = BCrypt.gensalt();
 			ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
 			shaPasswordEncoder.setIterations(1000);
