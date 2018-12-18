@@ -699,13 +699,17 @@
 			$("#password").focus();
 			return false;
 		}
-		
 		if(password != "" && password_confirm != "") {
 			if($("#password").val().length < parseInt("${policy.password_min_length}")
 					|| $("#password").val().length > parseInt("${policy.password_max_length}")) {
 				alert(JS_MESSAGE["user.password.length"] + " ${policy.password_min_length} ~ ${policy.password_max_length}");
 				$("#password").focus();
 				return false;
+			}
+			if(password.search(/\s/) != -1) { 
+				alert(JS_MESSAGE["user.password.invalid"]);
+				$("#password").focus();
+				return false; 
 			}
 			if(password != password_confirm) {
 				alert(JS_MESSAGE["user.group.password.not.same"]);
