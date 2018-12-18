@@ -92,6 +92,9 @@ public class LoginController {
         model.addAttribute("EncryptionKey", TOKEN_AES_KEY + "u/Gu5posvwDsXUnV5Zaq4g==" + TOKEN_AES_KEY);
         model.addAttribute("EncryptionIv", TOKEN_AES_KEY + "5D9r9ZVzEYYgha93/aUK2w==" + TOKEN_AES_KEY);
         model.addAttribute(SessionKey.TOKEN_AES_KEY.name(), TOKEN_AES_KEY);
+        
+        request.getSession().setAttribute(SessionKey.SESSION_TOKEN_AES_ENCRYPTION_KEY.name() , TOKEN_AES_KEY + "u/Gu5posvwDsXUnV5Zaq4g==" + TOKEN_AES_KEY);
+        request.getSession().setAttribute(SessionKey.SESSION_TOKEN_AES_ENCRYPTION_IV.name() , TOKEN_AES_KEY + "5D9r9ZVzEYYgha93/aUK2w==" + TOKEN_AES_KEY);
 
         return "/login/login";
     }
@@ -107,6 +110,8 @@ public class LoginController {
 
         Policy policy = CacheManager.getPolicy();
         String SESSION_TOKEN_AES_KEY = (String)request.getSession().getAttribute(SessionKey.SESSION_TOKEN_AES_KEY.name());
+        String SESSION_TOKEN_AES_ENCRYPTION_KEY = (String)request.getSession().getAttribute(SessionKey.SESSION_TOKEN_AES_ENCRYPTION_KEY.name());
+        String SESSION_TOKEN_AES_ENCRYPTION_IV = (String)request.getSession().getAttribute(SessionKey.SESSION_TOKEN_AES_ENCRYPTION_IV.name());
         try {
 
             SecretKey key = new SecretKeySpec(Base64.decode("u/Gu5posvwDsXUnV5Zaq4g=="), "AES");
@@ -144,6 +149,8 @@ public class LoginController {
             model.addAttribute("loginForm", loginForm);
             model.addAttribute("policy", policy);
             model.addAttribute("TOKEN_AES_KEY", SESSION_TOKEN_AES_KEY);
+            model.addAttribute("EncryptionKey", SESSION_TOKEN_AES_ENCRYPTION_KEY);
+            model.addAttribute("EncryptionIv", SESSION_TOKEN_AES_ENCRYPTION_IV);
             return "/login/login";
         }
 
@@ -183,6 +190,8 @@ public class LoginController {
             model.addAttribute("loginForm", loginForm);
             model.addAttribute("policy", policy);
             model.addAttribute("TOKEN_AES_KEY", SessionKey.TOKEN_AES_KEY.name());
+            model.addAttribute("EncryptionKey", SESSION_TOKEN_AES_ENCRYPTION_KEY);
+            model.addAttribute("EncryptionIv", SESSION_TOKEN_AES_ENCRYPTION_IV);
 
             return "/login/login";
         }
@@ -440,6 +449,8 @@ public class LoginController {
             checkForm.setMobile_phone(checkForm.getMobile_phone1()+"-"+checkForm.getMobile_phone2()+"-"+checkForm.getMobile_phone3());
             checkForm.setMobile_phone(Crypt.encrypt(checkForm.getMobile_phone()));
             checkForm.setEmail(Crypt.encrypt(checkForm.getEmail()));
+            
+            log.info("----------- checkForm = {}", checkForm);
             int count = userService.getUserInformationCheck(checkForm);
             if(count > 0) {
                 UserInfo userinfo = userService.getUser(checkForm.getUser_id());
