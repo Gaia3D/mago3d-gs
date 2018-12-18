@@ -31,7 +31,8 @@
 </c:if>
                 </div>
                 <div class="panel row">
-                    <h2 class="sign-title"><span class="text-sub"><spring:message code='user.find.password'/></span></h2>
+                    <h2 class="sign-title"><span class="text-sub"><spring:message code='user.find.password'/></span>
+                    	<br /><a href="/login/login.do" style="font-size: 16px;">[ Login Page ]</a></h2>
                     <div class="sign-inputs">
                         <div class="sign-desc"><spring:message code='user.find.id' /></div>
                         <form:form id="idCheckForm" modelAttribute="userInfo" method="get" action="/login/ajax-userid-check.do" onsubmit="return userid_check();">
