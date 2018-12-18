@@ -174,9 +174,9 @@
 	function reloadMenuCache() {
 		if(cacheFlag) {
 			cacheFlag = false;
-			var info = "service_name=menu";
+			var info = "cacheName=MENU&cacheType=BROADCAST";
 			$.ajax({
-				url: "/common/ajax-reload-config-cache.do",
+				url: "/cache/ajax-reload-config-cache.do",
 				type: "POST",
 				data: info,
 				cache: false,
