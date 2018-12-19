@@ -27,7 +27,7 @@
 						<div class="tabs">
 							<ul>
 								<li><a href="#user_info_tab"><spring:message code='user.input.information'/></a></li>
-								<li><a href="#user_device_tab"><spring:message code='user.input.device'/></a></li>
+								<%-- <li><a href="#user_device_tab"><spring:message code='user.input.device'/></a></li> --%>
 							</ul>
 							<div id="user_info_tab">
 								<table class="inner-table scope-row">
