@@ -57,6 +57,9 @@
 		<c:if test="${userInfo.error_code eq 'user.password.continuous.char.invalid'}">
 									<spring:message code='user.password.continuity'/>
 		</c:if>		
+		<c:if test="${userInfo.error_code eq 'user.old.password.exception'}">
+									<spring:message code='user.old.password.exception'/>
+		</c:if>		
 								</h6>
 							</div>
 	</c:if>
