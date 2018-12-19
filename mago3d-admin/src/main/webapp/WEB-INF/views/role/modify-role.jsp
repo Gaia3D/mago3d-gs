@@ -112,7 +112,9 @@
 <script type="text/javascript" src="/js/navigation.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$( ".select" ).selectmenu();
+		//$( ".select" ).selectmenu();
+		$("#role_type").val("${role.role_type}");
+		$("#business_type").val("${role.business_type}");
 	});
 	
 	function check() {

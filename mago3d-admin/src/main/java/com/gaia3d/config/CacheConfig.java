@@ -313,6 +313,7 @@ public class CacheConfig {
 		
 		// TODO 로컬, 이중화 등의 분기 처리가 생략되어 있음
 		List<ExternalService> remoteCacheServerList = CacheManager.getRemoteCacheServiceList();
+		log.info("============== remoteCacheServerList = {}", remoteCacheServerList);
 		for(ExternalService externalService : remoteCacheServerList) {
 			// TODO 환경 설정으로 빼서 로컬이거나 단독 서버인 경우 호출하지 않게 설계해야 함
 			try {

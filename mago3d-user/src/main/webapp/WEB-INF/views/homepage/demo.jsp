@@ -693,6 +693,9 @@
 			
 			managerFactory = new ManagerFactory(null, "magoContainer", policyJson, projectIdArray, projectDataArray, projectDataFolderArray, imagePath);			
 		}
+		
+		$(".cesium-geocoder-input").css("display", "none");
+		$(".cesium-geocoder-searchButton").css("display", "none");
 	}
 	
 	// 프로젝트를 로딩한 후 이동

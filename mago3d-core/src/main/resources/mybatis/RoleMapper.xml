@@ -167,6 +167,9 @@
 		SET role_name = #{role_name},
 			role_key = #{role_key},
 			role_type = #{role_type},
+			<if test="business_type != null and business_type != ''">
+			business_type = #{business_type},
+			</if>
 			use_yn = #{use_yn},
 			description = #{description}
 		WHERE role_id = #{role_id}

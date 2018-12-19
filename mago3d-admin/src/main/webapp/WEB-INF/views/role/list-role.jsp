@@ -114,7 +114,8 @@
 	<c:forEach var="role" items="${roleList}" varStatus="status">
 										<tr>
 											<td class="col-number">${roleListSize - status.index }</td>
-											<td class="col-name"><a href="/role/detail-role.do?role_id=${role.role_id }&amp;pageNo=${pagination.pageNo }${pagination.searchParameters}">${role.role_name }</a></td>
+											<%-- <td class="col-name"><a href="/role/detail-role.do?role_id=${role.role_id }&amp;pageNo=${pagination.pageNo }${pagination.searchParameters}">${role.role_name }</a></td> --%>
+											<td class="col-name">${role.role_name }</td>
 											<td class="col-key">${role.role_key }</td>
 											
 											<td class="col-type">
