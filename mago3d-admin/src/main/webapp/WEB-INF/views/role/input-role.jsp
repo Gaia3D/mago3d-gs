@@ -52,7 +52,7 @@
 								</th>
 								<spring:message code='role.user' var='user'/>
 								<td class="col-input">
-									<select id="role_type" name="role_type" class="select" >
+									<select id="role_type" name="role_type" class="selectBoxClass" >
 										<option value="0"> ${user} </option>
 									</select>
 								</td>
@@ -62,7 +62,7 @@
 							<spring:message code='role.main' var='main'/>
 								<th class="col-label l" scope="row"><form:label path="business_type"><spring:message code='role.type.work'/></form:label></th>
 								<td class="col-input">
-									<select id="business_type" name="business_type" class="select">
+									<select id="business_type" name="business_type" class="selectBoxClass">
 										<option value="0"> ${login} </option>
 										<option value="1"> ${main} </option>
 									</select>

@@ -29,7 +29,7 @@
 							<div class="input-group row">
 								<div class="input-set">
 									<label for="project_id"><spring:message code='data.project.name'/></label>
-									<form:select path="project_id" cssClass="select">
+									<form:select path="project_id" cssClass="selectBoxClass">
 										<option value="0"><spring:message code='all'/></option>
 <c:forEach var="project" items="${projectList}">
 										<option value="${project.project_id}">${project.project_name}</option>
@@ -38,11 +38,11 @@
 								</div>
 								<div class="input-set">
 									<label for="search_word"><spring:message code='search.word'/></label>
-									<select id="search_word" name="search_word" class="select">
+									<select id="search_word" name="search_word" class="selectBoxClass">
 										<option value=""><spring:message code='select'/></option>
 					                	<option value="user_id"><spring:message code='user.id'/></option>
 									</select>
-									<select id="search_option" name="search_option" class="select">
+									<select id="search_option" name="search_option" class="selectBoxClass">
 										<option value="0"><spring:message code='search.same'/></option>
 										<option value="1"><spring:message code='search.include'/></option>
 									</select>
@@ -50,7 +50,7 @@
 								</div>
 								<div class="input-set">
 									<label for="status"><spring:message code='search.status'/></label>
-									<select id="status" name="status" class="select">
+									<select id="status" name="status" class="selectBoxClass">
 										<option value=""> <spring:message code='all'/> </option>
 										<option value="0"> <spring:message code='request'/>  </option>
 										<option value="1"> <spring:message code='complete'/> </option>
@@ -65,16 +65,16 @@
 								</div>
 								<div class="input-set">
 									<label for="order_word"><spring:message code='search.order'/></label>
-									<select id="order_word" name="order_word" class="select">
+									<select id="order_word" name="order_word" class="selectBoxClass">
 										<option value=""> <spring:message code='search.basic'/> </option>
 					                	<option value="insert_date"> <spring:message code='search.insert.date'/> </option>
 									</select>
-									<select id="order_value" name="order_value" class="select">
+									<select id="order_value" name="order_value" class="selectBoxClass">
 				                		<option value=""> <spring:message code='search.basic'/> </option>
 					                	<option value="ASC"> <spring:message code='search.ascending'/> </option>
 										<option value="DESC"> <spring:message code='search.descending.order'/> </option>
 									</select>
-									<select id="list_counter" name="list_counter" class="select">
+									<select id="list_counter" name="list_counter" class="selectBoxClass">
 				                		<option value="10"> <spring:message code='search.ten.count'/> </option>
 					                	<option value="50"> <spring:message code='search.fifty.count'/> </option>
 										<option value="100"> <spring:message code='search.hundred.count'/> </option>
