@@ -22,6 +22,7 @@
 			<td class="col-input">
 				<form:input path="user_upload_max_filesize" cssClass="l" />
 				<form:errors path="user_upload_max_filesize" cssClass="error" />
+				&nbsp;&nbsp;(10 ~ 10,000)
 			</td>
 		</tr>
 		<tr>
@@ -32,6 +33,7 @@
 			<td class="col-input">
 				<form:input path="user_upload_max_count" cssClass="l" />
 				<form:errors path="user_upload_max_count" cssClass="error" />
+				&nbsp;&nbsp;최대 200개
 			</td>
 		</tr>
 	</table>

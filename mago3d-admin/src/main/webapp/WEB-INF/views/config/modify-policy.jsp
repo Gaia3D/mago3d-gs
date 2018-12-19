@@ -672,7 +672,19 @@
 				$("#user_upload_max_filesize").focus();
 				return;
 			}
+			var fileSize = parseInt($("#user_upload_max_filesize").val());
+			if(fileSize < 10 || fileSize > 10000) {
+				alert(JS_MESSAGE["fileinfo.size.invalid"]);
+				$("#user_upload_max_filesize").focus();
+				return;
+			}
 			if(!isNumber($("#user_upload_max_count").val())) {
+				$("#user_upload_max_count").focus();
+				return;
+			}
+			var fileCount = parseInt($("#user_upload_max_count").val());
+			if(fileCount < 1 || fileCount > 200) {
+				alert(JS_MESSAGE["user.input.invalid"]);
 				$("#user_upload_max_count").focus();
 				return;
 			}

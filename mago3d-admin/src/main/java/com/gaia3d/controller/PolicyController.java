@@ -449,8 +449,10 @@ public class PolicyController {
 			log.info("@@ policy = {} ", policy);
 			if( ( policy.getPolicy_id() == null || policy.getPolicy_id().intValue() <= 0 )
 					|| ( policy.getUser_upload_type() == null || "".equals(policy.getUser_upload_type()) )
-					|| ( policy.getUser_upload_max_filesize() == null || policy.getUser_upload_max_filesize().longValue() < 0l )
-					|| ( policy.getUser_upload_max_count() == null || policy.getUser_upload_max_count().intValue() < 0 )) {
+					|| ( policy.getUser_upload_max_filesize() == null || policy.getUser_upload_max_filesize().longValue() < 10l
+					|| policy.getUser_upload_max_filesize().longValue() > 10000l)
+					|| ( policy.getUser_upload_max_count() == null || policy.getUser_upload_max_count().intValue() < 0 
+					|| policy.getUser_upload_max_count().intValue() > 200)) {
 				result = "policy.userupload.invalid";
 				map.put("result", result);
 				return map;

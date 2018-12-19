@@ -28,6 +28,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.gaia3d.interceptor.CSRFHandlerInterceptor;
 import com.gaia3d.interceptor.ConfigInterceptor;
+import com.gaia3d.interceptor.ErrorUrlInterceptor;
 import com.gaia3d.interceptor.LogInterceptor;
 import com.gaia3d.interceptor.SecurityInterceptor;
 
@@ -65,6 +66,8 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new CSRFHandlerInterceptor())
         		.addPathPatterns("/**")
         		.excludePathPatterns("/login/**", "/css/**", "/externlib/**", "/f4d/**", "/images/**", "/js/**");
+        registry.addInterceptor(new ErrorUrlInterceptor())
+				.addPathPatterns("/login/**");
     }
 	
 	/**
