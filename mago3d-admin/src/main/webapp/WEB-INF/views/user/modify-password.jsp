@@ -122,37 +122,47 @@
 <script type="text/javascript" src="/js/navigation.js"></script>
 <script type="text/javascript">
 	function check() {
-		if ($("#password").val() == "") {
-			alert("현재 비밀번호를 입력하여 주십시오.");
+		var password = $("#password").val();
+		if(password == "") {
+			alert(JS_MESSAGE["user.old.password.exception"]);
 			$("#password").focus();
 			return false;
 		}
-		if ($("#new_password").val() == "") {
-			alert("새로운 비밀번호를 입력하여 주십시오.");
-			$("#new_password").focus();
-			return false;
-		}
-		if ($("#new_password_confirm").val() == "") {
-			alert("비밀번호 확인을 입력하여 주십시오.");
-			$("#new_password_confirm").focus();
-			return false;
-		}
-		if ($("#password").val() == $("#new_password").val()) {
-			alert("현재 비밀번호와 일치합니다. ");
-			$("#new_password").focus();
-			return false;
-		}
-		if($("#new_password").val().length < parseInt("${policy.password_min_length}")
-				|| $("#new_password").val().length > parseInt("${policy.password_max_length}")) {
+		if(password.length < parseInt("${policy.password_min_length}")
+				|| password.length > parseInt("${policy.password_max_length}")) {
 			alert(JS_MESSAGE["user.password.length"] + " ${policy.password_min_length} ~ ${policy.password_max_length}");
+			$("#password").focus();
+			return false;
+		}
+		
+		var new_password = $("#new_password").val();
+		var new_password_confirm = $("#new_password_confirm").val();
+		if(password == new_password_confirm) {
+			alert(JS_MESSAGE["user.password.same"]);
 			$("#new_password").focus();
 			return false;
 		}
-		if ($("#new_password").val() != $("#new_password_confirm").val()) {
-			alert("새로운 비밀번호와 일치하지 않습니다.");
-			$("#new_password_confirm").focus();
-			return false;
-		}	
+		if(new_password != "" && new_password_confirm != "") {
+			if($("#new_password").val().length < parseInt("${policy.password_min_length}")
+					|| $("#new_password").val().length > parseInt("${policy.password_max_length}")) {
+				alert(JS_MESSAGE["user.password.length"] + " ${policy.password_min_length} ~ ${policy.password_max_length}");
+				$("#new_password").focus();
+				return false;
+			}
+			if(new_password.search(/\s/) != -1) { 
+				alert(JS_MESSAGE["user.password.invalid"]);
+				$("#new_password").focus();
+				return false; 
+			}
+			if(new_password != new_password_confirm) {
+				alert(JS_MESSAGE["user.group.new_password.not.same"]);
+				$("#password").focus();
+				return false;
+			}	
+		} 
+		
+		
+		
 	}
 
 	function laterChangePasswordConfirm() {

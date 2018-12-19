@@ -298,7 +298,7 @@ public class UserController {
 				return map;
 			}
 			
-			for(int i = 0 ; i< userInfo.getPassword().length() ; i++) {
+			for(int i = 0 ; i< userInfo.getPassword().length(); i++) {
 				if(userInfo.getPassword().charAt(i) == ' ' || userInfo.getPassword().charAt(i) == ' ') {
 					result = "user.password.invalid";
 					map.put("result", result);
@@ -1164,7 +1164,10 @@ public class UserController {
 		
 		// 등록, 수정 화면의 validation 항목이 다를 경우를 위한 변수
 		userInfo.setMethod_mode("updatePassword");
-
+		UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+//		userInfo.setUser_id(userSession.getUser_id());
+//		userInfo.setUser_name(userSession.getUser_name());
+		
 		String errorcode = userValidate(policy, userInfo);
 		if(errorcode != null) {
 			log.info("@@@@@@@@@@@@@ errcode = {}", errorcode);
@@ -1172,22 +1175,44 @@ public class UserController {
 			model.addAttribute("policy", CacheManager.getPolicy());
 			return "/user/modify-password";		
 		}
-		
-		UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+		log.info("@@@@@@@@@@@@@ userSession.getUser_id( = {}", userSession.getUser_id());
 		UserInfo dbUserInfo = userService.getUser(userSession.getUser_id());
 		
+		String encryptPassword = null;		
 		ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
 		shaPasswordEncoder.setIterations(1000);
-		String PasswordCheck = shaPasswordEncoder.encodePassword(userInfo.getPassword(), dbUserInfo.getSalt());
-		if(!(PasswordCheck.equals(dbUserInfo.getPassword())) ){
-			errorcode = "user.password.compare.invalid";
+		
+		// 이전 비밀번호가 없을 때
+		if(userInfo.getPassword() == null || "".equals(userInfo.getPassword())) {
+			errorcode = "user.old.password.exception";
+			log.info("@@@@@@@@@@@@@ errcode = {}", errorcode);
+			userInfo.setError_code(errorcode);
+			model.addAttribute("policy", CacheManager.getPolicy());
+		}
+		
+		// 이전 비밀번호와 같을 때
+		if(userInfo.getPassword().equals(userInfo.getNew_password())) {
+			log.info("@@ new password is same password!");
+			errorcode = "user.password.same";
+			log.info("@@@@@@@@@@@@@ errcode = {}", errorcode);
+			userInfo.setError_code(errorcode);
+			model.addAttribute("policy", CacheManager.getPolicy());
+		}
+		
+		// 이전 비밀번호와 DB 비밀번호가 같은지 확인
+		ShaPasswordEncoder oldShaPasswordEncoder = new ShaPasswordEncoder(512);
+		oldShaPasswordEncoder.setIterations(1000);
+		String oldEncryptPassword = oldShaPasswordEncoder.encodePassword(userInfo.getPassword(), dbUserInfo.getSalt());
+		if(!oldEncryptPassword.equals(dbUserInfo.getPassword())) {
+			log.info("@@ old password is different from db password!");
+			errorcode = "user.old.password.exception";
 			log.info("@@@@@@@@@@@@@ errcode = {}", errorcode);
 			userInfo.setError_code(errorcode);
 			model.addAttribute("policy", CacheManager.getPolicy());
 			return "/user/modify-password";
 		}
 		
-		String encryptPassword = shaPasswordEncoder.encodePassword(userInfo.getNew_password(), dbUserInfo.getSalt());
+		encryptPassword = shaPasswordEncoder.encodePassword(userInfo.getNew_password(), dbUserInfo.getSalt());
 		userInfo.setUser_id(userSession.getUser_id());
 		userInfo.setPassword(encryptPassword);
 		userInfo.setStatus(UserInfo.STATUS_USE);

@@ -67,7 +67,7 @@ JS_MESSAGE["user.insert"] = "ユーザーを登録しました。";
 JS_MESSAGE["user.info.update"] = "ユーザー情報を修正しました。";
 JS_MESSAGE["user.id.notexist"] = "ユーザ名が存在しません。";
 JS_MESSAGE["user.old.password.exception"] = "以前パスワードが有効ではありません。";
-
+JS_MESSAGE["user.password.exception"] = "新しいパスワードが有効ではありません。";
 
 //運営ポリシー
 JS_MESSAGE["policy.server.datetime"] = "サーバーの時間がリセットされました。";

@@ -69,6 +69,7 @@ JS_MESSAGE["user.id.notexist"] = "Username does not exist";
 JS_MESSAGE["login.information.success"] = "Your password was reset and emailed.";
 JS_MESSAGE["login.information.fail"] = "No matching user information found.";
 JS_MESSAGE["user.old.password.exception"] = "Previous password is invalid.";
+JS_MESSAGE["user.password.exception"] = "The new password is not valid.";
 
 //Operational policy
 JS_MESSAGE["policy.server.datetime"] = "Server time has been reset."
