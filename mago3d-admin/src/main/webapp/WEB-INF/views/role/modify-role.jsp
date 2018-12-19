@@ -55,7 +55,7 @@
 								<spring:message code='role.user' var='user'/>
 								<spring:message code='role.server' var='server'/>
 								<td class="col-input">
-									<select id="role_type" name="role_type" class="select" >
+									<select id="role_type" name="role_type" class="selectBoxClass" >
 										<option value="0"> ${user} </option>
 										<option value="1"> ${server} </option>
 									</select>
@@ -66,7 +66,7 @@
 								<spring:message code='role.login' var='login'/>
 								<spring:message code='role.main' var='main'/>
 								<td class="col-input">
-									<select id="business_type" name="business_type" class="select">
+									<select id="business_type" name="business_type" class="selectBoxClass">
 										<option value="0"> ${login} </option>
 										<option value="1"> ${main} </option>
 									</select>
