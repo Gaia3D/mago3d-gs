@@ -10,7 +10,7 @@
 		  		<form:label path="geo_view_library" cssClass="nessItem"><spring:message code='config.geo.viewlibrary'/></form:label>
  			</th>
  			<td>
-	  			<select id="geo_view_library" name="geo_view_library" class="select">
+	  			<select id="geo_view_library" name="geo_view_library" class="selectBoxClass">
 	  				<option value="cesium" selected>Cesium</option>
 	  				<!-- <option value="worldwind">WorldWind</option> -->
 	  			</select>
