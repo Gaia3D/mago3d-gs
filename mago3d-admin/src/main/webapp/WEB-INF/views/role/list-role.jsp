@@ -31,7 +31,7 @@
 									<spring:message code='role.total' var='total'/>
 									<spring:message code='role.user' var='user'/>
 										<label for="role_type"><spring:message code='role.class'/></label>
-										<select id="role_type" name="role_type" class="select">
+										<select id="role_type" name="role_type" class="selectBoxClass">
 											<option value="">${total}</option>
 											<option value="0">${user}</option>
 										</select>
@@ -40,7 +40,7 @@
 									<spring:message code='use' var='use'/>
 									<spring:message code='not.use' var='notUse'/>
 										<label for="use_yn"><spring:message code='role.use.not'/></label>
-										<select id="use_yn" name="use_yn" class="select">
+										<select id="use_yn" name="use_yn" class="selectBoxClass">
 											<option value="">${total}</option>
 											<option value="Y">${use}</option>
 											<option value="N">${notUse}</option>
@@ -53,12 +53,12 @@
 									<spring:message code='role.down.order' var='downOrder'/>
 									<div class="input-set">
 										<label for="order_word"><spring:message code='role.order'/></label>
-										<select id="order_word" name="order_word" class="select">
+										<select id="order_word" name="order_word" class="selectBoxClass">
 											<option value="">${basic}</option>
 											<option value="role_name">${name}</option>
 											<option value="insert_date">${date}</option>
 										</select>
-										<select id="order_value" name="order_value" class="select">
+										<select id="order_value" name="order_value" class="selectBoxClass">
 											<option value="">${basic}</option>
 											<option value="ASC">${upOrder}</option>
 											<option value="DESC">${downOrder }</option>

@@ -70,7 +70,7 @@
 			<spring:message code='config.id.plus.init' var='idPlusInit'/>
 			<spring:message code='config.init' var='init'/>
 			<td class="col-input">
-				<select id="password_create_type" name="password_create_type" class="select">
+				<select id="password_create_type" name="password_create_type" class="selectBoxClass">
 	  				<option value="0">${idPlusInit}</option>
 	  				<option value="1">${init}</option>
 				</select>

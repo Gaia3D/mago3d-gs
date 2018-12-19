@@ -30,7 +30,7 @@
 							<div class="input-group row">
 								<div class="input-set">
 									<label for="user_group_id"><spring:message code='user.group.name'/></label>
-									<form:select path="user_group_id" cssClass="select">
+									<form:select path="user_group_id" cssClass="selectBoxClass">
 										<option value="0">${userGroupAll}</option>
 <c:forEach var="userGroup" items="${userGroupList}">
 										<option value="${userGroup.user_group_id}">${userGroup.group_name}</option>
@@ -39,12 +39,12 @@
 								</div>
 								<div class="input-set">
 									<label for="search_word"><spring:message code='user.group.search.word'/></label>
-									<select id="search_word" name="search_word" class="select">
+									<select id="search_word" name="search_word" class="selectBoxClass">
 										<option value=""><spring:message code='select'/></option>
 					                	<option value="user_id"><spring:message code='user.group.id'/></option>
 										<option value="user_name"><spring:message code='user.group.user.name'/></option>
 									</select>
-									<select id="search_option" name="search_option" class="select">
+									<select id="search_option" name="search_option" class="selectBoxClass">
 										<option value="0"><spring:message code='user.group.same'/></option>
 										<option value="1"><spring:message code='user.group.include'/></option>
 									</select>
@@ -52,7 +52,7 @@
 								</div>
 								<div class="input-set">
 									<label for="status"><spring:message code='user.group.status'/></label>
-									<select id="status" name="status" class="select">
+									<select id="status" name="status" class="selectBoxClass">
 										<option value="">${userGroupAll}</option>
 										<option value="0"> <spring:message code='user.group.in.use'/> </option>
 										<option value="1"> <spring:message code='user.group.stop.use'/> </option>
@@ -64,7 +64,7 @@
 								</div>
 								<div class="input-set">
 									<label for="user_insert_type"><spring:message code='user.group.insert.type'/></label>
-									<select id="user_insert_type" name="user_insert_type" class="select">
+									<select id="user_insert_type" name="user_insert_type" class="selectBoxClass">
 										<option value="">${userGroupAll}</option>
 <c:forEach var="commonCode" items="${userRegisterTypeList}" varStatus="status">
 										<option value="${commonCode.code_value }"> ${commonCode.code_name } </option>
@@ -80,19 +80,19 @@
 								
 								<div class="input-set">
 									<label for="order_word"><spring:message code='user.group.order'/></label>
-									<select id="order_word" name="order_word" class="select">
+									<select id="order_word" name="order_word" class="selectBoxClass">
 										<option value=""><spring:message code='user.group.basic'/></option>
 					                	<option value="user_id"><spring:message code='user.group.id'/></option>
 										<option value="user_name"><spring:message code='user.group.user.name'/> </option>
 										<option value="last_login_date"><spring:message code='user.group.login.date'/></option>
 										<option value="insert_date"> <spring:message code='user.group.insert.date'/> </option>
 									</select>
-									<select id="order_value" name="order_value" class="select">
+									<select id="order_value" name="order_value" class="selectBoxClass">
 				                		<option value=""> <spring:message code='user.group.basic'/> </option>
 					                	<option value="ASC"> <spring:message code='user.group.ascending'/></option>
 										<option value="DESC"> <spring:message code='user.group.descending.order'/> </option>
 									</select>
-									<select id="list_counter" name="list_counter" class="select">
+									<select id="list_counter" name="list_counter" class="selectBoxClass">
 				                		<option value="10"> <spring:message code='user.group.ten.count'/> </option>
 					                	<option value="50"> <spring:message code='user.group.fifty.count'/> </option>
 										<option value="100"> <spring:message code='user.group.hundred.count'/> </option>
