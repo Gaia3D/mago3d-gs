@@ -118,6 +118,14 @@ var fnObj = {
 			alert("メニューを選択してください。");
 			return;
 		}
+		
+		var nameEn = frm.name_en.value;
+		var regType1 = /^[A-Za-z0-9+]*$/;
+		if(!regType1.test(nameEn)) { 
+			alert("英語、数字のみ入力可能です。");
+			return;
+		}
+		
 		//myModal.close('addTreeModal');
 		if(writeMode == "child") {
 			// 자식 객체 추가

@@ -119,6 +119,14 @@ var fnObj = {
 			alert("메뉴를 선택해 주세요.");
 			return;
 		}
+		
+		var nameEn = frm.name_en.value;
+		var regType1 = /^[A-Za-z0-9+]*$/;
+		if(!regType1.test(nameEn)) { 
+			alert("영문, 숫자만 입력 가능 합니다.");
+			return;
+		}
+		
 		//myModal.close('addTreeModal');
 		if(writeMode == "child") {
 			// 자식 객체 추가

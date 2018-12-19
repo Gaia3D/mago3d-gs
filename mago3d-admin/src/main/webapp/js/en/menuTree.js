@@ -118,6 +118,14 @@ var fnObj = {
 			alert("Please select menu.");
 			return;
 		}
+		
+		var nameEn = frm.name_en.value;
+		var regType1 = /^[A-Za-z0-9+]*$/;
+		if(!regType1.test(nameEn)) { 
+			alert("Only alphanumeric characters can be entered.");
+			return;
+		}
+		
 		//myModal.close('addTreeModal');
 		if(writeMode == "child") {
 			// 자식 객체 추가
