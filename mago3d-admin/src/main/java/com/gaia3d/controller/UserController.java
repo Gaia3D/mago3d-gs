@@ -1173,6 +1173,7 @@ public class UserController {
 			log.info("@@@@@@@@@@@@@ errcode = {}", errorcode);
 			userInfo.setError_code(errorcode);
 			model.addAttribute("policy", CacheManager.getPolicy());
+			model.addAttribute("userInfo", userInfo);
 			return "/user/modify-password";		
 		}
 		log.info("@@@@@@@@@@@@@ userSession.getUser_id( = {}", userSession.getUser_id());
@@ -1188,6 +1189,8 @@ public class UserController {
 			log.info("@@@@@@@@@@@@@ errcode = {}", errorcode);
 			userInfo.setError_code(errorcode);
 			model.addAttribute("policy", CacheManager.getPolicy());
+			model.addAttribute("userInfo", userInfo);
+			return "/user/modify-password";	
 		}
 		
 		// 이전 비밀번호와 같을 때
@@ -1197,6 +1200,8 @@ public class UserController {
 			log.info("@@@@@@@@@@@@@ errcode = {}", errorcode);
 			userInfo.setError_code(errorcode);
 			model.addAttribute("policy", CacheManager.getPolicy());
+			model.addAttribute("userInfo", userInfo);
+			return "/user/modify-password";	
 		}
 		
 		// 이전 비밀번호와 DB 비밀번호가 같은지 확인
@@ -1209,7 +1214,8 @@ public class UserController {
 			log.info("@@@@@@@@@@@@@ errcode = {}", errorcode);
 			userInfo.setError_code(errorcode);
 			model.addAttribute("policy", CacheManager.getPolicy());
-			return "/user/modify-password";
+			model.addAttribute("userInfo", userInfo);
+			return "/user/modify-password";	
 		}
 		
 		encryptPassword = shaPasswordEncoder.encodePassword(userInfo.getNew_password(), dbUserInfo.getSalt());
