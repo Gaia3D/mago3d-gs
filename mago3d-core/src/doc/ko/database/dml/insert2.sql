@@ -103,7 +103,7 @@ insert into widget(	widget_id, name, view_order, user_id) values(NEXTVAL('widget
 insert into external_service (
 	external_service_id, service_code, service_name, service_type, server_ip, api_key, url_scheme, url_host, url_port, url_path, default_yn, description
 ) values(
-	NEXTVAL('api_log_seq'), 'CACHE', '사용자 CACHE 갱신', '0', '127.0.0.1', 'M5mru2GcGZOyc+Tdy7AYUw==', 'http', 'localhost', '8080', 'cache/call-cache.do', 'Y', 'test'
+	1, 'CACHE', '사용자 CACHE 갱신', '0', '127.0.0.1', 'M5mru2GcGZOyc+Tdy7AYUw==', 'http', 'localhost', '8080', 'cache/call-cache.do', 'Y', 'test'
 );
 
 

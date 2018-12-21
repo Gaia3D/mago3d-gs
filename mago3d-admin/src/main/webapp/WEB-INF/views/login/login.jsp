@@ -26,13 +26,13 @@
     <div class="site-body">
         <div class="row">
             <div class="container">
-                <div style="float: right;">
+                <!-- <div style="float: right;">
                     <select id="userLocale" name="userLocale" onchange="changeLanguage(this.value);">
                         <option value="ko">KOREA</option>
                         <option value="en">ENGLISH</option>
                         <option value="ja">JAPAN</option>
                     </select>
-                </div>
+                </div> -->
                 <div class="row">
                     <h1 style="padding-bottom:10px; font-size:38px; font-family:Lousianne; color:#573592;">mago3D</h1>
 <c:if test="${loginForm.error_code ne null && loginForm.error_code ne ''}">
@@ -67,6 +67,12 @@
     </div>
 
 <script type="text/javascript">
+	// 뒤로가기 막기
+	history.pushState(null, null, location.href);
+	window.onpopstate = function () {
+		history.go(1);
+	};
+
     $(document).ready(function () {
     });
 

@@ -176,7 +176,7 @@
 											</form:select>
 										</td>
 									</tr>
-									<tr>
+									<%-- <tr>
 										<th class="col-label" scope="row">
 											<form:label path="user_insert_type"><spring:message code='user.information.register.guide'/></form:label>
 										</th>
@@ -185,7 +185,7 @@
 												<option value="SELF"><spring:message code='user.information.register.admin'/></option>
 											</form:select>
 										</td>
-									</tr>
+									</tr> --%>
 								</table>
 								<div class="button-group">
 									<div class="center-buttons">
