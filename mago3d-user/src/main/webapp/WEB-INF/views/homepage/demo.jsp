@@ -559,7 +559,7 @@
 			<input type="radio" id="objectMove" name="objectMoveMode" value="1" onclick="changeObjectMove('1');"/>
 			<label for="objectMove"> <spring:message code='demo.object.move'/> </label>
 			
-			<button type="button" id="saveObjectMoveButton" class="btn"><spring:message code='save'/></button>
+			<%-- <button type="button" id="saveObjectMoveButton" class="btn"><spring:message code='save'/></button> --%>
 			<button type="button" id="deleteAllObjectMoveButton" class="btn"><spring:message code='all.delete'/></button>
 		</div>
 		<div>

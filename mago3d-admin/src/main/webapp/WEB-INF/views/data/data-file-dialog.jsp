@@ -10,7 +10,7 @@
 						<label for="project_id"><spring:message code='data.project.name'/></label>
 					</th>
 					<td>
-						<select id="project_id" name="project_id" class="select">
+						<select id="project_id" name="project_id" style="height: 30px; width: 200px;">
 							<option value="0"><spring:message code='all'/></option>
 <c:forEach var="project" items="${projectList}">
 							<option value="${project.project_id}">${project.project_name}</option>

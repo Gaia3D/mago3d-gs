@@ -26,6 +26,9 @@ JS_MESSAGE["not.use"] = "Not used";
 JS_MESSAGE["file.name.empty"] = "Please enter a filename.";
 JS_MESSAGE["file.ext.invalid"] = "The file extension is invalid.";
 JS_MESSAGE["fileinfo.size.invalid"] = "The uploadable file size has been exceeded.";
+JS_MESSAGE["fileinfo.invalid"] = "The file information is not valid. Please contact the administrator.";
+JS_MESSAGE["fileinfo.name.invalid"] = "The file name is not valid.";
+JS_MESSAGE["fileinfo.ext.invalid"] = "The file extension is invalid.;
 
 // common
 JS_MESSAGE["user.session.empty"] = "Available after login";

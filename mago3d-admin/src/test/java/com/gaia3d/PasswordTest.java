@@ -14,6 +14,13 @@ public class PasswordTest {
 		String encryptPassword = shaPasswordEncoder.encodePassword("test", salt);
 		System.out.println("salt = " + salt);
 		System.out.println(encryptPassword);
+		
+		String dbsalt = "test";
+		ShaPasswordEncoder dbShaPasswordEncoder = new ShaPasswordEncoder(512);
+		dbShaPasswordEncoder.setIterations(1000);
+		String dbEncryptPassword = dbShaPasswordEncoder.encodePassword("test", dbsalt);
+		System.out.println("salt = " + dbsalt);
+		System.out.println("db password = " + dbEncryptPassword);
 	}
 
 }

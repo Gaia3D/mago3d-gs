@@ -344,10 +344,10 @@
 							<div class="widget-heading u-pull-left">						
 								<h3 class="widget-title"><spring:message code='main.status.db.session'/>(${dbSessionCount })<span class="widget-desc">${today }<spring:message code='main.standard'/></span></h3>
 							</div>
-							<div class="widget-functions u-pull-right">
+							<%-- <div class="widget-functions u-pull-right">
 								<spring:message code='main.status.db.moresession' var='moreSession'/>
 								<a href="/monitoring/list-db-session.do" title="${moreSession}"><span class="icon-glyph glyph-plus"></span></a>
-							</div>
+							</div> --%>
 						</div>
 						<div id="${dbWidget.name}" class="widget-content row">
 							<table class="widget-table">

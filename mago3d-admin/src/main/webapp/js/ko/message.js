@@ -26,6 +26,9 @@ JS_MESSAGE["not.use"] = "미사용";
 JS_MESSAGE["file.name.empty"] = "파일명을 입력하여 주십시오.";
 JS_MESSAGE["file.ext.invalid"] = "파일 확장자가 유효하지 않습니다.";
 JS_MESSAGE["fileinfo.size.invalid"] = "업로딩 가능한 파일 사이즈를 초과 하였습니다.";
+JS_MESSAGE["fileinfo.invalid"] = "파일 정보가 유효하지 않습니다. 관리자에게 문의하여 주십시오.";
+JS_MESSAGE["fileinfo.name.invalid"] = "파일 이름이 유효하지 않습니다.";
+JS_MESSAGE["fileinfo.ext.invalid"] = "파일 확장자가 유효하지 않습니다.";
 
 // 공통
 JS_MESSAGE["user.session.empty"] = "로그인 후 사용 가능한 서비스 입니다.";

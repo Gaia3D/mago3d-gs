@@ -134,7 +134,7 @@
 											<th scope="col" class="col-checkbox"><input type="checkbox" id="chk_all" name="chk_all" /></th>
 											<th scope="col" class="col-number"><spring:message code='number'/></th>
 											<th scope="col" class="col-name"><spring:message code='data.project.name'/></th>
-											<th scope="col" class="col-id"><spring:message code='data.project.key'/></th>
+											<th scope="col" class="col-id"><spring:message code='data.key'/></th>
 											<th scope="col" class="col-name"><spring:message code='data.name'/></th>
 											<th scope="col" class="col-toggle"><spring:message code='latitude'/></th>
 											<th scope="col" class="col-toggle"><spring:message code='longitude'/></th>
@@ -575,10 +575,7 @@
 			return false;
 		}
 		
-		if( fileName.lastIndexOf("xlsx") <=0 
-				&& fileName.lastIndexOf("xls") <=0
-				&& fileName.lastIndexOf("json") <=0 
-				&& fileName.lastIndexOf("txt") <=0 ) {
+		if( fileName.lastIndexOf("json") <=0 ) {
 			alert(JS_MESSAGE["file.ext.invalid"]);
 			$("#data_file_name").focus();
 			return false;

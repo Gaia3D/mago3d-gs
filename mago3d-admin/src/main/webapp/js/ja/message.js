@@ -26,6 +26,10 @@ JS_MESSAGE["not.use"] = "未使用";
 JS_MESSAGE["file.name.empty"] = "ファイル名を入力してください。";
 JS_MESSAGE["file.ext.invalid"] = "ファイルの拡張子が無効です。";
 JS_MESSAGE["fileinfo.size.invalid"] = "アップロード可能なファイルサイズを超えました。";
+JS_MESSAGE["fileinfo.invalid"] = "ファイル情報が有効ではありません。管理者に連絡してください。";
+JS_MESSAGE["fileinfo.name.invalid"] = "ファイル名が有効ではありません。";
+JS_MESSAGE["fileinfo.ext.invalid"] = "ファイルの拡張子が無効です。";
+
 
 //共通
 JS_MESSAGE["user.session.empty"] = "ログイン後に使用可能なサービスです。";

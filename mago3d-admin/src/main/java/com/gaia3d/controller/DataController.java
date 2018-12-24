@@ -481,7 +481,17 @@ public class DataController {
 	 * @return
 	 */
 	@GetMapping(value = "delete-data.do")
-	public String deleteData(@RequestParam("data_id") String data_id, Model model) {
+	public String deleteData(HttpServletRequest request, @RequestParam("data_id") String data_id, Model model) {
+		
+		UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+		// 사용자 그룹 ROLE 확인
+		UserGroupRole userGroupRole = new UserGroupRole();
+		userGroupRole.setUser_id(userSession.getUser_id());
+		
+		if(!GroupRoleHelper.isUserGroupRoleValid(roleService.getListUserGroupRoleByUserId(userGroupRole), UserGroupRole.DATA_DELETE)) {
+			log.info("@@ 접근 권한이 없어 실행할 수 없습니다. RoleName = {}",  UserGroupRole.DATA_INSERT);
+			return "/error/authorization";
+		}
 		
 		// validation 체크 해야 함
 		dataService.deleteData(Long.valueOf(data_id));
@@ -615,7 +625,19 @@ public class DataController {
 		log.info("@@@@@@@@@@@@@@@@@@@@ data_id = {}", data_id);
 		Map<String, Object> map = new HashMap<>();
 		String result = "success";
-		try {		
+		try {
+			
+			UserSession userSession = (UserSession)request.getSession().getAttribute(UserSession.KEY);
+			// 사용자 그룹 ROLE 확인
+			UserGroupRole userGroupRole = new UserGroupRole();
+			userGroupRole.setUser_id(userSession.getUser_id());
+			
+			if(!GroupRoleHelper.isUserGroupRoleValid(roleService.getListUserGroupRoleByUserId(userGroupRole), UserGroupRole.DATA_INSERT)) {
+				log.info("@@ 접근 권한이 없어 실행할 수 없습니다. RoleName = {}",  UserGroupRole.DATA_INSERT);
+				map.put("result", "user.group.role.invalid");
+				return map;
+			}
+			
 			DataInfoAttribute dataInfoAttribute = dataService.getDataAttribute(data_id);
 			map.put("dataInfoAttribute", dataInfoAttribute);
 		} catch(Exception e) {
