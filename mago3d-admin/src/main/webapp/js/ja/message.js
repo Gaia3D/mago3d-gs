@@ -29,7 +29,7 @@ JS_MESSAGE["fileinfo.size.invalid"] = "アップロード可能なファイル�
 JS_MESSAGE["fileinfo.invalid"] = "ファイル情報が有効ではありません。管理者に連絡してください。";
 JS_MESSAGE["fileinfo.name.invalid"] = "ファイル名が有効ではありません。";
 JS_MESSAGE["fileinfo.ext.invalid"] = "ファイルの拡張子が無効です。";
-
+JS_MESSAGE["fileinfo.copy.exception"] = "ファイルのコピー中にエラーが発生しました。管理者に連絡してください。";
 
 //共通
 JS_MESSAGE["user.session.empty"] = "ログイン後に使用可能なサービスです。";

@@ -29,6 +29,7 @@ JS_MESSAGE["fileinfo.size.invalid"] = "업로딩 가능한 파일 사이즈를 �
 JS_MESSAGE["fileinfo.invalid"] = "파일 정보가 유효하지 않습니다. 관리자에게 문의하여 주십시오.";
 JS_MESSAGE["fileinfo.name.invalid"] = "파일 이름이 유효하지 않습니다.";
 JS_MESSAGE["fileinfo.ext.invalid"] = "파일 확장자가 유효하지 않습니다.";
+JS_MESSAGE["fileinfo.copy.exception"] = "파일 복사 중 오류가 발생 하였습니다. 관리자에게 문의하여 주십시오.";
 
 // 공통
 JS_MESSAGE["user.session.empty"] = "로그인 후 사용 가능한 서비스 입니다.";
